@@ -9,7 +9,6 @@ import game_world
 from player import Player
 from grass import Grass
 from pow import Pow
-from cannon import Cannon
 
 name = "MainState"
 
