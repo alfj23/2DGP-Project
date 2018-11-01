@@ -5,7 +5,7 @@ import game_world
 
 # POW Speed
 
-PIXEL_PER_METER = (10.0 / 0.2)
+PIXEL_PER_METER = (10.0 / 0.3)
 RUN_SPEED_KMPH = 10.0
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
@@ -36,79 +36,39 @@ class IdleState:
 
     @staticmethod
     def enter(player, event):
-        if event == RIGHT_DOWN:
-            player.velocity += RUN_SPEED_PPS
-        elif event == LEFT_DOWN:
-            player.velocity -= RUN_SPEED_PPS
-        elif event == RIGHT_UP:
-            player.velocity -= RUN_SPEED_PPS
-        elif event == LEFT_UP:
-            player.velocity += RUN_SPEED_PPS
+        pass
 
     @staticmethod
     def exit(player, event):
-        if event == X:
-            player.frame = 0
-            player.check_cannon = True
-            player.fire_cannon()
+        pass
 
     @staticmethod
     def do(player):
-        if player.check_cannon:
-            player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 23
-            if player.frame >= 22:
-                player.check_cannon = False
-        else:
-            player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 3
+        pass
 
 
 
     @staticmethod
     def draw(player):
-        if player.check_cannon:
-            player.image.clip_draw(int(player.frame) * 140, 0, 140, 80, player.x + 40, player.y)
-        else:
-            player.image.clip_draw(int(player.frame) * 80, 160, 80 - 3, 80, player.x, player.y)
+        pass
 
 class DriveState:
 
     @staticmethod
     def enter(player, event):
-        if event == RIGHT_DOWN:
-            player.velocity += RUN_SPEED_PPS
-        elif event == LEFT_DOWN:
-            player.velocity -= RUN_SPEED_PPS
-        elif event == RIGHT_UP:
-            player.velocity -= RUN_SPEED_PPS
-        elif event == LEFT_UP:
-            player.velocity += RUN_SPEED_PPS
-        player.dir = clamp(-1, player.velocity, 1)
+        pass
 
     @staticmethod
-    def exit(player, event):  # 왜 나가는지 event를 통해서 알려줄 수 있음.
-        if event == X:
-            player.frame = 0
-            player.check_cannon = True
-            player.fire_cannon()
+    def exit(player, event):
+        pass
 
     @staticmethod
     def do(player):
-        if player.check_cannon:
-            player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 23
-            if player.frame >= 22:
-                player.check_cannon = False
-        else:
-            player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 18
-
-        player.x += player.velocity * game_framework.frame_time
-        player.x = clamp(40, player.x, 1600 - 40)
+        pass
 
     @staticmethod
     def draw(player):
-        if player.check_cannon:
-            player.image.clip_draw(int(player.frame) * 140, 0, 140, 80, player.x + 40, player.y)
-        else:
-            player.image.clip_draw(int(player.frame) * 80, 80, 80 - 3, 80, player.x, player.y)
+        pass
 
 
 next_state_table = {
@@ -123,7 +83,7 @@ next_state_table = {
 }
 
 
-class Player:
+class Pow:
     def __init__(self):
         self.x, self.y = 1600 // 2, 70
         self.image = load_image('P_O_W.png')
