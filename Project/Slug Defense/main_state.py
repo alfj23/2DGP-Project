@@ -21,7 +21,7 @@ def enter():
     player = Player()
     grass = Grass()
     prisoner = Pow()
-    game_world.add_object(grass, 0) # (변수, 레이어번호)
+    game_world.add_object(grass, 0)  # (변수, 레이어번호)
     game_world.add_object(player, 1)
     game_world.add_object(prisoner, 1)
 
