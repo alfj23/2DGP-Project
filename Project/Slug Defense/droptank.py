@@ -1,8 +1,6 @@
 import game_framework
 from pico2d import *
-import time
-import game_world
-from player import  Player
+
 # droptank Speed
 
 PIXEL_PER_METER = (10.0 / 0.5)
@@ -14,14 +12,11 @@ RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 # droptank Speed
 
 TIME_PER_ACTION = 2.0  # 액션 당 시간
-ACTION_PER_TIME = 10.0
+ACTION_PER_TIME = 1.0
 FRAMES_PER_ACTION = 8
 
 # droptank States
 
-#global player
-#player = None
-#player = Player()
 
 class IdleState:
 
@@ -34,17 +29,15 @@ class IdleState:
         pass
 
     @staticmethod
-    def do(droptank): # 사거리 400
-        current_time = time.time()
-        if (current_time % 5) == 0:
+    def do(droptank): # 사거리 800
+        if droptank.x <= 800:
             droptank.chk_range = True
             droptank.velocity = 0
             droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
-        else:
+        if droptank.x > 800:
             droptank.velocity = RUN_SPEED_PPS
             droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 3
             droptank.x -= droptank.velocity * game_framework.frame_time
-        print(RUN_SPEED_PPS)
         pass
 
     @staticmethod
@@ -75,15 +68,9 @@ class DieState:
         pass
 
 
-next_state_table = {
-    IdleState: {},
-    DieState: {}
-}
-
-
 class Droptank:
     def __init__(self):
-        self.x, self.y = 1600 - 100, 70
+        self.x, self.y = 1600 - 100, 40
         self.image = load_image('EnemyTank_M_I_F.png')
         self.velocity = 0
         self.frame = 0
@@ -91,6 +78,7 @@ class Droptank:
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
         self.chk_range = False
+        self.hp = 400
 
     def add_event(self, event):
         self.event_que.insert(0, event)

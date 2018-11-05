@@ -82,7 +82,7 @@ next_state_table = {
 
 class Pow:
     def __init__(self):
-        self.x, self.y = 100, 60
+        self.x, self.y = 100, 30
         self.image = load_image('P_O_W.png')
         self.dir = 1
         self.velocity = 0

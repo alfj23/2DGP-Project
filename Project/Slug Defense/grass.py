@@ -2,11 +2,11 @@ from pico2d import *
 
 class Grass:
     def __init__(self):
-        self.image = load_image('grass.png')
+        self.image = load_image('maaap.png')
 
     def update(self):
         pass
 
     def draw(self):
-        self.image.draw(400, 30)
-        self.image.draw(1200, 30)
+        self.image.draw(1600//2, 220//2)
+       # self.image.draw(1200, 30)
