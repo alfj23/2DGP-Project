@@ -1,12 +1,12 @@
 import game_framework
 from pico2d import *
-
+import time
 import game_world
 
 # droptank Speed
 
 PIXEL_PER_METER = (10.0 / 0.4)
-RUN_SPEED_KMPH = 10.0
+RUN_SPEED_KMPH = 1.0
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -15,19 +15,7 @@ RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 TIME_PER_ACTION = 1.0 # 액션 당 시간
 ACTION_PER_TIME = 1.0  # 액션 마다 달라서 따로 빼놓음?
-FRAMES_PER_ACTION = 13
-
-
-# droptank Events
-RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, X = range(5)
-
-key_event_table = {
-    (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
-    (SDL_KEYDOWN, SDLK_LEFT): LEFT_DOWN,
-    (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
-    (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
-    (SDL_KEYDOWN, SDLK_x): X
-}
+FRAMES_PER_ACTION = 8
 
 # droptank States
 
@@ -43,11 +31,23 @@ class IdleState:
         pass
 
     @staticmethod
-    def do(droptank):
+    def do(droptank): # 사거리 400
+        if droptank.x + 400 <= 1200:
+            droptank.chk_range = True
+            droptank.velocity = 0
+            droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
+        else:
+            droptank.velocity -= RUN_SPEED_PPS
+            droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 3
+            droptank.x += droptank.velocity * game_framework.frame_time
         pass
 
     @staticmethod
     def draw(droptank):
+        if droptank.chk_range == False:
+            droptank.image.clip_draw(int(droptank.frame) * 100, 160, 100, 80, droptank.x, droptank.y)
+        else:
+            droptank.image.clip_draw(int(droptank.frame) * 100, 80, 100, 80, droptank.x, droptank.y)
         pass
 
 
@@ -78,13 +78,14 @@ next_state_table = {
 
 class Droptank:
     def __init__(self):
-        self.x, self.y = 100, 60
+        self.x, self.y = 1600 - 100, 70
         self.image = load_image('EnemyTank_M_I_F.png')
         self.velocity = 0
         self.frame = 0
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
+        self.chk_range = False
 
     def add_event(self, event):
         self.event_que.insert(0, event)

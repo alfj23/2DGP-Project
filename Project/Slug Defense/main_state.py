@@ -9,6 +9,7 @@ import game_world
 from player import Player
 from grass import Grass
 from pow import Pow
+from droptank import Droptank
 from cannon import Cannon
 
 name = "MainState"
@@ -16,15 +17,18 @@ name = "MainState"
 player = None
 grass = None
 prisoner = None
+droptank = None
 
 def enter():
-    global player, prisoner, grass
+    global player, prisoner, grass, droptank
     player = Player()
     grass = Grass()
     prisoner = Pow()
+    droptank = Droptank()
     game_world.add_object(grass, 0) # (변수, 레이어번호)
     game_world.add_object(player, 1)
     game_world.add_object(prisoner, 1)
+    game_world.add_object(droptank, 1)
 
 
 def exit():

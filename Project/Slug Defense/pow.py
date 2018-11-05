@@ -17,18 +17,6 @@ TIME_PER_ACTION = 1.0 # 액션 당 시간
 ACTION_PER_TIME = 1.0  # 액션 마다 달라서 따로 빼놓음?
 FRAMES_PER_ACTION = 13
 
-
-# POW Events
-RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, X = range(5)
-
-key_event_table = {
-    (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
-    (SDL_KEYDOWN, SDLK_LEFT): LEFT_DOWN,
-    (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
-    (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
-    (SDL_KEYDOWN, SDLK_x): X
-}
-
 # POW States
 
 
@@ -58,8 +46,6 @@ class IdleState:
 
         prisoner.x += prisoner.velocity * game_framework.frame_time
         prisoner.x = clamp(0 + 20, prisoner.x, 200 - 20)
-        print(prisoner.velocity)
-        pass
 
     @staticmethod
     def draw(prisoner):
@@ -67,7 +53,6 @@ class IdleState:
             prisoner.image.clip_draw(int(prisoner.frame) * 50, 0, 50, 50, prisoner.x, prisoner.y)
         else:
             prisoner.image.clip_draw(int(prisoner.frame) * 50, 50, 50, 50, prisoner.x, prisoner.y)
-        pass
 
 
 class WatchState:
