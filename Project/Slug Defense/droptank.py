@@ -2,23 +2,26 @@ import game_framework
 from pico2d import *
 import time
 import game_world
-
+from player import  Player
 # droptank Speed
 
-PIXEL_PER_METER = (10.0 / 0.4)
-RUN_SPEED_KMPH = 1.0
+PIXEL_PER_METER = (10.0 / 0.5)
+RUN_SPEED_KMPH = 20
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 # droptank Speed
 
-TIME_PER_ACTION = 1.0 # 액션 당 시간
-ACTION_PER_TIME = 1.0  # 액션 마다 달라서 따로 빼놓음?
+TIME_PER_ACTION = 2.0  # 액션 당 시간
+ACTION_PER_TIME = 10.0
 FRAMES_PER_ACTION = 8
 
 # droptank States
 
+#global player
+#player = None
+#player = Player()
 
 class IdleState:
 
@@ -32,14 +35,16 @@ class IdleState:
 
     @staticmethod
     def do(droptank): # 사거리 400
-        if droptank.x + 400 <= 1200:
+        current_time = time.time()
+        if (current_time % 5) == 0:
             droptank.chk_range = True
             droptank.velocity = 0
             droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
         else:
-            droptank.velocity -= RUN_SPEED_PPS
+            droptank.velocity = RUN_SPEED_PPS
             droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 3
-            droptank.x += droptank.velocity * game_framework.frame_time
+            droptank.x -= droptank.velocity * game_framework.frame_time
+        print(RUN_SPEED_PPS)
         pass
 
     @staticmethod
@@ -102,6 +107,4 @@ class Droptank:
         self.cur_state.draw(self)
 
     def handle_event(self, event):
-        if (event.type, event.key) in key_event_table:
-            key_event = key_event_table[(event.type, event.key)]
-            self.add_event(key_event)
+       pass

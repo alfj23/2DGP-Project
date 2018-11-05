@@ -5,8 +5,8 @@ import game_world
 
 # POW Speed
 
-PIXEL_PER_METER = (10.0 / 0.15)
-RUN_SPEED_KMPH = 0.01
+PIXEL_PER_METER = (10.0 / 0.2)
+RUN_SPEED_KMPH = 5.0
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -33,12 +33,12 @@ class IdleState:
     @staticmethod
     def do(prisoner):
         if prisoner.dir == 1:
-            prisoner.velocity += RUN_SPEED_PPS
+            prisoner.velocity = RUN_SPEED_PPS
             if prisoner.x >= 180 - 1:
                 prisoner.velocity = -1
                 prisoner.dir = -1
         elif prisoner.dir == -1:
-            prisoner.velocity -= RUN_SPEED_PPS
+            prisoner.velocity = (-1)*RUN_SPEED_PPS
             if prisoner.x <= 20 + 1:
                 prisoner.velocity = 1
                 prisoner.dir = 1
@@ -106,6 +106,4 @@ class Pow:
         self.cur_state.draw(self)
 
     def handle_event(self, event):
-        if (event.type, event.key) in key_event_table:
-            key_event = key_event_table[(event.type, event.key)]
-            self.add_event(key_event)
+       pass
