@@ -13,8 +13,8 @@ RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 # droptank Speed
 
-TIME_PER_ACTION = 2.0  # 액션 당 시간
-ACTION_PER_TIME = 1.0
+TIME_PER_ACTION = 1.5  # 액션 당 시간
+ACTION_PER_TIME = 1.25 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 8
 
 
@@ -38,16 +38,24 @@ class IdleState:
 
     @staticmethod
     def do(droptank): # 사거리 800
-        if droptank.x - main_state.player.x <= 400:
-            droptank.chk_range = True
-            droptank.velocity = 0
-            droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
-        elif droptank.x - main_state.player.x > 400:
-            droptank.chk_range = False
-            droptank.velocity = RUN_SPEED_PPS
-            droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 3
-            droptank.x -= droptank.velocity * game_framework.frame_time
-        pass
+        if droptank.hp <= 0:
+            droptank.chk_die = True
+        if droptank.chk_die == False:
+            if droptank.x - main_state.player.x <= 400:
+                droptank.chk_range = True
+                droptank.velocity = 0
+                droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
+            elif droptank.x - main_state.player.x > 400:
+                droptank.chk_range = False
+                droptank.velocity = RUN_SPEED_PPS
+                droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 3
+                droptank.x -= droptank.velocity * game_framework.frame_time
+        elif droptank.chk_die:
+            droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 7
+            droptank.chk_time = True
+            if droptank.chk_time:
+                game_world.remove_object(droptank)
+            pass
 
     @staticmethod
     def draw(droptank):
@@ -55,19 +63,23 @@ class IdleState:
             droptank.image.clip_draw(int(droptank.frame) * 100, 80, 100, 80, droptank.x, droptank.y)
         else:
             droptank.image.clip_draw(int(droptank.frame) * 100, 160, 100, 80, droptank.x, droptank.y)
+        if droptank.chk_die:
+            droptank.image.clip_draw(int(droptank.frame) * 100, 0, 100, 80, droptank.x, droptank.y)
 
 class Droptank:
     def __init__(self):
         self.x, self.y = 1600 - 100, 40
-        self.image = load_image('EnemyTank_M_I_F.png')
+        self.image = load_image('droptank.png')
         self.velocity = 0
         self.frame = 0
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
         self.chk_range = False
+        self.chk_die = False
         self.hp = 400
         self.chk_atk = False
+        self.chk_time = False
         self.font = load_font('ENCR10B.TTF', 16)
 
     def add_event(self, event):

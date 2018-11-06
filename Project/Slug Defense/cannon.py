@@ -9,7 +9,7 @@ class Cannon:
     def __init__(self, x=400, y=300, velocity=3):
         self.x, self.y, self.velocity = x, y, velocity
         self.frame = 0
-        self.damage = 20
+        self.damage = 200
         if Cannon.image == None:
             self.image = load_image('cannon_ball.png')
 
