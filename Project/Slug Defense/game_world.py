@@ -1,7 +1,7 @@
 
 # layer 0: Background Objects
 # layer 1: Foreground Objects
-objects = [[],[]]
+objects = [[], []]
 
 
 def add_object(o, layer): #게임월드에 객체 넣기
@@ -13,6 +13,7 @@ def remove_object(o): #게임월드에서 객체 삭제하기
         if o in objects[i]:
             objects[i].remove(o)
             del o # 메모리 반환
+            break
 
 
 def clear():

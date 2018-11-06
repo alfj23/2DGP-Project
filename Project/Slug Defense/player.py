@@ -1,7 +1,6 @@
 import game_framework
 from pico2d import *
 from cannon import Cannon
-
 import game_world
 
 # Player Slug Drive Speed
@@ -109,7 +108,7 @@ class DriveState:
         if player.check_cannon:
             player.image.clip_draw(int(player.frame) * 140, 0, 140, 80, player.x + 40, player.y)
         else:
-            player.image.clip_draw(int(player.frame) * 80, 80, 80 - 3, 80, player.x, player.y)
+            player.image.clip_draw(int(player.frame) * 80, 80, 80, 80, player.x, player.y)
 
 
 next_state_table = {
@@ -144,6 +143,9 @@ class Player:
     def add_event(self, event):
         self.event_que.insert(0, event)
 
+    def get_bb(self):
+        return self.x -20, self.y -25, self.x + 30, self.y + 20
+
     def update(self):
         self.cur_state.do(self)
         if len(self.event_que) > 0:
@@ -154,6 +156,7 @@ class Player:
 
     def draw(self):
         self.cur_state.draw(self)
+        draw_rectangle(*self.get_bb())
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:

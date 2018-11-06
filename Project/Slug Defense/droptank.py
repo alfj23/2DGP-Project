@@ -1,6 +1,8 @@
 import game_framework
 from pico2d import *
 import main_state
+from droptank_bomb import  Bomb
+import game_world
 # droptank Speed
 
 PIXEL_PER_METER = (10.0 / 0.5)
@@ -15,6 +17,11 @@ TIME_PER_ACTION = 2.0  # 액션 당 시간
 ACTION_PER_TIME = 1.0
 FRAMES_PER_ACTION = 8
 
+
+# droptank Events
+
+
+
 # droptank States
 
 
@@ -25,7 +32,8 @@ class IdleState:
         pass
 
     @staticmethod
-    def exit(droptank, event):
+    def exit(droptank):
+        droptank.fire_bomb()
         pass
 
     @staticmethod
@@ -43,31 +51,10 @@ class IdleState:
 
     @staticmethod
     def draw(droptank):
-        if droptank.chk_range == False:
-            droptank.image.clip_draw(int(droptank.frame) * 100, 160, 100, 80, droptank.x, droptank.y)
-        else:
+        if droptank.chk_range:
             droptank.image.clip_draw(int(droptank.frame) * 100, 80, 100, 80, droptank.x, droptank.y)
-        pass
-
-
-class DieState:
-
-    @staticmethod
-    def enter(droptank, event):
-        pass
-
-    @staticmethod
-    def exit(droptank, event):
-        pass
-
-    @staticmethod
-    def do(droptank):
-        pass
-
-    @staticmethod
-    def draw(droptank):
-        pass
-
+        else:
+            droptank.image.clip_draw(int(droptank.frame) * 100, 160, 100, 80, droptank.x, droptank.y)
 
 class Droptank:
     def __init__(self):
@@ -80,6 +67,8 @@ class Droptank:
         self.cur_state.enter(self, None)
         self.chk_range = False
         self.hp = 400
+        self.chk_atk = False
+        self.font = load_font('ENCR10B.TTF', 16)
 
     def add_event(self, event):
         self.event_que.insert(0, event)
@@ -92,8 +81,19 @@ class Droptank:
             self.cur_state = next_state_table[self.cur_state][event]
             self.cur_state.enter(self, event)
 
+    def get_bb(self):
+        return self.x - 33, self.y - 30, self.x + 32, self.y + 20
+
+    def fire_bomb(self):
+        bomb = Bomb(self.x, self.y)
+        game_world.add_object(bomb, 1)
+        pass
+
     def draw(self):
         self.cur_state.draw(self)
+        self.font.draw(self.x - 60, self.y + 50,
+                       '(HP : %i)' % self.hp, (255, 0, 0))
+        draw_rectangle(*self.get_bb())
 
     def handle_event(self, event):
        pass
