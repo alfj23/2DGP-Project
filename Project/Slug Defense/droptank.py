@@ -1,6 +1,6 @@
 import game_framework
 from pico2d import *
-
+import main_state
 # droptank Speed
 
 PIXEL_PER_METER = (10.0 / 0.5)
@@ -30,11 +30,11 @@ class IdleState:
 
     @staticmethod
     def do(droptank): # 사거리 800
-        if droptank.x <= 800:
+        if droptank.x -main_state.player.x <= 800:
             droptank.chk_range = True
             droptank.velocity = 0
             droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
-        if droptank.x > 800:
+        else:
             droptank.velocity = RUN_SPEED_PPS
             droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 3
             droptank.x -= droptank.velocity * game_framework.frame_time
