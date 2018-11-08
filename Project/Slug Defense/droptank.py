@@ -19,7 +19,7 @@ FRAMES_PER_ACTION = 8
 
 
 # droptank Events
-
+ATTACK_TIMER, DIE = range(2)
 
 
 # droptank States
@@ -39,7 +39,7 @@ class IdleState:
     @staticmethod
     def do(droptank):  # 사거리 800
         if droptank.hp <= 0:
-            droptank.chk_die = True
+            droptank.add_event(DIE)
         if droptank.chk_die == False:
             if droptank.x - main_state.player.x <= 400:
                 droptank.chk_range = True
@@ -65,6 +65,49 @@ class IdleState:
             droptank.image.clip_draw(int(droptank.frame) * 100, 160, 100, 80, droptank.x, droptank.y)
         if droptank.chk_die:
             droptank.image.clip_draw(int(droptank.frame) * 100, 0, 100, 80, droptank.x, droptank.y)
+
+
+class DeathState:
+
+    @staticmethod
+    def enter(droptank):
+        pass
+
+    @staticmethod
+    def exit(droptank):
+        pass
+
+    @staticmethod
+    def do(droptank):
+        pass
+
+    @staticmethod
+    def draw(droptank):
+        pass
+
+class DriveState:
+
+    @staticmethod
+    def enter(droptank):
+        pass
+
+    @staticmethod
+    def exit(droptank):
+        pass
+
+    @staticmethod
+    def do(droptank):
+        pass
+
+    @staticmethod
+    def draw(droptank):
+        pass
+
+next_event_table = {
+    IdleState:{},
+    DriveState:{},
+    DeathState:{}
+}
 
 class Droptank:
     def __init__(self):
