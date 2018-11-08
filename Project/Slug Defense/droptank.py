@@ -85,6 +85,7 @@ class DeathState:
     def draw(droptank):
         pass
 
+
 class DriveState:
 
     @staticmethod
@@ -102,6 +103,26 @@ class DriveState:
     @staticmethod
     def draw(droptank):
         pass
+
+
+class AttackState:
+
+    @staticmethod
+    def enter(droptank):
+        pass
+
+    @staticmethod
+    def exit(droptank):
+        pass
+
+    @staticmethod
+    def do(droptank):
+        pass
+
+    @staticmethod
+    def draw(droptank):
+        pass
+
 
 next_event_table = {
     IdleState:{},
