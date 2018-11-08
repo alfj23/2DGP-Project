@@ -30,7 +30,7 @@ class IdleState:
     @staticmethod
     def enter(droptank, event):
         droptank.frame = 0
-        droptank.timer = 400
+        droptank.timer = 800
         if event == RELOAD:
             droptank.chk_reload = True
         pass

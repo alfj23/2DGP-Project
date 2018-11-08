@@ -1,6 +1,6 @@
 from pico2d import *
 import game_world
-
+import main_state
 
 class Bomb:
     image = None
@@ -23,5 +23,8 @@ class Bomb:
     def draw(self):
         self.image.clip_draw(self.frame * 14, 40, 14, 14, self.x-40, self.y)
         draw_rectangle(*self.get_bb())
+        if main_state.collide(self, main_state.player):
+            main_state.player.hp -= self.damage_amount
+            game_world.remove_object(self)
         if self.x < 0 + 14:
             game_world.remove_object(self)  # cannon 이 범위 벗어날 시 반환됨
