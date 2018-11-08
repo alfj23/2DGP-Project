@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4dd5d27a-1d63-4ddf-9362-3b391dd40141" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Slug Defense/cannon.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/cannon.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Slug Defense/droptank.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/droptank.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Slug Defense/droptank_bomb.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/droptank_bomb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Slug Defense/game_world.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/game_world.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Slug Defense/main_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/main_state.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Slug Defense/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/player.py" afterDir="false" />
-    </list>
+    <list default="true" id="4dd5d27a-1d63-4ddf-9362-3b391dd40141" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,8 +126,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Slug Defense/main_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="40" selection-start-line="40" selection-end-line="40" />
+            <state relative-caret-position="204">
+              <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -168,6 +161,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>player</find>
+      <find>clamp</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -553,8 +547,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Slug Defense/main_state.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
+        <state relative-caret-position="204">
+          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
