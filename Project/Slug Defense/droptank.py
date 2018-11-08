@@ -19,7 +19,7 @@ FRAMES_PER_ACTION = 8
 
 
 # droptank Events
-ATTACK_TIMER, DIE, DRIVE, ATTACK = range(4)
+RELOAD, DIE, DRIVE, MARKING, FIRE = range(5) # 재장전/ 죽음 / 이동 / 조준 / 발사
 
 
 # droptank States
@@ -29,8 +29,10 @@ class IdleState:
 
     @staticmethod
     def enter(droptank, event):
-        if droptank.x - main_state.player.x > 400:
-            droptank.add_event(DRIVE)
+        droptank.frame = 0
+        droptank.timer = 400
+        if event == RELOAD:
+            droptank.chk_reload = True
         pass
 
     @staticmethod
@@ -38,10 +40,17 @@ class IdleState:
         pass
 
     @staticmethod
-    def do(droptank):  # 사거리 800
+    def do(droptank):  # 사거리 400
         if droptank.hp <= 0:
             droptank.add_event(DIE)
+        if droptank.timer == 0:
+            droptank.chk_reload = False
+            droptank.add_event(MARKING)
+        if droptank.x - main_state.player.x > 400:
+            droptank.add_event(DRIVE)
         droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 2
+        if droptank.chk_reload:
+            droptank.timer -= 1
 
     @staticmethod
     def draw(droptank):
@@ -52,6 +61,7 @@ class DeathState:
 
     @staticmethod
     def enter(droptank, event):
+        droptank.frame = 0
         pass
 
     @staticmethod
@@ -71,46 +81,49 @@ class DriveState:
 
     @staticmethod
     def enter(droptank, event):
+        droptank.frame = 0
         droptank.velocity -= RUN_SPEED_PPS
-        pass
 
     @staticmethod
     def exit(droptank, event):
         droptank.velocity = 0
-        pass
 
     @staticmethod
     def do(droptank):
         if droptank.x - main_state.player.x <= 400:
-            droptank.add_event(ATTACK)
+            droptank.add_event(MARKING)
+        if droptank.hp <= 0:
+            droptank.add_event(DIE)
         else:
             droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 3
             droptank.x += droptank.velocity * game_framework.frame_time
             droptank.x = clamp(0 + 40, droptank.x, 1600 - 40)
-        pass
 
     @staticmethod
     def draw(droptank):
         droptank.image.clip_draw(int(droptank.frame) * 100, 160, 100, 80, droptank.x, droptank.y)
-        pass
 
 
 class AttackState:
 
     @staticmethod
     def enter(droptank, event):
-        droptank.timer = 200
         pass
 
     @staticmethod
     def exit(droptank, event):
+        if event == RELOAD:
+            droptank.fire_bomb()
         pass
 
     @staticmethod
     def do(droptank):
         droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
-        if droptank.x - main_state.player.x > 400 and int(droptank.frame) % 8 == 7:
-            droptank.add_event(DRIVE)
+        if int(droptank.frame) % 8 == 7:
+            droptank.add_event(RELOAD)
+            droptank.frame = 0
+        if droptank.hp <= 0:
+            droptank.add_event(DIE)
         pass
 
     @staticmethod
@@ -120,10 +133,10 @@ class AttackState:
 
 
 next_state_table = {
-    IdleState: {DIE: DeathState, DRIVE: DriveState, ATTACK: AttackState},
-    DriveState: {DIE: DeathState, ATTACK: AttackState},
-    DeathState: {DIE: DeathState},
-    AttackState: {DIE: DeathState, DRIVE: DriveState, ATTACK_TIMER: IdleState}
+    IdleState: {DIE: DeathState, DRIVE: DriveState, MARKING: AttackState},
+    DriveState: {DIE: DeathState, MARKING: AttackState},
+    DeathState: {},
+    AttackState: {DIE: DeathState, DRIVE: DriveState, RELOAD: IdleState, FIRE: AttackState}
 }
 
 class Droptank:
@@ -135,12 +148,9 @@ class Droptank:
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
-        self.chk_range = False
-        self.chk_die = False
         self.hp = 400
-        self.chk_atk = False
-        self.chk_time = False
         self.font = load_font('ENCR10B.TTF', 16)
+        self.chk_reload = False
 
     def add_event(self, event):
         self.event_que.insert(0, event)

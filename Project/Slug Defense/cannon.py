@@ -15,6 +15,7 @@ class Cannon:
 
     def update(self):
         self.x += self.velocity
+        self.frame = (self.frame + 1) % 4
 
     def get_bb(self):
         return self.x + 10, self.y, self.x + 45, self.y + 20
