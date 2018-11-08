@@ -5,7 +5,7 @@ import game_world
 
 # POW Speed
 
-PIXEL_PER_METER = (10.0 / 0.2)
+PIXEL_PER_METER = (10.0 / 0.3)
 RUN_SPEED_KMPH = 5.0
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
@@ -102,8 +102,12 @@ class Pow:
             self.cur_state = next_state_table[self.cur_state][event]
             self.cur_state.enter(self, event)
 
+    def get_bb(self):
+        return self.x - 15, self.y - 15, self.x + 5, self.y + 20
+
     def draw(self):
         self.cur_state.draw(self)
+        draw_rectangle(*self.get_bb())
 
     def handle_event(self, event):
        pass

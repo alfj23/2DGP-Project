@@ -69,11 +69,15 @@ class DeathState:
         pass
 
     @staticmethod
-    def do(droptank, event):
+    def do(droptank):
+        droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 7
+        if int(droptank.frame) % 7 == 6:
+            game_world.remove_object(droptank)
         pass
 
     @staticmethod
     def draw(droptank):
+        droptank.image.clip_draw(int(droptank.frame) * 100, 0, 100, 80, droptank.x, droptank.y)
         pass
 
 
