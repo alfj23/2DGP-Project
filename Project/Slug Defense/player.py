@@ -125,8 +125,8 @@ next_state_table = {
 
 class Player:
     def __init__(self):
-        self.x, self.y = 1600 // 2, 40
-        self.image = load_image('finaltest.png')
+        self.x, self.y = 1600 // 2, 40 + 200
+        self.image = load_image('player.png')
         self.dir = 1
         self.velocity = 0
         self.frame = 0

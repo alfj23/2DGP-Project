@@ -37,7 +37,7 @@ class IdleState:
         pass
 
     @staticmethod
-    def do(droptank): # 사거리 800
+    def do(droptank):  # 사거리 800
         if droptank.hp <= 0:
             droptank.chk_die = True
         if droptank.chk_die == False:
@@ -68,7 +68,7 @@ class IdleState:
 
 class Droptank:
     def __init__(self):
-        self.x, self.y = 1600 - 100, 40
+        self.x, self.y = 1600 - 100, 40 + 200
         self.image = load_image('droptank.png')
         self.velocity = 0
         self.frame = 0

@@ -8,5 +8,5 @@ class Map:
         pass
 
     def draw(self):
-        self.image.draw(1600//2, 220//2)
+        self.image.draw(1600//2, 600//2)
        # self.image.draw(1200, 30)
