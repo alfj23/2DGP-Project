@@ -71,12 +71,12 @@ class DriveState:
 
     @staticmethod
     def enter(droptank, event):
-        if event == DRIVE:
-            droptank.velocity -= RUN_SPEED_PPS
+        droptank.velocity -= RUN_SPEED_PPS
         pass
 
     @staticmethod
     def exit(droptank, event):
+        droptank.velocity = 0
         pass
 
     @staticmethod
@@ -109,6 +109,8 @@ class AttackState:
     @staticmethod
     def do(droptank):
         droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
+        if droptank.x - main_state.player.x > 400 and int(droptank.frame) % 8 == 7:
+            droptank.add_event(DRIVE)
         pass
 
     @staticmethod
