@@ -70,6 +70,7 @@ class IdleState:
         else:
             player.image.clip_draw(int(player.frame) * 80, 160, 80 - 3, 80, player.x, player.y)
 
+
 class DriveState:
 
     @staticmethod
