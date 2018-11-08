@@ -128,6 +128,7 @@ class Player:
     def __init__(self):
         self.x, self.y = 1600 // 2, 40 + 200
         self.image = load_image('player.png')
+        self.font = load_font('ENCR10B.TTF', 16)
         self.dir = 1
         self.velocity = 0
         self.frame = 0
@@ -158,6 +159,8 @@ class Player:
     def draw(self):
         self.cur_state.draw(self)
         draw_rectangle(*self.get_bb())
+        self.font.draw(self.x - 60, self.y + 50,
+                       '(HP : %i)' % self.hp, (255, 0, 0))
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:

@@ -7,6 +7,9 @@ objects = [[], []]
 def add_object(o, layer): #게임월드에 객체 넣기
     objects[layer].append(o) # 몇번 레이언지 알려주기
 
+def add_objects(l, layer):
+    for o in l:
+        add_object(o, layer)
 
 def remove_object(o): #게임월드에서 객체 삭제하기
     for i in range(len(objects)): #리스트 안에 리스트가 있으므로 어디 있는지 찾아야함. len(object) = 2 임. 확장성있는 코드~

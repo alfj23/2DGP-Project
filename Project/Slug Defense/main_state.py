@@ -10,32 +10,39 @@ from player import Player
 from map import Map
 from pow import Pow
 from droptank import Droptank
-from cannon import  Cannon
+from cannon import Cannon
+from droptank_bomb import Bomb
 
 name = "MainState"
 
 player = None
 map = None
 prisoner = None
-droptank = None
-cannon = None
+droptanks = []
+cannonballs = []
+droptank_bombs = []
 
 def enter():
-    global player, prisoner, map, droptank, cannon
+    global player
     player = Player()
-    map = Map()
-    prisoner = Pow()
-    droptank = Droptank()
-    cannon = Cannon()
-    game_world.add_object(map, 0) # (변수, 레이어번호)
     game_world.add_object(player, 1)
-    game_world.add_object(prisoner, 1)
-    game_world.add_object(droptank, 1)
 
+    global map
+    map = Map()
+    game_world.add_object(map, 0)
+
+    global prisoner
+    prisoner = Pow()
+    game_world.add_object(prisoner, 1)
+
+    global droptanks
+    droptanks = [Droptank() for i in range(20)]
+    game_world.add_objects(droptanks, 1)
 
 
 def exit():
     game_world.clear()
+
 
 def pause():
     pass
@@ -67,6 +74,7 @@ def draw():
         game_object.draw()
     update_canvas()
 
+
 def collide(a, b):
     left_a, bottom_a, right_a, top_a = a.get_bb()
     left_b, bottom_b, right_b, top_b = b.get_bb()
@@ -75,7 +83,6 @@ def collide(a, b):
     if right_a < left_b: return False
     if top_a < bottom_b: return False
     if bottom_a > top_b: return False
-
     return True
 
 

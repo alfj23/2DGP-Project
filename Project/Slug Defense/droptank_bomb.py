@@ -8,14 +8,19 @@ class Bomb:
     def __init__(self, x=800, y=200, velocity=0.5):
         self.x, self.y, self.velocity = x, y, velocity
         self.frame = 0
-        self.damage_amount = 50
+        self.damage_amount = 1
         if Bomb.image == None:
             self.image = load_image('droptank_bomb.png')
 
     def update(self):
         self.x -= self.velocity
         self.frame = (self.frame + 1) % 20
-        print(self.velocity, self.x)
+        print(self.damage_amount)
+        if main_state.collide(self, main_state.player):
+            game_world.remove_object(self)
+            main_state.player.hp -= self.damage_amount
+
+
 
     def get_bb(self):
         return self.x - 47, self.y - 7, self.x - 33, self.y + 7
@@ -23,8 +28,5 @@ class Bomb:
     def draw(self):
         self.image.clip_draw(self.frame * 14, 40, 14, 14, self.x-40, self.y)
         draw_rectangle(*self.get_bb())
-        if main_state.collide(self, main_state.player):
-            main_state.player.hp -= self.damage_amount
-            game_world.remove_object(self)
         if self.x < 0 + 14:
             game_world.remove_object(self)  # cannon 이 범위 벗어날 시 반환됨

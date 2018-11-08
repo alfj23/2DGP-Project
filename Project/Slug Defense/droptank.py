@@ -1,8 +1,9 @@
 import game_framework
 from pico2d import *
 import main_state
-from droptank_bomb import  Bomb
+from droptank_bomb import Bomb
 import game_world
+import random
 # droptank Speed
 
 PIXEL_PER_METER = (10.0 / 0.5)
@@ -73,6 +74,7 @@ class DeathState:
         droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 7
         if int(droptank.frame) % 7 == 6:
             game_world.remove_object(droptank)
+            droptank.x = 1800
         pass
 
     @staticmethod
@@ -101,7 +103,7 @@ class DriveState:
         else:
             droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 3
             droptank.x += droptank.velocity * game_framework.frame_time
-            droptank.x = clamp(0 + 40, droptank.x, 1600 - 40)
+            droptank.x = clamp(0 + 40, droptank.x, 4000 - 40)
 
     @staticmethod
     def draw(droptank):
@@ -145,7 +147,7 @@ next_state_table = {
 
 class Droptank:
     def __init__(self):
-        self.x, self.y = 1600 - 100, 40 + 200
+        self.x, self.y = random.randint(1600, 3000), 40 + 200
         self.image = load_image('droptank.png')
         self.velocity = 0
         self.frame = 0
