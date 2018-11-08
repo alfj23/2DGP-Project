@@ -108,12 +108,12 @@ class AttackState:
 
     @staticmethod
     def do(droptank):
-        droptank.frame = (droptank.frame * FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
+        droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
         pass
 
     @staticmethod
     def draw(droptank):
-        droptank.image.clip_draw(int(droptank.frame) * 80, 80, 100, 80, droptank.x, droptank.y)
+        droptank.image.clip_draw(int(droptank.frame) * 100, 80, 100, 80, droptank.x, droptank.y)
         pass
 
 

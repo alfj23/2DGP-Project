@@ -50,24 +50,24 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="3" />
-          <entry key="py" value="5417" />
+          <entry key="py" value="5462" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="3" />
-          <entry key="Python" value="5417" />
+          <entry key="Python" value="5462" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="png" value="23" />
+          <entry key="png" value="24" />
           <entry key="py" value="50" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Image" value="23" />
+          <entry key="Image" value="24" />
           <entry key="Python" value="50" />
         </counts>
       </usages-collector>
@@ -83,7 +83,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.46265244">
+    <splitter split-orientation="horizontal" split-proportion="0.35518292">
       <split-first>
         <leaf>
           <file pinned="false" current-in-tab="false">
@@ -131,8 +131,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Slug Defense/player.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-111">
-                  <caret line="68" selection-start-line="68" selection-end-line="68" />
+                <state relative-caret-position="193">
+                  <caret line="77" selection-start-line="77" selection-end-line="77" />
                   <folding>
                     <element signature="e#0#21#0" expanded="true" />
                     <marker date="1541673303766" expanded="true" signature="4330:4400" ph="..." />
@@ -161,14 +161,14 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Slug Defense/droptank.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="478">
-                  <caret line="115" column="94" lean-forward="true" selection-start-line="115" selection-start-column="94" selection-end-line="115" selection-end-column="94" />
+                <state relative-caret-position="385">
+                  <caret line="110" column="42" selection-start-line="110" selection-start-column="42" selection-end-line="110" selection-end-column="42" />
                   <folding>
                     <element signature="e#0#21#0" expanded="true" />
-                    <marker date="1541676776586" expanded="true" signature="1141:2848" ph="..." />
-                    <marker date="1541676776586" expanded="true" signature="3420:3784" ph="..." />
-                    <marker date="1541676776586" expanded="true" signature="3712:3784" ph="..." />
-                    <marker date="1541676776586" expanded="true" signature="3804:3898" ph="..." />
+                    <marker date="1541677027372" expanded="true" signature="1141:2935" ph="..." />
+                    <marker date="1541677027372" expanded="true" signature="3507:3871" ph="..." />
+                    <marker date="1541677027372" expanded="true" signature="3799:3871" ph="..." />
+                    <marker date="1541677027372" expanded="true" signature="3891:3985" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -395,8 +395,8 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32670453" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.07528409" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3979885" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.20880681" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.11647727" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -541,10 +541,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Slug Defense/droptank.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/Slug Defense/player.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-111">
-          <caret line="68" selection-start-line="68" selection-end-line="68" />
+        <state relative-caret-position="193">
+          <caret line="77" selection-start-line="77" selection-end-line="77" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
             <marker date="1541673303766" expanded="true" signature="4330:4400" ph="..." />
@@ -553,19 +556,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Slug Defense/droptank.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Slug Defense/droptank.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="115" column="94" lean-forward="true" selection-start-line="115" selection-start-column="94" selection-end-line="115" selection-end-column="94" />
+        <state relative-caret-position="385">
+          <caret line="110" column="42" selection-start-line="110" selection-start-column="42" selection-end-line="110" selection-end-column="42" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <marker date="1541676776586" expanded="true" signature="1141:2848" ph="..." />
-            <marker date="1541676776586" expanded="true" signature="3420:3784" ph="..." />
-            <marker date="1541676776586" expanded="true" signature="3712:3784" ph="..." />
-            <marker date="1541676776586" expanded="true" signature="3804:3898" ph="..." />
+            <marker date="1541677027372" expanded="true" signature="1141:2935" ph="..." />
+            <marker date="1541677027372" expanded="true" signature="3507:3871" ph="..." />
+            <marker date="1541677027372" expanded="true" signature="3799:3871" ph="..." />
+            <marker date="1541677027372" expanded="true" signature="3891:3985" ph="..." />
           </folding>
         </state>
       </provider>
