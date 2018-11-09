@@ -6,7 +6,7 @@ import game_world
 # Player Slug Drive Speed
 
 PIXEL_PER_METER = (10.0 / 0.5)
-RUN_SPEED_KMPH = 60.0
+RUN_SPEED_KMPH = 50.0
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -19,14 +19,14 @@ FRAMES_PER_ACTION = 23
 
 
 # Player Slug Events
-RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, X, DISABLED, REPAIR = range(7)
+RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, FIRE_CANNON, DISABLED, REPAIR = range(7)
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
     (SDL_KEYDOWN, SDLK_LEFT): LEFT_DOWN,
     (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
-    (SDL_KEYDOWN, SDLK_x): X
+    (SDL_KEYDOWN, SDLK_x): FIRE_CANNON
 }
 
 # Player Slug States
@@ -44,10 +44,13 @@ class IdleState:
             player.velocity -= RUN_SPEED_PPS
         elif event == LEFT_UP:
             player.velocity += RUN_SPEED_PPS
+        elif event == REPAIR:
+            player.hp = 200
+            print(player.velocity)
 
     @staticmethod
     def exit(player, event):
-        if event == X:
+        if event == FIRE_CANNON:
             player.frame = 0
             player.check_cannon = True
             player.fire_cannon()
@@ -56,12 +59,13 @@ class IdleState:
     def do(player):
         if player.hp <= 0:
             player.add_event(DISABLED)
-        if player.check_cannon:
-            player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 23
-            if player.frame >= 22:
-                player.check_cannon = False
         else:
-            player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 3
+            if player.check_cannon:
+                player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 23
+                if player.frame >= 22:
+                    player.check_cannon = False
+            else:
+                player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 3
 
 
 
@@ -86,10 +90,11 @@ class DriveState:
         elif event == LEFT_UP:
             player.velocity += RUN_SPEED_PPS
         player.dir = clamp(-1, player.velocity, 1)
+        print(player.velocity)
 
     @staticmethod
     def exit(player, event):  # 왜 나가는지 event를 통해서 알려줄 수 있음.
-        if event == X:
+        if event == FIRE_CANNON:
             player.frame = 0
             player.check_cannon = True
             player.fire_cannon()
@@ -98,16 +103,16 @@ class DriveState:
     def do(player):
         if player.hp <= 0:
             player.add_event(DISABLED)
-
-        if player.check_cannon:
-            player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 23
-            if player.frame >= 22:
-                player.check_cannon = False
         else:
-            player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 18
+            if player.check_cannon:
+                player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 23
+                if player.frame >= 22:
+                    player.check_cannon = False
+            else:
+                player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 18
 
-        player.x += player.velocity * game_framework.frame_time
-        player.x = clamp(40, player.x, 1600 - 40)
+            player.x += player.velocity * game_framework.frame_time
+            player.x = clamp(40, player.x, 1600 - 40)
 
     @staticmethod
     def draw(player):
@@ -123,19 +128,12 @@ class DamagedState:
         if event == DISABLED:
             player.timer = 1000
             player.frame = 0
-        if event == RIGHT_DOWN:
-            player.velocity += 0
-        elif event == LEFT_DOWN:
-            player.velocity -= 0
-        elif event == RIGHT_UP:
-            player.velocity -= 0
-        elif event == LEFT_UP:
-            player.velocity += 0
+        else:
+            pass
         pass
 
     @staticmethod
     def exit(player, event):
-        player.hp = 200
         pass
 
     @staticmethod
@@ -143,26 +141,28 @@ class DamagedState:
         player.timer -= 1
         if player.timer == 0:
             player.add_event(REPAIR)
-        player.frame = (player.frame + ACTION_PER_TIME * FRAMES_PER_ACTION * game_framework.frame_time) % 25
+        #player.frame = (player.frame + ACTION_PER_TIME * FRAMES_PER_ACTION * game_framework.frame_time) % 25
 
         pass
 
     @staticmethod
     def draw(player):
-        player.image.clip_draw(int(player.frame) * 120, 0, 120, 80, player.x, player.y)
+        #player.image.clip_draw(int(player.frame) * 120, 0, 120, 80, player.x, player.y)
+        player.image.clip_draw(240, 240, 80, 80, player.x, player.y)
         pass
 
 
 next_state_table = {
     IdleState: {RIGHT_UP: DriveState, LEFT_UP: DriveState,
                 RIGHT_DOWN: DriveState, LEFT_DOWN: DriveState,
-                X: IdleState, DISABLED: DamagedState
+                FIRE_CANNON: IdleState, DISABLED: DamagedState
                },
     DriveState: {RIGHT_UP: IdleState, LEFT_UP: IdleState,
                  LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState,
-                 X: DriveState, DISABLED: DamagedState
+                 FIRE_CANNON: DriveState, DISABLED: DamagedState
                },
-    DamagedState: {REPAIR: IdleState}
+    DamagedState: {REPAIR: IdleState, RIGHT_UP: DamagedState, RIGHT_DOWN: DamagedState, LEFT_UP: DamagedState,
+                   LEFT_DOWN: DamagedState, FIRE_CANNON: DamagedState}
 }
 
 
@@ -178,7 +178,7 @@ class Player:
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
         self.check_cannon = False
-        self.hp = 0  # 캐릭터 체력
+        self.hp = 200  # 캐릭터 체력
 
     def fire_cannon(self):
         cannon = Cannon(self.x, self.y)
