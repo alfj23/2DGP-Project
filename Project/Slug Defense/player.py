@@ -91,7 +91,7 @@ class DriveState:
         player.dir = clamp(-1, player.velocity, 1)
 
     @staticmethod
-    def exit(player, event):  # 왜 나가는지 event를 통해서 알려줄 수 있음.
+    def exit(player, event): 
         if event == FIRE_CANNON:
             player.frame = 0
             player.check_fired = True
