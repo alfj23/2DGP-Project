@@ -34,9 +34,9 @@ def enter():
     prisoner = Pow()
     game_world.add_object(prisoner, 1)
 
-    global droptanks
-    droptanks = [Droptank() for i in range(20)]
-    game_world.add_objects(droptanks, 1)
+    #global droptanks
+    #droptanks = [Droptank() for i in range(20)]
+    #game_world.add_objects(droptanks, 1)
 
     global barricade
     barricade = Barricade()

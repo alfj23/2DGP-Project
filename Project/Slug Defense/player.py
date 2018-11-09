@@ -19,7 +19,7 @@ FRAMES_PER_ACTION = 23
 
 
 # Player Slug Events
-RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, X, DISABLED = range(6)
+RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, X, DISABLED, REPAIR = range(7)
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
@@ -54,6 +54,8 @@ class IdleState:
 
     @staticmethod
     def do(player):
+        if player.hp <= 0:
+            player.add_event(DISABLED)
         if player.check_cannon:
             player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 23
             if player.frame >= 22:
@@ -94,6 +96,9 @@ class DriveState:
 
     @staticmethod
     def do(player):
+        if player.hp <= 0:
+            player.add_event(DISABLED)
+
         if player.check_cannon:
             player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 23
             if player.frame >= 22:
@@ -114,19 +119,37 @@ class DriveState:
 
 class DamagedState:
     @staticmethod
-    def enter(barricade, event):
+    def enter(player, event):
+        if event == DISABLED:
+            player.timer = 1000
+            player.frame = 0
+        if event == RIGHT_DOWN:
+            player.velocity += 0
+        elif event == LEFT_DOWN:
+            player.velocity -= 0
+        elif event == RIGHT_UP:
+            player.velocity -= 0
+        elif event == LEFT_UP:
+            player.velocity += 0
         pass
 
     @staticmethod
-    def exit(barricade, event):
+    def exit(player, event):
+        player.hp = 200
         pass
 
     @staticmethod
-    def do(barricade):
-           pass
+    def do(player):
+        player.timer -= 1
+        if player.timer == 0:
+            player.add_event(REPAIR)
+        player.frame = (player.frame + ACTION_PER_TIME * FRAMES_PER_ACTION * game_framework.frame_time) % 25
+
+        pass
 
     @staticmethod
-    def draw(barricade):
+    def draw(player):
+        player.image.clip_draw(int(player.frame) * 120, 0, 120, 80, player.x, player.y)
         pass
 
 
@@ -138,7 +161,8 @@ next_state_table = {
     DriveState: {RIGHT_UP: IdleState, LEFT_UP: IdleState,
                  LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState,
                  X: DriveState, DISABLED: DamagedState
-               }
+               },
+    DamagedState: {REPAIR: IdleState}
 }
 
 
@@ -154,7 +178,7 @@ class Player:
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
         self.check_cannon = False
-        self.hp = 200  # 캐릭터 체력
+        self.hp = 0  # 캐릭터 체력
 
     def fire_cannon(self):
         cannon = Cannon(self.x, self.y)
