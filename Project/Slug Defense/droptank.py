@@ -74,7 +74,7 @@ class DeathState:
         droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 7
         if int(droptank.frame) % 7 == 6:
             game_world.remove_object(droptank)
-            droptank.x = 1800
+            droptank.x = random.randint(1700, 3000)
         pass
 
     @staticmethod

@@ -11,20 +11,19 @@ class Barricade:
         self.image = load_image('barricade.png')
         self.font = load_font('ENCR10B.TTF', 16)
         self.hp = 300
-        pass
 
     def update(self):
         if self.hp <= 0:
             game_world.remove_object(self)
+            self.x = -100  # 좌표를 어떻게 없애지? ㅠㅠ
+
         pass
 
     def get_bb(self):
         return self.x - 25, self.y - 20, self.x + 25, self.y + 20
-        pass
 
     def draw(self):
         self.image.draw(self.x, self.y)
         draw_rectangle(*self.get_bb())
         self.font.draw(self.x - 60, self.y + 50,
                        '(HP : %i)' % self.hp, (255, 0, 0))
-        pass
