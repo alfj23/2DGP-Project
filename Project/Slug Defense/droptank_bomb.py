@@ -16,9 +16,13 @@ class Bomb:
         self.x -= self.velocity
         self.frame = (self.frame + 1) % 20
         print(self.damage_amount)
-        if main_state.collide(self, main_state.player) or main_state.collide(self, main_state.barricade):
+        if main_state.collide(self, main_state.barricade):
             game_world.remove_object(self)
             main_state.barricade.hp -= self.damage_amount
+
+        if main_state.collide(self, main_state.player):
+            game_world.remove_object(self)
+            main_state.player.hp -= self.damage_amount
 
 
 
