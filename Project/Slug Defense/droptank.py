@@ -170,7 +170,7 @@ class Droptank:
             self.cur_state.enter(self, event)
 
     def get_bb(self):
-        return self.x - 33, self.y - 30, self.x + 32, self.y + 20
+        return self.x - 33, self.y - 25, self.x + 32, self.y + 20
 
     def fire_bomb(self):
         bomb = Bomb(self.x, self.y)

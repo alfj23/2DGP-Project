@@ -21,6 +21,7 @@ class Cannon:
             if main_state.collide(self, droptank):
                 droptank.hp -= self.damage
                 game_world.remove_object(self)
+                break
 
     def get_bb(self):
         return self.x + 10, self.y, self.x + 45, self.y + 20

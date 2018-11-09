@@ -19,7 +19,7 @@ FRAMES_PER_ACTION = 23
 
 
 # Player Slug Events
-RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, X = range(5)
+RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, X, DISABLED = range(6)
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
@@ -66,9 +66,9 @@ class IdleState:
     @staticmethod
     def draw(player):
         if player.check_cannon:
-            player.image.clip_draw(int(player.frame) * 140, 0, 140, 80, player.x + 40, player.y)
+            player.image.clip_draw(int(player.frame) * 140, 80, 140, 80, player.x + 40, player.y)
         else:
-            player.image.clip_draw(int(player.frame) * 80, 160, 80 - 3, 80, player.x, player.y)
+            player.image.clip_draw(int(player.frame) * 80, 240, 80 - 3, 80, player.x, player.y)
 
 
 class DriveState:
@@ -107,19 +107,37 @@ class DriveState:
     @staticmethod
     def draw(player):
         if player.check_cannon:
-            player.image.clip_draw(int(player.frame) * 140, 0, 140, 80, player.x + 40, player.y)
+            player.image.clip_draw(int(player.frame) * 140, 80, 140, 80, player.x + 40, player.y)
         else:
-            player.image.clip_draw(int(player.frame) * 80, 80, 80, 80, player.x, player.y)
+            player.image.clip_draw(int(player.frame) * 80, 160, 80, 80, player.x, player.y)
+
+
+class DamagedState:
+    @staticmethod
+    def enter(barricade, event):
+        pass
+
+    @staticmethod
+    def exit(barricade, event):
+        pass
+
+    @staticmethod
+    def do(barricade):
+           pass
+
+    @staticmethod
+    def draw(barricade):
+        pass
 
 
 next_state_table = {
     IdleState: {RIGHT_UP: DriveState, LEFT_UP: DriveState,
                 RIGHT_DOWN: DriveState, LEFT_DOWN: DriveState,
-                X: IdleState
+                X: IdleState, DISABLED: DamagedState
                },
     DriveState: {RIGHT_UP: IdleState, LEFT_UP: IdleState,
                  LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState,
-                 X: DriveState
+                 X: DriveState, DISABLED: DamagedState
                }
 }
 
@@ -127,7 +145,7 @@ next_state_table = {
 class Player:
     def __init__(self):
         self.x, self.y = 1600 // 2, 40 + 200
-        self.image = load_image('player.png')
+        self.image = load_image('slug.png')
         self.font = load_font('ENCR10B.TTF', 16)
         self.dir = 1
         self.velocity = 0

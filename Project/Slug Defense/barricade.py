@@ -7,7 +7,7 @@ class Barricade:
     image = None
 
     def __init__(self, x=400, y=300, velocity=3):
-        self.x, self.y = 200, 40 + 200
+        self.x, self.y = 200, 35 + 200
         self.image = load_image('barricade.png')
         self.font = load_font('ENCR10B.TTF', 16)
         self.hp = 300
