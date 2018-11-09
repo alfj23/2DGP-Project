@@ -46,13 +46,12 @@ class IdleState:
             player.velocity += RUN_SPEED_PPS
         elif event == REPAIR:
             player.hp = 200
-            print(player.velocity)
 
     @staticmethod
     def exit(player, event):
         if event == FIRE_CANNON:
             player.frame = 0
-            player.check_cannon = True
+            player.check_fired = True
             player.fire_cannon()
 
     @staticmethod
@@ -60,10 +59,10 @@ class IdleState:
         if player.hp <= 0:
             player.add_event(DISABLED)
         else:
-            if player.check_cannon:
+            if player.check_fired:
                 player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 23
                 if player.frame >= 22:
-                    player.check_cannon = False
+                    player.check_fired = False
             else:
                 player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 3
 
@@ -71,7 +70,7 @@ class IdleState:
 
     @staticmethod
     def draw(player):
-        if player.check_cannon:
+        if player.check_fired:
             player.image.clip_draw(int(player.frame) * 140, 80, 140, 80, player.x + 40, player.y)
         else:
             player.image.clip_draw(int(player.frame) * 80, 240, 80 - 3, 80, player.x, player.y)
@@ -90,13 +89,12 @@ class DriveState:
         elif event == LEFT_UP:
             player.velocity += RUN_SPEED_PPS
         player.dir = clamp(-1, player.velocity, 1)
-        print(player.velocity)
 
     @staticmethod
     def exit(player, event):  # 왜 나가는지 event를 통해서 알려줄 수 있음.
         if event == FIRE_CANNON:
             player.frame = 0
-            player.check_cannon = True
+            player.check_fired = True
             player.fire_cannon()
 
     @staticmethod
@@ -104,10 +102,10 @@ class DriveState:
         if player.hp <= 0:
             player.add_event(DISABLED)
         else:
-            if player.check_cannon:
+            if player.check_fired:
                 player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 23
                 if player.frame >= 22:
-                    player.check_cannon = False
+                    player.check_fired = False
             else:
                 player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 18
 
@@ -116,7 +114,7 @@ class DriveState:
 
     @staticmethod
     def draw(player):
-        if player.check_cannon:
+        if player.check_fired:
             player.image.clip_draw(int(player.frame) * 140, 80, 140, 80, player.x + 40, player.y)
         else:
             player.image.clip_draw(int(player.frame) * 80, 160, 80, 80, player.x, player.y)
@@ -128,9 +126,6 @@ class DamagedState:
         if event == DISABLED:
             player.timer = 1000
             player.frame = 0
-        else:
-            pass
-        pass
 
     @staticmethod
     def exit(player, event):
@@ -142,7 +137,6 @@ class DamagedState:
         if player.timer == 0:
             player.add_event(REPAIR)
         #player.frame = (player.frame + ACTION_PER_TIME * FRAMES_PER_ACTION * game_framework.frame_time) % 25
-
         pass
 
     @staticmethod
@@ -177,7 +171,7 @@ class Player:
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
-        self.check_cannon = False
+        self.check_fired = False
         self.hp = 200  # 캐릭터 체력
 
     def fire_cannon(self):
