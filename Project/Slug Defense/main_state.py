@@ -10,9 +10,7 @@ from player import Player
 from map import Map
 from pow import Pow
 from droptank import Droptank
-from cannon import Cannon
-from droptank_bomb import Bomb
-
+from barricade import Barricade
 name = "MainState"
 
 player = None
