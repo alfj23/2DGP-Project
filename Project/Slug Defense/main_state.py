@@ -19,6 +19,7 @@ prisoner = None
 droptanks = []
 cannonballs = []
 droptank_bombs = []
+barricade = None
 
 def enter():
     global player
@@ -36,6 +37,10 @@ def enter():
     global droptanks
     droptanks = [Droptank() for i in range(20)]
     game_world.add_objects(droptanks, 1)
+
+    global barricade
+    barricade = Barricade()
+    game_world.add_object(barricade, 1)
 
 
 def exit():

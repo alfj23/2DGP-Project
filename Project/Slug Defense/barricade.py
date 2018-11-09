@@ -16,7 +16,10 @@ class Barricade:
         pass
 
     def get_bb(self):
+        return self.x - 25, self.y - 20, self.x + 25, self.y + 20
         pass
 
     def draw(self):
+        self.image.draw(self.x, self.y)
+        draw_rectangle(*self.get_bb())
         pass
