@@ -14,6 +14,8 @@ class Barricade:
         pass
 
     def update(self):
+        if self.hp <= 0:
+            game_world.remove_object(self)
         pass
 
     def get_bb(self):

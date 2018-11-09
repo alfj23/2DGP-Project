@@ -8,7 +8,7 @@ class Bomb:
     def __init__(self, x=800, y=200, velocity=0.5):
         self.x, self.y, self.velocity = x, y, velocity
         self.frame = 0
-        self.damage_amount = 1
+        self.damage_amount = 100
         if Bomb.image == None:
             self.image = load_image('droptank_bomb.png')
 
