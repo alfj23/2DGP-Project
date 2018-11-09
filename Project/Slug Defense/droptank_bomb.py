@@ -2,6 +2,81 @@ from pico2d import *
 import game_world
 import main_state
 
+# barricade Events
+REPAIR, UNDER50, DESTROYED = range(3)  # repair barricade / hp_amount under 50% / barricade destroyed
+# barricade States
+class IdleState:
+    @staticmethod
+    def enter(barricade, event):
+        pass
+
+    @staticmethod
+    def exit(barricade, event):
+        pass
+
+    @staticmethod
+    def do(barricade):
+        pass
+
+    @staticmethod
+    def draw(barricade):
+        pass
+
+
+class HitState:
+    @staticmethod
+    def enter(barricade, event):
+        pass
+
+    @staticmethod
+    def exit(barricade, event):
+        pass
+
+    @staticmethod
+    def do(barricade):
+        pass
+
+    @staticmethod
+    def draw(barricade):
+        pass
+
+
+class DamagedState:
+    @staticmethod
+    def enter(barricade, event):
+        pass
+
+    @staticmethod
+    def exit(barricade, event):
+        pass
+
+    @staticmethod
+    def do(barricade):
+        pass
+
+    @staticmethod
+    def draw(barricade):
+        pass
+
+
+class DestroyedState:
+    @staticmethod
+    def enter(barricade, event):
+        pass
+
+    @staticmethod
+    def exit(barricade, event):
+        pass
+
+    @staticmethod
+    def do(barricade):
+        pass
+
+    @staticmethod
+    def draw(barricade):
+        pass
+
+
 class Bomb:
     image = None
 
