@@ -11,13 +11,14 @@ from map import Map
 from pow import Pow
 from droptank import Droptank
 from barricade import Barricade
-from UI import Bottom_UI
+from UI import Bottom_UI, Top_UI
 name = "MainState"
 
 player = None
 map = None
 prisoner = None
 bottom_ui = None
+top_ui = None
 
 droptanks = []
 cannonballs = []
@@ -36,6 +37,10 @@ def enter():
     global bottom_ui
     bottom_ui = Bottom_UI()
     game_world.add_object(bottom_ui, 0)
+
+    global top_ui
+    top_ui = Top_UI()
+    game_world.add_object(top_ui, 0)
 
     global prisoner
     prisoner = Pow()
