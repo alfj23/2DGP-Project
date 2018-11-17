@@ -146,12 +146,10 @@ class DamagedState:
 next_state_table = {
     IdleState: {RIGHT_UP: DriveState, LEFT_UP: DriveState,
                 RIGHT_DOWN: DriveState, LEFT_DOWN: DriveState,
-                FIRE_CANNON: IdleState, DISABLED: DamagedState
-               },
+                FIRE_CANNON: IdleState, DISABLED: DamagedState},
     DriveState: {RIGHT_UP: IdleState, LEFT_UP: IdleState,
                  LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState,
-                 FIRE_CANNON: DriveState, DISABLED: DamagedState
-               },
+                 FIRE_CANNON: DriveState, DISABLED: DamagedState},
     DamagedState: {REPAIR: IdleState, RIGHT_UP: IdleState, RIGHT_DOWN: IdleState, LEFT_UP: IdleState,
                    LEFT_DOWN: IdleState, FIRE_CANNON: IdleState}
 }

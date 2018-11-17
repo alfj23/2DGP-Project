@@ -26,6 +26,9 @@ droptank_bombs = []
 barricade = None
 
 def enter():
+    global gold
+    gold = 0
+
     global player
     player = Player()
     game_world.add_object(player, 1)

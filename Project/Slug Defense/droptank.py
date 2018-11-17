@@ -63,6 +63,7 @@ class DeathState:
     @staticmethod
     def enter(droptank, event):
         droptank.frame = 0
+        main_state.gold += droptank.gold
         pass
 
     @staticmethod
@@ -157,6 +158,7 @@ class Droptank:
         self.hp = 400
         self.font = load_font('ENCR10B.TTF', 16)
         self.chk_reload = False
+        self.gold = 200
 
     def add_event(self, event):
         self.event_que.insert(0, event)
