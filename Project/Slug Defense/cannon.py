@@ -6,16 +6,16 @@ import game_framework
 # cannon Speed
 
 PIXEL_PER_METER = (10.0 / 0.15)
-RUN_SPEED_KMPH = 60
+RUN_SPEED_KMPH = 40
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 # cannnon Speed
 
-TIME_PER_ACTION = 1.5  # 액션 당 시간
-ACTION_PER_TIME = 1.25 / TIME_PER_ACTION
-FRAMES_PER_ACTION = 8
+TIME_PER_ACTION = 0.1  # 액션 당 시간
+ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
+FRAMES_PER_ACTION = 4
 
 
 class IdleState:
@@ -62,7 +62,6 @@ class Cannon:
 
     def update(self):
         self.cur_state.do(self)
-
 
     def get_bb(self):
         return self.x + 10, self.y, self.x + 45, self.y + 20
