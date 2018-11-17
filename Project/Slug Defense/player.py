@@ -170,7 +170,7 @@ class Player:
         self.cur_state.enter(self, None)
         self.check_fired = False
         self.timer = 0.0
-        self.hp = 200  # 캐릭터 체력
+        self.hp = 1500  # 캐릭터 체력
 
     def fire_cannon(self):
         cannon = Cannon(self.x, self.y)

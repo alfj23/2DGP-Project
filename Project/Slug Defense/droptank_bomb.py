@@ -54,7 +54,7 @@ class Bomb:
     def __init__(self, x=400, y=300, velocity=1):
         self.x, self.y, self.velocity = x, y, velocity
         self.frame = 0
-        self.damage_amount = 100
+        self.damage_amount = 50
         if Bomb.image == None:
             self.image = load_image('droptank_bomb.png')
         self.event_que = []
