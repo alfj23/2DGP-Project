@@ -5,6 +5,7 @@ import os
 from pico2d import *
 import game_framework
 import game_world
+import pause_state
 
 from player import Player
 from map import Map
@@ -81,7 +82,7 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-                game_framework.quit()
+                game_framework.push_state(pause_state)
         else:
             player.handle_event(event)
 
