@@ -5,6 +5,14 @@ import main_state
 
 __name__ = "pause_state"
 
+class Pause_menu:
+    def __init__(self):
+        self.image
+        self.font = load_font('ENCR10B.TTF', 30)
+
+    def draw(self):
+        pass
+    
 def enter():
     pass
 
