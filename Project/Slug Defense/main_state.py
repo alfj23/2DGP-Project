@@ -42,11 +42,11 @@ def enter():
 
     global bottom_ui
     bottom_ui = Bottom_UI()
-    game_world.add_object(bottom_ui, 0)
+    game_world.add_object(bottom_ui, 2)
 
     global top_ui
     top_ui = Top_UI()
-    game_world.add_object(top_ui, 0)
+    game_world.add_object(top_ui, 2)
 
     global prisoner
     prisoner = Pow()

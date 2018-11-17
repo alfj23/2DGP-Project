@@ -1,7 +1,8 @@
 
 # layer 0: Background Objects
 # layer 1: Foreground Objects
-objects = [[], []]
+# layer 2: UIs
+objects = [[], [], []]
 
 
 def add_object(o, layer): #게임월드에 객체 넣기
