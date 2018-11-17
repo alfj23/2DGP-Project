@@ -122,6 +122,7 @@ class DamagedState:
     def enter(player, event):
         if event == DISABLED:
             player.frame = 0
+            player.timer = 1000
 
     @staticmethod
     def exit(player, event):
@@ -129,10 +130,10 @@ class DamagedState:
 
     @staticmethod
     def do(player):
-        if int(player.timer + game_framework.frame_time) >= 3:
+        player.timer -= 1
+        if player.timer == 0:
             player.add_event(REPAIR)
         #player.frame = (player.frame + ACTION_PER_TIME * FRAMES_PER_ACTION * game_framework.frame_time) % 25
-        print(int(player.timer + game_framework.frame_time))
         pass
 
     @staticmethod
