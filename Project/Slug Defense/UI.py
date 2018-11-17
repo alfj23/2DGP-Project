@@ -20,7 +20,7 @@ class Bottom_UI:
 class Top_UI:
     def __init__(self):
         self.image = load_image('top_ui.png')
-        self.font = load_font('ENCR10B.TTF', 30)
+        self.font = load_font('ENCR10B.TTF', 40)
 
     def update(self):
         pass
@@ -28,3 +28,4 @@ class Top_UI:
     def draw(self):
         self.image.draw(800//2, 550)
         self.font.draw(30, 540, 'GOLD : %i' %main_state.gold, (255, 255, 0))
+        self.font.draw(300, 540, 'WAVE : %i', (255, 255, 255))

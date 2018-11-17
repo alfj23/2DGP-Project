@@ -114,14 +114,13 @@ class DriveState:
 class AttackState:
 
     @staticmethod
-    def enter(droptank, event):
+    def enter(droptank):
         pass
 
     @staticmethod
     def exit(droptank, event):
         if event == RELOAD:
             droptank.fire_bomb()
-        pass
 
     @staticmethod
     def do(droptank):
@@ -131,12 +130,10 @@ class AttackState:
             droptank.frame = 0
         if droptank.hp <= 0:
             droptank.add_event(DIE)
-        pass
 
     @staticmethod
     def draw(droptank):
         droptank.image.clip_draw(int(droptank.frame) * 100, 80, 100, 80, droptank.x, droptank.y)
-        pass
 
 
 next_state_table = {
