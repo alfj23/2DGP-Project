@@ -64,6 +64,7 @@ class DeathState:
     def enter(droptank, event):
         droptank.frame = 0
         main_state.gold += droptank.gold
+        main_state.left_wave_amount -= 1
         pass
 
     @staticmethod
@@ -114,7 +115,7 @@ class DriveState:
 class AttackState:
 
     @staticmethod
-    def enter(droptank):
+    def enter(droptank, event):
         pass
 
     @staticmethod

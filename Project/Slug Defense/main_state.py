@@ -29,6 +29,8 @@ def enter():
     global gold
     gold = 0
 
+
+
     global player
     player = Player()
     game_world.add_object(player, 1)
@@ -56,6 +58,9 @@ def enter():
     global barricade
     barricade = Barricade()
     game_world.add_object(barricade, 1)
+
+    global left_wave_amount
+    left_wave_amount = len(droptanks)
 
 
 def exit():
