@@ -44,7 +44,7 @@ class IdleState:
 
     @staticmethod
     def draw(solider):
-        solider.image.clip_draw(int(solider.frame) * 40, 50, 40, 50, solider.x, solider.y)
+        solider.image.clip_draw(int(solider.frame) * 40, 50, 40, 50, solider.x, solider.y + 2)
         pass
 
 
@@ -65,7 +65,7 @@ class DeathState:
 
     @staticmethod
     def draw(solider):
-        solider.die.clip_draw(int(solider.frame) * 52, 0, 48, 80, solider.x, solider.y)
+        solider.image.clip_draw(int(solider.frame) * 52, 150, 48, 80, solider.x, solider.y + 16)
         pass
 
 
@@ -125,12 +125,11 @@ next_state_table = {
 class Soldier:
     def __init__(self):
         self.x, self.y = random.randint(400, 800), 32 + 200
-        self.image = load_image('soldier3.png')
-        self.die = load_image('soldierdie.png')
+        self.image = load_image('soldier4.png')
         self.velocity = 0
         self.frame = random.randint(0, 11)
         self.event_que = []
-        self.cur_state = DeathState
+        self.cur_state = AttackState#MoveState#IdleState#DeathState
         self.cur_state.enter(self, None)
         self.hp = 400
         self.font = load_font('ENCR10B.TTF', 16)
