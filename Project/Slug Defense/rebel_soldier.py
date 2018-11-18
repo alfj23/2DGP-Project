@@ -117,8 +117,8 @@ next_state_table = {
 
 class Soldier:
     def __init__(self):
-        self.x, self.y = random.randint(800, 1600), 35 + 200
-        self.image = load_image('rebel_soldier_moving.png')
+        self.x, self.y = random.randint(800, 1600), 32 + 200
+        self.image = load_image('soldier.png')
         self.velocity = 0
         self.frame = random.randint(0, 11)
         self.event_que = []
@@ -141,7 +141,7 @@ class Soldier:
             self.cur_state.enter(self, event)
 
     def get_bb(self):
-        return self.x - 17, self.y - 22, self.x + 17, self.y + 22
+        return self.x - 15, self.y - 18, self.x + 12, self.y + 22
 
     def draw(self):
         self.cur_state.draw(self)
