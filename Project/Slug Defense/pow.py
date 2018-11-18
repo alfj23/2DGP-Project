@@ -14,7 +14,7 @@ RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 # POW Speed
 
 TIME_PER_ACTION = 1.0 # 액션 당 시간
-ACTION_PER_TIME = 1.0  # 액션 마다 달라서 따로 빼놓음?
+ACTION_PER_TIME = 0.5  # 액션 마다 달라서 따로 빼놓음?
 FRAMES_PER_ACTION = 13
 
 # POW States

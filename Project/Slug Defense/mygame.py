@@ -5,5 +5,5 @@ import main_state
 import pause_state
 
 pico2d.open_canvas(800, 600)
-game_framework.run(pause_state)
+game_framework.run(main_state)
 pico2d.close_canvas()

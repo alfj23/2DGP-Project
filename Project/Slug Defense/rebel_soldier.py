@@ -7,16 +7,16 @@ import random
 # soldier Speed
 
 PIXEL_PER_METER = (10.0 / 0.3)
-RUN_SPEED_KMPH = 15
+RUN_SPEED_KMPH = 10
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 # soldier Speed
 
-TIME_PER_ACTION = 1.5  # 액션 당 시간
-ACTION_PER_TIME = 1.25 / TIME_PER_ACTION
-FRAMES_PER_ACTION = 8
+TIME_PER_ACTION = 0.5  # 액션 당 시간
+ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
+FRAMES_PER_ACTION = 12
 
 
 # soldier Events
@@ -68,18 +68,24 @@ class MoveState:
 
     @staticmethod
     def enter(solider, event):
-       pass
+        solider.velocity -= RUN_SPEED_PPS
+        pass
 
     @staticmethod
     def exit(solider, event):
-       pass
+        solider.velocity = 0
+        pass
 
     @staticmethod
     def do(solider):
+        solider.frame = (solider.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) % 12
+        solider.x += solider.velocity * game_framework.frame_time
+        solider.x = clamp(0 + 17, solider.x, 4000 - 17)
         pass
 
     @staticmethod
     def draw(solider):
+        solider.image.clip_draw(int(solider.frame) * 33, 0, 33, 44, solider.x, solider.y)
         pass
 
 
@@ -109,12 +115,12 @@ next_state_table = {
     AttackState: {}
 }
 
-class Droptank:
+class Soldier:
     def __init__(self):
-        self.x, self.y = random.randint(1600, 3000), 40 + 200
+        self.x, self.y = random.randint(800, 1600), 35 + 200
         self.image = load_image('rebel_soldier_moving.png')
         self.velocity = 0
-        self.frame = 0
+        self.frame = random.randint(0, 11)
         self.event_que = []
         self.cur_state = MoveState #IdleState
         self.cur_state.enter(self, None)

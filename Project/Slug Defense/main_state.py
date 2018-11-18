@@ -13,6 +13,7 @@ from pow import Pow
 from droptank import Droptank
 from barricade import Barricade
 from UI import Bottom_UI, Top_UI
+from rebel_soldier import Soldier
 name = "MainState"
 
 player = None
@@ -22,15 +23,15 @@ bottom_ui = None
 top_ui = None
 
 droptanks = []
+soldiers = []
 cannonballs = []
 droptank_bombs = []
 barricade = None
 
+
 def enter():
     global gold
     gold = 0
-
-
 
     global player
     player = Player()
@@ -52,9 +53,13 @@ def enter():
     prisoner = Pow()
     game_world.add_object(prisoner, 1)
 
-    global droptanks
-    droptanks = [Droptank() for i in range(20)]
-    game_world.add_objects(droptanks, 1)
+    #global droptanks
+    #droptanks = [Droptank() for i in range(20)]
+    #game_world.add_objects(droptanks, 1)
+
+    global soldiers
+    soldiers = [Soldier() for i in range(20)]
+    game_world.add_objects(soldiers, 1)
 
     global barricade
     barricade = Barricade()
