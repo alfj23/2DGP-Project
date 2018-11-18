@@ -60,10 +60,12 @@ class DeathState:
 
     @staticmethod
     def do(solider):
+        solider.frame = (solider.frame + ACTION_PER_TIME * FRAMES_PER_ACTION * game_framework.frame_time) % 22
         pass
 
     @staticmethod
     def draw(solider):
+        solider.die.clip_draw(int(solider.frame) * 52, 0, 48, 80, solider.x, solider.y)
         pass
 
 
@@ -124,10 +126,11 @@ class Soldier:
     def __init__(self):
         self.x, self.y = random.randint(400, 800), 32 + 200
         self.image = load_image('soldier3.png')
+        self.die = load_image('soldierdie.png')
         self.velocity = 0
         self.frame = random.randint(0, 11)
         self.event_que = []
-        self.cur_state = AttackState #MoveState #IdleState
+        self.cur_state = DeathState
         self.cur_state.enter(self, None)
         self.hp = 400
         self.font = load_font('ENCR10B.TTF', 16)
