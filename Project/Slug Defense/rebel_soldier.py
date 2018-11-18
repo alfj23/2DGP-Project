@@ -16,7 +16,7 @@ RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 TIME_PER_ACTION = 0.5  # 액션 당 시간
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
-FRAMES_PER_ACTION = 12
+FRAMES_PER_ACTION = 8
 
 
 # soldier Events
@@ -29,7 +29,8 @@ FRAMES_PER_ACTION = 12
 class IdleState:
 
     @staticmethod
-    def enter(solider, event):
+    def enter(soldier, event):
+        soldier.velocity = 0
         pass
 
     @staticmethod
@@ -37,12 +38,14 @@ class IdleState:
         pass
 
     @staticmethod
-    def do(solider):  # 사거리 400
-       pass
+    def do(solider):
+        solider.frame = (solider.frame + ACTION_PER_TIME*FRAMES_PER_ACTION*game_framework.frame_time) % 4
+        pass
 
     @staticmethod
     def draw(solider):
-       pass
+        solider.image.clip_draw(int(solider.frame) * 40, 50, 40, 50, solider.x, solider.y)
+        pass
 
 
 class DeathState:
@@ -117,12 +120,12 @@ next_state_table = {
 
 class Soldier:
     def __init__(self):
-        self.x, self.y = random.randint(800, 1600), 32 + 200
-        self.image = load_image('soldier.png')
+        self.x, self.y = random.randint(400, 800), 32 + 200
+        self.image = load_image('soldier1.png')
         self.velocity = 0
         self.frame = random.randint(0, 11)
         self.event_que = []
-        self.cur_state = MoveState #IdleState
+        self.cur_state = IdleState
         self.cur_state.enter(self, None)
         self.hp = 400
         self.font = load_font('ENCR10B.TTF', 16)
