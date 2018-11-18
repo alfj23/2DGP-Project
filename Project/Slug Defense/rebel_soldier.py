@@ -104,10 +104,12 @@ class AttackState:
 
     @staticmethod
     def do(solider):
+        solider.frame = (solider.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 16
         pass
 
     @staticmethod
     def draw(solider):
+        solider.image.clip_composite_draw(int(solider.frame) * 80, 100, 80, 50, 3.141592, 'v', solider.x, solider.y, 80, 50)
         pass
 
 
@@ -121,11 +123,11 @@ next_state_table = {
 class Soldier:
     def __init__(self):
         self.x, self.y = random.randint(400, 800), 32 + 200
-        self.image = load_image('soldier1.png')
+        self.image = load_image('soldier3.png')
         self.velocity = 0
         self.frame = random.randint(0, 11)
         self.event_que = []
-        self.cur_state = IdleState
+        self.cur_state = AttackState #MoveState #IdleState
         self.cur_state.enter(self, None)
         self.hp = 400
         self.font = load_font('ENCR10B.TTF', 16)
