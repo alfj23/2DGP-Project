@@ -2,21 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4dd5d27a-1d63-4ddf-9362-3b391dd40141" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Slug Defense/UI.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/UI.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Slug Defense/barricade.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/barricade.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Slug Defense/cannon.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/cannon.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Slug Defense/droptank.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/droptank.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Slug Defense/droptank_bomb.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/droptank_bomb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Slug Defense/game_framework.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/game_framework.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Slug Defense/game_world.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/game_world.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Slug Defense/main_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/main_state.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Slug Defense/map.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/map.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Slug Defense/mygame.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/mygame.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Slug Defense/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Slug Defense/pow.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/pow.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Slug Defense/rebel_soldier.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/rebel_soldier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Slug Defense/start_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/start_state.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Slug Defense/title_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/title_state.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,25 +52,25 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="3" />
-          <entry key="py" value="15701" />
+          <entry key="py" value="15790" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="3" />
-          <entry key="Python" value="15701" />
+          <entry key="Python" value="15790" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="png" value="41" />
-          <entry key="py" value="147" />
+          <entry key="py" value="150" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Image" value="41" />
-          <entry key="Python" value="147" />
+          <entry key="Python" value="150" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -101,15 +89,52 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Slug Defense/rebel_soldier.py">
+        <entry file="file://$PROJECT_DIR$/Slug Defense/cannon.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="239">
+              <caret line="46" column="20" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Slug Defense/droptank.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="205">
+              <caret line="131" column="35" selection-start-line="131" selection-start-column="35" selection-end-line="131" selection-end-column="35" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1542638926056" expanded="true" signature="2652:2653" ph="..." />
-                <marker date="1542638926056" expanded="true" signature="2652:2657" ph="..." />
-                <marker date="1542638926056" expanded="true" signature="4779:4784" ph="..." />
+                <marker date="1542641101293" expanded="true" signature="1498:4005" ph="..." />
+                <marker date="1542641101293" expanded="true" signature="4559:4923" ph="..." />
+                <marker date="1542641101293" expanded="true" signature="4851:4923" ph="..." />
+                <marker date="1542641101293" expanded="true" signature="4943:5037" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Slug Defense/main_state.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1570">
+              <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+              <folding>
+                <marker date="1542638926270" expanded="true" signature="1334:1339" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Slug Defense/rebel_soldier.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="122" column="102" selection-start-line="122" selection-start-column="102" selection-end-line="122" selection-end-column="102" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
+                <marker date="1542641170809" expanded="true" signature="2693:2694" ph="..." />
+                <marker date="1542641170809" expanded="true" signature="2693:2698" ph="..." />
+                <marker date="1542641170809" expanded="true" signature="4769:4774" ph="..." />
               </folding>
             </state>
           </provider>
@@ -145,10 +170,8 @@
         <option value="$PROJECT_DIR$/Slug Defense/title/pause_state.py" />
         <option value="$PROJECT_DIR$/Slug Defense/pause_state.py" />
         <option value="$PROJECT_DIR$/Slug Defense/UI.py" />
-        <option value="$PROJECT_DIR$/Slug Defense/droptank.py" />
         <option value="$PROJECT_DIR$/Slug Defense/barricade.py" />
         <option value="$PROJECT_DIR$/Slug Defense/droptank_bomb.py" />
-        <option value="$PROJECT_DIR$/Slug Defense/cannon.py" />
         <option value="$PROJECT_DIR$/Slug Defense/game_framework.py" />
         <option value="$PROJECT_DIR$/Slug Defense/game_world.py" />
         <option value="$PROJECT_DIR$/Slug Defense/main_state.py" />
@@ -158,13 +181,16 @@
         <option value="$PROJECT_DIR$/Slug Defense/pow.py" />
         <option value="$PROJECT_DIR$/Slug Defense/start_state.py" />
         <option value="$PROJECT_DIR$/Slug Defense/title_state.py" />
+        <option value="$PROJECT_DIR$/Slug Defense/droptank.py" />
         <option value="$PROJECT_DIR$/Slug Defense/rebel_soldier.py" />
+        <option value="$PROJECT_DIR$/Slug Defense/cannon.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="681" />
-    <option name="width" value="1248" />
+    <option name="x" value="32" />
+    <option name="y" value="7" />
+    <option name="width" value="978" />
     <option name="height" value="1039" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -340,7 +366,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3252841" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49966952" visible="true" weight="0.17045455" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49966952" visible="true" weight="0.37926137" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.11647727" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -435,27 +461,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Slug Defense/cannon.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Slug Defense/droptank.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="17" lean-forward="true" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <marker date="1542638674649" expanded="true" signature="1498:4025" ph="..." />
-            <marker date="1542638674649" expanded="true" signature="4579:4943" ph="..." />
-            <marker date="1542638674649" expanded="true" signature="4871:4943" ph="..." />
-            <marker date="1542638674649" expanded="true" signature="4963:5057" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Slug Defense/droptank_bomb.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -476,16 +481,6 @@
           <caret column="8" selection-start-column="8" selection-end-column="8" />
           <folding>
             <marker date="1542638926027" expanded="true" signature="234:281" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Slug Defense/main_state.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
-          <folding>
-            <marker date="1542638926270" expanded="true" signature="1334:1339" ph="..." />
           </folding>
         </state>
       </provider>
@@ -552,16 +547,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Slug Defense/rebel_soldier.py">
+    <entry file="file://$PROJECT_DIR$/Slug Defense/droptank.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="205">
+          <caret line="131" column="35" selection-start-line="131" selection-start-column="35" selection-end-line="131" selection-end-column="35" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <marker date="1542638926056" expanded="true" signature="2652:2653" ph="..." />
-            <marker date="1542638926056" expanded="true" signature="2652:2657" ph="..." />
-            <marker date="1542638926056" expanded="true" signature="4779:4784" ph="..." />
+            <marker date="1542641101293" expanded="true" signature="1498:4005" ph="..." />
+            <marker date="1542641101293" expanded="true" signature="4559:4923" ph="..." />
+            <marker date="1542641101293" expanded="true" signature="4851:4923" ph="..." />
+            <marker date="1542641101293" expanded="true" signature="4943:5037" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Slug Defense/rebel_soldier.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="122" column="102" selection-start-line="122" selection-start-column="102" selection-end-line="122" selection-end-column="102" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <marker date="1542641170809" expanded="true" signature="2693:2694" ph="..." />
+            <marker date="1542641170809" expanded="true" signature="2693:2698" ph="..." />
+            <marker date="1542641170809" expanded="true" signature="4769:4774" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Slug Defense/main_state.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1570">
+          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+          <folding>
+            <marker date="1542638926270" expanded="true" signature="1334:1339" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Slug Defense/cannon.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="46" column="20" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
         </state>
       </provider>
     </entry>

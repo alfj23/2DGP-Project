@@ -30,19 +30,23 @@ class IdleState:
         pass
 
     @staticmethod
-    def do(cannon):  # 사거리 400
+    def do(cannon):
         cannon.x += cannon.velocity * game_framework.frame_time
         cannon.frame = (cannon.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) % 4
 
         for droptank in main_state.droptanks:
             if main_state.collide(cannon, droptank):
-                droptank.hp -= cannon.damage
-                game_world.remove_object(cannon)
+
+                if droptank.hp > 0:
+                    droptank.hp -= cannon.damage
+                    game_world.remove_object(cannon)
                 break
         for soldier in main_state.soldiers:
             if main_state.collide(cannon, soldier):
-                soldier.hp -= cannon.damage
-                game_world.remove_object(cannon)
+
+                if soldier.hp > 0:
+                    soldier.hp -= cannon.damage
+                    game_world.remove_object(cannon)
                 break
         pass
 
@@ -51,6 +55,7 @@ class IdleState:
         cannon.image.clip_draw(int(cannon.frame) * 40, 0, 40, 30, cannon.x + 30, cannon.y + 10)
         if cannon.x > 1600 - 20:
             game_world.remove_object(cannon)  # cannon 이 범위 벗어날 시 반환됨
+
 
 class Cannon:
     image = None

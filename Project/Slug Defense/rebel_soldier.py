@@ -56,6 +56,7 @@ class DeathState:
     @staticmethod
     def enter(soldier, event):
         soldier.frame = 0
+        main_state.left_wave_amount -= 1
         pass
 
     @staticmethod
@@ -67,7 +68,6 @@ class DeathState:
         if int(soldier.frame) % 22 == 21:
             game_world.remove_object(soldier)
             soldier.x = 2000
-            main_state.left_wave_amount -= 1
         soldier.frame = (soldier.frame + ACTION_PER_TIME * FRAMES_PER_ACTION * game_framework.frame_time) % 22
         pass
 
@@ -121,7 +121,6 @@ class AttackState:
     @staticmethod
     def do(soldier):
         if soldier.x - main_state.player.x > soldier.atk_range or soldier.x - main_state.player.x < 0:
-            print(soldier.x - main_state.player.x)
             soldier.add_event(MOVE)
         soldier.frame = (soldier.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 16
         if main_state.collide(main_state.player, soldier) and int(soldier.frame) % 16 == 15:
@@ -151,7 +150,7 @@ class Soldier:
         self.event_que = []
         self.cur_state = MoveState
         self.cur_state.enter(self, None)
-        self.hp = 300
+        self.hp = 200
         self.font = load_font('ENCR10B.TTF', 16)
         self.chk_reload = False
         self.gold = 100

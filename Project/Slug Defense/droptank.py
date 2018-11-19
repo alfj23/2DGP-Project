@@ -78,7 +78,8 @@ class DeathState:
         droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 7
         if int(droptank.frame) % 7 == 6:
             game_world.remove_object(droptank)
-            droptank.x = random.randint(1700, 3000)
+            droptank.x = 2000
+
         pass
 
     @staticmethod
@@ -100,10 +101,10 @@ class DriveState:
 
     @staticmethod
     def do(droptank):
-        if droptank.x - main_state.player.x <= droptank.atk_range:
-            droptank.add_event(MARKING)
         if droptank.hp <= 0:
             droptank.add_event(DIE)
+        if droptank.x - main_state.player.x <= droptank.atk_range:
+            droptank.add_event(MARKING)
         else:
             droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 3
             droptank.x += droptank.velocity * game_framework.frame_time
@@ -127,12 +128,13 @@ class AttackState:
 
     @staticmethod
     def do(droptank):
+        if droptank.hp <= 0:
+            droptank.add_event(DIE)
         droptank.frame = (droptank.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
         if int(droptank.frame) % 8 == 7:
             droptank.add_event(RELOAD)
             droptank.frame = 0
-        if droptank.hp <= 0:
-            droptank.add_event(DIE)
+
 
     @staticmethod
     def draw(droptank):
