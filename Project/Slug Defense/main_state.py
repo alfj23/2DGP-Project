@@ -109,6 +109,11 @@ def handle_events():
                 cost_HP = cost_HP * 2
             pass
         elif event.type == SDL_KEYDOWN and event.key == SDLK_3:
+            # 바리게이트 수리
+            if gold - cost_BRCD_RP >= 0:
+                gold -= cost_BRCD_RP
+                barricade.hp += 200
+                cost_BRCD_RP = cost_BRCD_RP * 2
             pass
         elif event.type == SDL_KEYDOWN and event.key == SDLK_4:
             pass
