@@ -54,6 +54,7 @@ class DeathState:
 
     @staticmethod
     def enter(soldier, event):
+        soldier.frame = 0
         pass
 
     @staticmethod
@@ -62,6 +63,9 @@ class DeathState:
 
     @staticmethod
     def do(soldier):
+        if int(soldier.frame) % 22 == 21:
+            game_world.remove_object(soldier)
+            soldier.x = 2000
         soldier.frame = (soldier.frame + ACTION_PER_TIME * FRAMES_PER_ACTION * game_framework.frame_time) % 22
         pass
 
