@@ -58,8 +58,8 @@ def enter():
     #game_world.add_objects(droptanks, 1)
 
     global soldiers
-    soldiers = Soldier()#[Soldier() for i in range(20)]
-    game_world.add_object(soldiers, 1)
+    soldiers = [Soldier() for i in range(20)]
+    game_world.add_objects(soldiers, 1)
 
     global barricade
     barricade = Barricade()

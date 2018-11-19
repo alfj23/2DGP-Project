@@ -85,7 +85,7 @@ class MoveState:
 
     @staticmethod
     def do(soldier):
-        if soldier.x - main_state.player.x <= soldier.atk_range:
+        if 0 < soldier.x - main_state.player.x <= soldier.atk_range:
             soldier.add_event(ATTACK)
         if soldier.hp <= 0:
             soldier.add_event(DIE)
@@ -114,10 +114,11 @@ class AttackState:
 
     @staticmethod
     def do(soldier):
-        if soldier.x - main_state.player.x > soldier.atk_range:
+        if soldier.x - main_state.player.x > soldier.atk_range or soldier.x - main_state.player.x < 0:
+            print(soldier.x - main_state.player.x)
             soldier.add_event(MOVE)
         soldier.frame = (soldier.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 16
-        if main_state.collide(main_state.player, soldier):
+        if main_state.collide(main_state.player, soldier) and int(soldier.frame) % 16 == 15:
             main_state.player.hp -= soldier.damage_amount
         pass
 
@@ -148,8 +149,9 @@ class Soldier:
         self.font = load_font('ENCR10B.TTF', 16)
         self.chk_reload = False
         self.gold = 100
-        self.damage_amount = 40
-        self.atk_range = 50
+        self.damage_amount = 2
+        self.atk_range = 45
+
 
     def add_event(self, event):
         self.event_que.insert(0, event)
@@ -172,4 +174,4 @@ class Soldier:
         draw_rectangle(*self.get_bb())
 
     def handle_event(self, event):
-       pass
+        pass
