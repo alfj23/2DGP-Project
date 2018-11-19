@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4dd5d27a-1d63-4ddf-9362-3b391dd40141" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Slug Defense/cannon.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/cannon.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Slug Defense/droptank.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/droptank.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Slug Defense/rebel_soldier.py" beforeDir="false" afterPath="$PROJECT_DIR$/Slug Defense/rebel_soldier.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,13 +50,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="3" />
-          <entry key="py" value="15790" />
+          <entry key="py" value="15800" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="3" />
-          <entry key="Python" value="15790" />
+          <entry key="Python" value="15800" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -88,26 +86,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Slug Defense/cannon.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="46" column="20" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
+            <state relative-caret-position="125">
+              <caret line="40" column="48" selection-start-line="40" selection-start-column="48" selection-end-line="40" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Slug Defense/droptank.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="131" column="35" selection-start-line="131" selection-start-column="35" selection-end-line="131" selection-end-column="35" />
+            <state relative-caret-position="376">
+              <caret line="146" column="79" selection-start-line="146" selection-start-column="79" selection-end-line="146" selection-end-column="79" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1542641101293" expanded="true" signature="1498:4005" ph="..." />
-                <marker date="1542641101293" expanded="true" signature="4559:4923" ph="..." />
-                <marker date="1542641101293" expanded="true" signature="4851:4923" ph="..." />
-                <marker date="1542641101293" expanded="true" signature="4943:5037" ph="..." />
+                <marker date="1542641857931" expanded="true" signature="1498:4007" ph="..." />
+                <marker date="1542641857931" expanded="true" signature="4561:4925" ph="..." />
+                <marker date="1542641857931" expanded="true" signature="4853:4925" ph="..." />
+                <marker date="1542641857931" expanded="true" signature="4945:5039" ph="..." />
               </folding>
             </state>
           </provider>
@@ -128,13 +126,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Slug Defense/rebel_soldier.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="122" column="102" selection-start-line="122" selection-start-column="102" selection-end-line="122" selection-end-column="102" />
+            <state relative-caret-position="397">
+              <caret line="152" column="19" selection-start-line="152" selection-start-column="19" selection-end-line="152" selection-end-column="19" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1542641170809" expanded="true" signature="2693:2694" ph="..." />
-                <marker date="1542641170809" expanded="true" signature="2693:2698" ph="..." />
-                <marker date="1542641170809" expanded="true" signature="4769:4774" ph="..." />
+                <marker date="1542641649342" expanded="true" signature="2693:2694" ph="..." />
+                <marker date="1542641649342" expanded="true" signature="2693:2698" ph="..." />
+                <marker date="1542641649342" expanded="true" signature="4769:4774" ph="..." />
               </folding>
             </state>
           </provider>
@@ -181,9 +179,9 @@
         <option value="$PROJECT_DIR$/Slug Defense/pow.py" />
         <option value="$PROJECT_DIR$/Slug Defense/start_state.py" />
         <option value="$PROJECT_DIR$/Slug Defense/title_state.py" />
-        <option value="$PROJECT_DIR$/Slug Defense/droptank.py" />
-        <option value="$PROJECT_DIR$/Slug Defense/rebel_soldier.py" />
         <option value="$PROJECT_DIR$/Slug Defense/cannon.py" />
+        <option value="$PROJECT_DIR$/Slug Defense/rebel_soldier.py" />
+        <option value="$PROJECT_DIR$/Slug Defense/droptank.py" />
       </list>
     </option>
   </component>
@@ -361,12 +359,12 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17779246" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12161269" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3252841" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49966952" visible="true" weight="0.37926137" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49966952" visible="true" weight="0.06818182" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.11647727" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -547,33 +545,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Slug Defense/droptank.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="131" column="35" selection-start-line="131" selection-start-column="35" selection-end-line="131" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <marker date="1542641101293" expanded="true" signature="1498:4005" ph="..." />
-            <marker date="1542641101293" expanded="true" signature="4559:4923" ph="..." />
-            <marker date="1542641101293" expanded="true" signature="4851:4923" ph="..." />
-            <marker date="1542641101293" expanded="true" signature="4943:5037" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Slug Defense/rebel_soldier.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="122" column="102" selection-start-line="122" selection-start-column="102" selection-end-line="122" selection-end-column="102" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <marker date="1542641170809" expanded="true" signature="2693:2694" ph="..." />
-            <marker date="1542641170809" expanded="true" signature="2693:2698" ph="..." />
-            <marker date="1542641170809" expanded="true" signature="4769:4774" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Slug Defense/main_state.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1570">
@@ -586,8 +557,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Slug Defense/cannon.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="46" column="20" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
+        <state relative-caret-position="125">
+          <caret line="40" column="48" selection-start-line="40" selection-start-column="48" selection-end-line="40" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Slug Defense/rebel_soldier.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="152" column="19" selection-start-line="152" selection-start-column="19" selection-end-line="152" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <marker date="1542641649342" expanded="true" signature="2693:2694" ph="..." />
+            <marker date="1542641649342" expanded="true" signature="2693:2698" ph="..." />
+            <marker date="1542641649342" expanded="true" signature="4769:4774" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Slug Defense/droptank.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="146" column="79" selection-start-line="146" selection-start-column="79" selection-end-line="146" selection-end-column="79" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <marker date="1542641857931" expanded="true" signature="1498:4007" ph="..." />
+            <marker date="1542641857931" expanded="true" signature="4561:4925" ph="..." />
+            <marker date="1542641857931" expanded="true" signature="4853:4925" ph="..." />
+            <marker date="1542641857931" expanded="true" signature="4945:5039" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

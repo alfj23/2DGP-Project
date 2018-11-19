@@ -57,6 +57,7 @@ class DeathState:
     def enter(soldier, event):
         soldier.frame = 0
         main_state.left_wave_amount -= 1
+        main_state.gold += soldier.gold
         pass
 
     @staticmethod

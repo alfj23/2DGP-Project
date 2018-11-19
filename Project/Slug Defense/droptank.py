@@ -144,7 +144,7 @@ class AttackState:
 next_state_table = {
     IdleState: {DIE: DeathState, DRIVE: DriveState, MARKING: AttackState},
     DriveState: {DIE: DeathState, MARKING: AttackState},
-    DeathState: {MARKING: DeathState, DRIVE: DeathState, RELOAD: DeathState},
+    DeathState: {}, #MARKING: DeathState, DRIVE: DeathState, RELOAD: DeathState
     AttackState: {DIE: DeathState, DRIVE: DriveState, RELOAD: IdleState, FIRE: AttackState}
 }
 
