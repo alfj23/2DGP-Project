@@ -21,7 +21,7 @@ FRAMES_PER_ACTION = 8
 
 # soldier Events
 
-
+ATTACK, DIE, MOVE = range(3)
 
 # soldier States
 
@@ -34,63 +34,66 @@ class IdleState:
         pass
 
     @staticmethod
-    def exit(solider, event):
+    def exit(soldier, event):
         pass
 
     @staticmethod
-    def do(solider):
-        solider.frame = (solider.frame + ACTION_PER_TIME*FRAMES_PER_ACTION*game_framework.frame_time) % 4
+    def do(soldier):
+        soldier.frame = (soldier.frame + ACTION_PER_TIME*FRAMES_PER_ACTION*game_framework.frame_time) % 4
         pass
 
     @staticmethod
-    def draw(solider):
-        solider.image.clip_draw(int(solider.frame) * 40, 50, 40, 50, solider.x, solider.y + 2)
+    def draw(soldier):
+        soldier.image.clip_draw(int(soldier.frame) * 40, 50, 40, 50, soldier.x, soldier.y + 2)
         pass
 
 
 class DeathState:
 
     @staticmethod
-    def enter(solider, event):
+    def enter(soldier, event):
         pass
 
     @staticmethod
-    def exit(solider, event):
+    def exit(soldier, event):
         pass
 
     @staticmethod
-    def do(solider):
-        solider.frame = (solider.frame + ACTION_PER_TIME * FRAMES_PER_ACTION * game_framework.frame_time) % 22
+    def do(soldier):
+        soldier.frame = (soldier.frame + ACTION_PER_TIME * FRAMES_PER_ACTION * game_framework.frame_time) % 22
         pass
 
     @staticmethod
-    def draw(solider):
-        solider.image.clip_draw(int(solider.frame) * 52, 150, 48, 80, solider.x, solider.y + 16)
+    def draw(soldier):
+        soldier.image.clip_draw(int(soldier.frame) * 52, 150, 48, 80, soldier.x, soldier.y + 16)
         pass
 
 
 class MoveState:
 
     @staticmethod
-    def enter(solider, event):
-        solider.velocity -= RUN_SPEED_PPS
+    def enter(soldier, event):
+        soldier.velocity -= RUN_SPEED_PPS
         pass
 
     @staticmethod
-    def exit(solider, event):
-        solider.velocity = 0
+    def exit(soldier, event):
+        soldier.velocity = 0
         pass
 
     @staticmethod
-    def do(solider):
-        solider.frame = (solider.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) % 12
-        solider.x += solider.velocity * game_framework.frame_time
-        solider.x = clamp(0 + 17, solider.x, 4000 - 17)
+    def do(soldier):
+        if soldier.x - main_state.player.x <= soldier.atk_range:
+            soldier.add_event(ATTACK)
+        else:
+            soldier.frame = (soldier.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) % 12
+            soldier.x += soldier.velocity * game_framework.frame_time
+            soldier.x = clamp(0 + 17, soldier.x, 4000 - 17)
         pass
 
     @staticmethod
-    def draw(solider):
-        solider.image.clip_draw(int(solider.frame) * 33, 0, 33, 44, solider.x, solider.y)
+    def draw(soldier):
+        soldier.image.clip_draw(int(soldier.frame) * 33, 0, 33, 44, soldier.x, soldier.y)
         pass
 
 
@@ -98,6 +101,7 @@ class AttackState:
 
     @staticmethod
     def enter(solider, event):
+        solider.frame = 0
         pass
 
     @staticmethod
@@ -105,21 +109,23 @@ class AttackState:
         pass
 
     @staticmethod
-    def do(solider):
-        solider.frame = (solider.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 16
+    def do(soldier):
+        if soldier.x - main_state.player.x > soldier.atk_range:
+            soldier.add_event(MOVE)
+        soldier.frame = (soldier.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 16
         pass
 
     @staticmethod
-    def draw(solider):
-        solider.image.clip_composite_draw(int(solider.frame) * 80, 100, 80, 50, 3.141592, 'v', solider.x, solider.y + 2, 80, 50)
+    def draw(soldier):
+        soldier.image.clip_composite_draw(int(soldier.frame) * 80, 100, 80, 50, 3.141592, 'v', soldier.x, soldier.y + 2, 80, 50)
         pass
 
 
 next_state_table = {
-    IdleState: {},
-    MoveState: {},
+    IdleState: {ATTACK: AttackState, DIE: DeathState, MOVE: MoveState},
+    MoveState: {ATTACK: AttackState, DIE: DeathState},
     DeathState: {},
-    AttackState: {}
+    AttackState: {DIE: DeathState, MOVE: MoveState}
 }
 
 class Soldier:
@@ -129,12 +135,14 @@ class Soldier:
         self.velocity = 0
         self.frame = random.randint(0, 11)
         self.event_que = []
-        self.cur_state = AttackState#MoveState#IdleState#DeathState
+        self.cur_state = MoveState
         self.cur_state.enter(self, None)
-        self.hp = 400
+        self.hp = 300
         self.font = load_font('ENCR10B.TTF', 16)
         self.chk_reload = False
-        self.gold = 200
+        self.gold = 100
+        self.damage_amount = 40
+        self.atk_range = 50
 
     def add_event(self, event):
         self.event_que.insert(0, event)

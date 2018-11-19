@@ -98,7 +98,7 @@ class DriveState:
 
     @staticmethod
     def do(droptank):
-        if droptank.x - main_state.player.x <= 400:
+        if droptank.x - main_state.player.x <= droptank.atk_range:
             droptank.add_event(MARKING)
         if droptank.hp <= 0:
             droptank.add_event(DIE)
@@ -154,6 +154,7 @@ class Droptank:
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
         self.hp = 400
+        self.atk_range = 400
         self.font = load_font('ENCR10B.TTF', 16)
         self.chk_reload = False
         self.gold = 200
