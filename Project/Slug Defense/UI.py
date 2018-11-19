@@ -16,7 +16,11 @@ class Bottom_UI:
         self.category_font.draw(65,  self.y, 'Status', (0,0,0))
         self.category_font.draw(265, self.y, 'Skill', (0,0,0))
         self.category_font.draw(575, self.y, 'Store', (0,0,0))
-        self.contents_font.draw(425, self.y - 40, '1 : Upgrade ATK', (0,0,0))
+        self.contents_font.draw(455, self.y - 30, '1 : Upgrade ATK', (0, 0, 0))
+        self.contents_font.draw(455, self.y - 60, '2 : Upgrade HP', (0, 0, 0))
+        self.contents_font.draw(455, self.y - 90, '3 : Repair Barricade', (0, 0, 0))
+        self.contents_font.draw(455, self.y - 120, '4 : Upgrade BRCDE HP', (0, 0, 0))
+        self.contents_font.draw(455, self.y - 150, '5 : Upgrade Skill DMG', (0, 0, 0))
         pass
 
 class Top_UI:
