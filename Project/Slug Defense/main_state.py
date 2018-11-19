@@ -88,6 +88,18 @@ def handle_events():
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
                 game_framework.push_state(pause_state)
+
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_1:  # 키입력으로 상점 상호작용 처리.
+            pass
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_2:
+            pass
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_3:
+            pass
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_4:
+            pass
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_5:
+            pass
+
         else:
             player.handle_event(event)
 
