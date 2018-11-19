@@ -50,13 +50,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="3" />
-          <entry key="py" value="16919" />
+          <entry key="py" value="16970" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="3" />
-          <entry key="Python" value="16919" />
+          <entry key="Python" value="16970" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -101,10 +101,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Slug Defense/main_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="115" column="47" selection-start-line="115" selection-start-column="47" selection-end-line="115" selection-end-column="47" />
+            <state relative-caret-position="438">
+              <caret line="124" column="55" selection-start-line="124" selection-start-column="55" selection-end-line="124" selection-end-column="55" />
               <folding>
-                <marker date="1542645189396" expanded="true" signature="1325:1330" ph="..." />
+                <marker date="1542645530481" expanded="true" signature="1325:1330" ph="..." />
               </folding>
             </state>
           </provider>
@@ -583,10 +583,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Slug Defense/main_state.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="115" column="47" selection-start-line="115" selection-start-column="47" selection-end-line="115" selection-end-column="47" />
+        <state relative-caret-position="438">
+          <caret line="124" column="55" selection-start-line="124" selection-start-column="55" selection-end-line="124" selection-end-column="55" />
           <folding>
-            <marker date="1542645189396" expanded="true" signature="1325:1330" ph="..." />
+            <marker date="1542645530481" expanded="true" signature="1325:1330" ph="..." />
           </folding>
         </state>
       </provider>

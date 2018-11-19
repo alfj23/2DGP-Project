@@ -122,6 +122,7 @@ def handle_events():
                 cost_BRCD_RP = cost_BRCD_HP * 2
             pass
         elif event.type == SDL_KEYDOWN and event.key == SDLK_5:
+            # 스킬 데미지 업그레이드 ==> 현재 스킬 미구현으로 업그레이드 또한 미구현
             pass
 
         else:
