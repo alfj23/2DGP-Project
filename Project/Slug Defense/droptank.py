@@ -119,6 +119,8 @@ class AttackState:
 
     @staticmethod
     def enter(droptank, event):
+        if droptank.hp <= 0:
+            droptank.add_event(DIE)
         pass
 
     @staticmethod
