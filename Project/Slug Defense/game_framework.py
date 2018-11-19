@@ -1,3 +1,4 @@
+__name__ = "game_framework"
 class GameState:
     def __init__(self, state):
         self.enter = state.enter

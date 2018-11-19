@@ -2,7 +2,7 @@ from pico2d import *
 import game_world
 import main_state
 import game_framework
-
+name = "droptank_bomb"
 # bomb Speed
 
 PIXEL_PER_METER = (10.0 / 0.15)

@@ -3,6 +3,7 @@ from pico2d import *
 
 import game_world
 
+__name__ = "pow"
 # POW Speed
 
 PIXEL_PER_METER = (10.0 / 0.3)

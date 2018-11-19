@@ -14,7 +14,7 @@ from droptank import Droptank
 from barricade import Barricade
 from UI import Bottom_UI, Top_UI
 from rebel_soldier import Soldier
-name = "MainState"
+__name__ = "MainState"
 
 player = None
 map = None
@@ -53,9 +53,9 @@ def enter():
     prisoner = Pow()
     game_world.add_object(prisoner, 1)
 
-    #global droptanks
-    #droptanks = [Droptank() for i in range(20)]
-    #game_world.add_objects(droptanks, 1)
+    global droptanks
+    droptanks = [Droptank() for i in range(20)]
+    game_world.add_objects(droptanks, 1)
 
     global soldiers
     soldiers = [Soldier() for i in range(20)]
@@ -66,7 +66,7 @@ def enter():
     game_world.add_object(barricade, 1)
 
     global left_wave_amount
-    left_wave_amount = len(droptanks)
+    left_wave_amount = len(droptanks) + len(soldiers)
 
 
 def exit():

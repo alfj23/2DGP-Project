@@ -1,6 +1,6 @@
 from pico2d import *
 import main_state
-
+name = "UI"
 class Bottom_UI:
     def __init__(self):
         self.image = load_image('Bottom_UI_Background.png')

@@ -2,7 +2,7 @@ import game_framework
 from pico2d import *
 import title_state
 
-name = "StartState"
+__name__ = "StartState"
 image = None
 logo_time = 0.0
 

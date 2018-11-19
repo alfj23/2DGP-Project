@@ -4,6 +4,7 @@ import main_state
 import game_world
 import random
 
+__name__ = "rebel_soldier"
 # soldier Speed
 
 PIXEL_PER_METER = (10.0 / 0.3)
@@ -66,6 +67,7 @@ class DeathState:
         if int(soldier.frame) % 22 == 21:
             game_world.remove_object(soldier)
             soldier.x = 2000
+            main_state.left_wave_amount -= 1
         soldier.frame = (soldier.frame + ACTION_PER_TIME * FRAMES_PER_ACTION * game_framework.frame_time) % 22
         pass
 
@@ -142,7 +144,7 @@ next_state_table = {
 
 class Soldier:
     def __init__(self):
-        self.x, self.y = random.randint(400, 800), 32 + 200
+        self.x, self.y = random.randint(800, 4000), 32 + 200
         self.image = load_image('soldier.png')
         self.velocity = 0
         self.frame = random.randint(0, 11)

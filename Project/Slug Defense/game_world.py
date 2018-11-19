@@ -1,4 +1,4 @@
-
+__name__ = "game_world"
 # layer 0: Background Objects
 # layer 1: Foreground Objects
 # layer 2: UIs

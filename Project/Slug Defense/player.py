@@ -3,6 +3,8 @@ from pico2d import *
 from cannon import Cannon
 import game_world
 import time
+
+__name__ = "player"
 # Player Slug Drive Speed
 
 PIXEL_PER_METER = (10.0 / 0.5)

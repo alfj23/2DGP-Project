@@ -4,6 +4,8 @@ import main_state
 from droptank_bomb import Bomb
 import game_world
 import random
+name = "droptank"
+
 # droptank Speed
 
 PIXEL_PER_METER = (10.0 / 0.5)

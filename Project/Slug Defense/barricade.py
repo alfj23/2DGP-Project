@@ -1,6 +1,7 @@
 from pico2d import *
 import game_world
 import main_state
+name = "barricade"
 
 # barricade Events
 REPAIR, UNDER50, DESTROYED = range(3)  # repair barricade / hp_amount under 50% / barricade destroyed

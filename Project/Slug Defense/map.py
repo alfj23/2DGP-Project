@@ -1,5 +1,5 @@
 from pico2d import *
-
+__name__ = "map"
 class Map:
     def __init__(self):
         self.image = load_image('maaap.png')
