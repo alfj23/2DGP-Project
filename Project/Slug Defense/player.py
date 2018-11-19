@@ -170,6 +170,7 @@ class Player:
         self.cur_state.enter(self, None)
         self.check_fired = False
         self.timer = 0.0
+        self.damage_amount_of_cannon = 200
         self.hp = 1500  # 캐릭터 체력
 
     def fire_cannon(self):

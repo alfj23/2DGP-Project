@@ -28,11 +28,10 @@ cannonballs = []
 droptank_bombs = []
 barricade = None
 
+global gold
+gold = 0
 
 def enter():
-    global gold
-    gold = 0
-
     global player
     player = Player()
     game_world.add_object(player, 1)
@@ -81,7 +80,13 @@ def resume():
     pass
 
 
+#global cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK
+#cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK = 100, 100, 100, 200, 300
+
+
 def handle_events():
+    global gold
+    cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK = 100, 100, 100, 200, 300
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -90,8 +95,18 @@ def handle_events():
                 game_framework.push_state(pause_state)
 
         elif event.type == SDL_KEYDOWN and event.key == SDLK_1:  # 키입력으로 상점 상호작용 처리.
+            # 플레이어 공격력 증가
+            if gold - cost_ATK > 0:
+                gold -= cost_ATK
+                player.damage_amount_of_cannon += 50
+                cost_ATK = cost_ATK * 2
             pass
         elif event.type == SDL_KEYDOWN and event.key == SDLK_2:
+            # 플레이어 최대 체력 증가
+            if gold - cost_HP > 0:
+                gold -= cost_HP
+                player.hp += 200
+                cost_HP = cost_HP * 2
             pass
         elif event.type == SDL_KEYDOWN and event.key == SDLK_3:
             pass

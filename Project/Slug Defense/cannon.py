@@ -38,14 +38,14 @@ class IdleState:
             if main_state.collide(cannon, droptank):
 
                 if droptank.hp > 0:
-                    droptank.hp -= cannon.damage
+                    droptank.hp -= cannon.damage_amount
                     game_world.remove_object(cannon)
                 break
         for soldier in main_state.soldiers:
             if main_state.collide(cannon, soldier):
 
                 if soldier.hp > 0:
-                    soldier.hp -= cannon.damage
+                    soldier.hp -= cannon.damage_amount
                     game_world.remove_object(cannon)
                 break
         pass
@@ -63,7 +63,7 @@ class Cannon:
     def __init__(self, x=400, y=300, velocity=3):
         self.x, self.y, self.velocity = x, y, velocity
         self.frame = 0
-        self.damage = 200
+        self.damage_amount = main_state.player.damage_amount_of_cannon
         if Cannon.image == None:
             self.image = load_image('cannon_ball.png')
         self.event_que = []
