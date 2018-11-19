@@ -39,6 +39,8 @@ class IdleState:
 
     @staticmethod
     def do(soldier):
+        if soldier.hp <= 0:
+            soldier.add_event(DIE)
         soldier.frame = (soldier.frame + ACTION_PER_TIME*FRAMES_PER_ACTION*game_framework.frame_time) % 4
         pass
 
@@ -85,6 +87,8 @@ class MoveState:
     def do(soldier):
         if soldier.x - main_state.player.x <= soldier.atk_range:
             soldier.add_event(ATTACK)
+        if soldier.hp <= 0:
+            soldier.add_event(DIE)
         else:
             soldier.frame = (soldier.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) % 12
             soldier.x += soldier.velocity * game_framework.frame_time
@@ -113,6 +117,8 @@ class AttackState:
         if soldier.x - main_state.player.x > soldier.atk_range:
             soldier.add_event(MOVE)
         soldier.frame = (soldier.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 16
+        if main_state.collide(main_state.player, soldier):
+            main_state.player.hp -= soldier.damage_amount
         pass
 
     @staticmethod
@@ -127,6 +133,7 @@ next_state_table = {
     DeathState: {},
     AttackState: {DIE: DeathState, MOVE: MoveState}
 }
+
 
 class Soldier:
     def __init__(self):
