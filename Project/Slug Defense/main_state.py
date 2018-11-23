@@ -31,6 +31,7 @@ barricade = None
 global gold
 gold = 3000
 
+
 def enter():
     global player
     player = Player()
@@ -52,13 +53,13 @@ def enter():
     prisoner = Pow()
     game_world.add_object(prisoner, 1)
 
-    global droptanks
-    droptanks = [Droptank() for i in range(20)]
-    game_world.add_objects(droptanks, 1)
+    #global droptanks
+    #droptanks = [Droptank() for i in range(20)]
+    #game_world.add_objects(droptanks, 1)
 
-    global soldiers
-    soldiers = [Soldier() for i in range(20)]
-    game_world.add_objects(soldiers, 1)
+    #global soldiers
+    #soldiers = [Soldier() for i in range(20)]
+    #game_world.add_objects(soldiers, 1)
 
     global barricade
     barricade = Barricade()
@@ -67,6 +68,8 @@ def enter():
     global left_wave_amount
     left_wave_amount = len(droptanks) + len(soldiers)
 
+    map.set_center_object(player)
+    player.set_background(map)
 
 def exit():
     game_world.clear()
@@ -79,17 +82,6 @@ def pause():
 def resume():
     pass
 
-
-def get_player():
-    return player
-
-
-def get_barricade():
-    return barricade
-
-
-def get_pow():
-    return prisoner
 
 global cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK
 cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK = 100, 100, 500, 100, 300

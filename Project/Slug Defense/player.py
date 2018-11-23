@@ -7,8 +7,8 @@ import time
 __name__ = "player"
 # Player Slug Drive Speed
 
-PIXEL_PER_METER = (10.0 / 0.5)
-RUN_SPEED_KMPH = 50.0
+PIXEL_PER_METER = (10.0 / 0.4)
+RUN_SPEED_KMPH = 40.0
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -204,3 +204,7 @@ class Player:
         if (event.type, event.key) in key_event_table:
             key_event = key_event_table[(event.type, event.key)]
             self.add_event(key_event)
+
+    def set_background(self, bg):
+        self.bg = bg
+        self.x = self.bg.w / 2

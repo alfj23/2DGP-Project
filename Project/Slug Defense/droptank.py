@@ -9,7 +9,7 @@ name = "droptank"
 
 # droptank Speed
 
-PIXEL_PER_METER = (10.0 / 0.3) # 10 pixel = 30cm
+PIXEL_PER_METER = (10.0 / 0.4)  # 10 pixel = 30cm
 RUN_SPEED_KMPH = 20
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
@@ -17,7 +17,7 @@ RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 # droptank Speed
 
-TIME_PER_ACTION = 1.5  # 액션 당 시간
+TIME_PER_ACTION = 1.25  # 액션 당 시간
 ACTION_PER_TIME = 1.25 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 8
 
@@ -28,7 +28,7 @@ RELOAD, DIE, DRIVE, MARKING, FIRE = range(5) # 재장전/ 죽음 / 이동 / 조�
 
 # droptank States
 
-'''
+
 class IdleState:
 
     @staticmethod
@@ -150,8 +150,9 @@ next_state_table = {
     DeathState: {}, #MARKING: DeathState, DRIVE: DeathState, RELOAD: DeathState
     AttackState: {DIE: DeathState, DRIVE: DriveState, RELOAD: IdleState, FIRE: AttackState}
 }
-'''
+
 animation_name = ['IDLE', 'DRIVE', 'ATTACK', 'DIE']
+
 
 class Droptank:
     def __init__(self):
@@ -159,52 +160,25 @@ class Droptank:
         self.image = load_image('droptank.png')
         self.velocity = 0
         self.frame = 0
-        #self.event_que = []
-        #self.cur_state = IdleState
-        #self.cur_state.enter(self, None)
+        self.event_que = []
+        self.cur_state = IdleState
+        self.cur_state.enter(self, None)
         self.hp = 400
         self.atk_range = 400
         self.font = load_font('ENCR10B.TTF', 16)
         self.chk_reload = False
         self.gold = 200
 
-    #def add_event(self, event):
-        #self.event_que.insert(0, event)
-
-    def driving(self):
-        self.velocity = RUN_SPEED_PPS
-        pass
-
-    def chk_distance_player(self):
-        player = main_state.get_player()
-        distance = self.x - player.x
-        if distance < PIXEL_PER_METER * 40:
-            return BehaviorTree.SUCCESS
-        pass
-
-    def chk_distance_barricade(self):
-        barricade = main_state.get_barricade()
-        distance = self.x - barricade.x
-        if distance < PIXEL_PER_METER * 40:
-            return BehaviorTree.SUCCESS
-        pass
-
-    def chk_distance_pow(self):
-        pow = main_state.get_pow()
-        distance = self.x - pow.x
-        if distance < PIXEL_PER_METER * 40:
-            return BehaviorTree.SUCCESS
-        pass
+    def add_event(self, event):
+        self.event_que.insert(0, event)
 
     def update(self):
-        #self.cur_state.do(self)
-        #if len(self.event_que) > 0:
-            #event = self.event_que.pop()
-            #self.cur_state.exit(self, event)
-            #self.cur_state = next_state_table[self.cur_state][event]
-            #self.cur_state.enter(self, event)
-        self.frame = (int(self.frame) + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time)
-
+        self.cur_state.do(self)
+        if len(self.event_que) > 0:
+            event = self.event_que.pop()
+            self.cur_state.exit(self, event)
+            self.cur_state = next_state_table[self.cur_state][event]
+            self.cur_state.enter(self, event)
         pass
 
     def get_bb(self):
@@ -216,10 +190,8 @@ class Droptank:
         pass
 
     def draw(self):
-        #self.cur_state.draw(self)
+        self.cur_state.draw(self)
         self.font.draw(self.x - 60, self.y + 50,
                        '(HP : %i)' % self.hp, (255, 0, 0))
         draw_rectangle(*self.get_bb())
 
-    def handle_event(self, event):
-       pass
