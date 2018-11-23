@@ -29,7 +29,7 @@ droptank_bombs = []
 barricade = None
 
 global gold
-gold = 0
+gold = 3000
 
 def enter():
     global player
@@ -52,13 +52,13 @@ def enter():
     prisoner = Pow()
     game_world.add_object(prisoner, 1)
 
-    global droptanks
-    droptanks = [Droptank() for i in range(20)]
-    game_world.add_objects(droptanks, 1)
+    #global droptanks
+    #droptanks = [Droptank() for i in range(20)]
+    #game_world.add_objects(droptanks, 1)
 
-    global soldiers
-    soldiers = [Soldier() for i in range(20)]
-    game_world.add_objects(soldiers, 1)
+    #global soldiers
+    #soldiers = [Soldier() for i in range(20)]
+    #game_world.add_objects(soldiers, 1)
 
     global barricade
     barricade = Barricade()
@@ -80,9 +80,8 @@ def resume():
     pass
 
 
-global cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK, chk_barricade_alive
-cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK = 100, 100, 100, 200, 300
-chk_barricade_alive = True
+global cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK
+cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK = 100, 100, 500, 100, 300
 
 
 def handle_events():
@@ -115,14 +114,17 @@ def handle_events():
                 gold -= cost_BRCD_RP
                 barricade.hp_amount = barricade.max_hp
                 cost_BRCD_RP = cost_BRCD_RP * 2
-            elif (gold - cost_BRCD_RP) >= 0 and not chk_barricade_alive:
-                chk_barricade_alive = True
+            elif (gold - cost_BRCD_RP) >= 0 and not barricade.chk_alive:
+                barricade.chk_alive = True
+                gold -= cost_BRCD_RP
+                barricade.hp_amount = barricade.max_hp
+                cost_BRCD_RP = cost_BRCD_RP * 2
             pass
         elif event.type == SDL_KEYDOWN and event.key == SDLK_4:
             if gold - cost_BRCD_HP >= 0:
                 gold -= cost_BRCD_HP
                 barricade.hp_amount += 200
-                cost_BRCD_RP = cost_BRCD_HP * 2
+                cost_BRCD_HP = cost_BRCD_HP * 2
             pass
         elif event.type == SDL_KEYDOWN and event.key == SDLK_5:
             # 스킬 데미지 업그레이드 ==> 현재 스킬 미구현으로 업그레이드 또한 미구현

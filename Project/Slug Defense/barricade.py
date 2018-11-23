@@ -22,7 +22,7 @@ class IdleState:
     @staticmethod
     def do(barricade):
         if barricade.hp_amount <= 0:
-            main_state.chk_barricade_alive = False
+            barricade.chk_alive = False
             barricade.add_event(DESTROYED)
         pass
 
@@ -73,7 +73,6 @@ class BrokenState:
     def enter(barricade, event):
         if event == DESTROYED:
             barricade.x = -100
-            game_world.remove_object(barricade)
         pass
 
     @staticmethod
@@ -82,8 +81,9 @@ class BrokenState:
 
     @staticmethod
     def do(barricade):
-        if main_state.chk_barricade_alive:
+        if barricade.chk_alive:
             barricade.add_event(REPAIR)
+
         pass
 
     @staticmethod
@@ -110,8 +110,9 @@ class Barricade:
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
         self.max_hp = 300
-        self.hp_amount = self.max_hp
-        self.hp_rate = int((self.hp_amount / self.max_hp) * 100)  # 체력 퍼센테이지
+        self.hp_amount = 0 #self.max_hp
+        #self.hp_rate = int((self.hp_amount / self.max_hp) * 100)  # 체력 퍼센테이지
+        self.chk_alive = True
 
     def update(self):
         self.cur_state.do(self)
