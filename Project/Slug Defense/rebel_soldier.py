@@ -125,7 +125,7 @@ class AttackState:
             soldier.add_event(MOVE)
         soldier.frame = (soldier.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 16
         if main_state.collide(main_state.player, soldier) and int(soldier.frame) % 16 == 15:
-            main_state.player.hp -= soldier.damage_amount
+            main_state.player.hp_amount -= soldier.damage_amount
         pass
 
     @staticmethod

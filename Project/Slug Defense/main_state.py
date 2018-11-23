@@ -105,7 +105,8 @@ def handle_events():
             # 플레이어 최대 체력 증가
             if gold - cost_HP >= 0:
                 gold -= cost_HP
-                player.hp += 200
+                player.max_hp += 200
+                player.hp_amount = player.hp_rate * player.max_hp
                 cost_HP = cost_HP * 2
             pass
         elif event.type == SDL_KEYDOWN and event.key == SDLK_3:

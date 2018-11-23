@@ -110,7 +110,7 @@ class Barricade:
         self.cur_state.enter(self, None)
         self.max_hp = 300
         self.hp_amount = self.max_hp
-        self.hp_rate = int((self.hp_amount / self.max_hp))  # 체력 퍼센테이지
+        self.hp_rate = (self.hp_amount / self.max_hp)  # 체력 퍼센테이지
         self.chk_alive = True
 
     def update(self):
@@ -120,7 +120,7 @@ class Barricade:
             self.cur_state.exit(self, event)
             self.cur_state = next_state_table[self.cur_state][event]
             self.cur_state.enter(self, event)
-        pass
+        self.hp_rate = (self.hp_amount / self.max_hp)
 
     def add_event(self, event):
         self.event_que.insert(0, event)

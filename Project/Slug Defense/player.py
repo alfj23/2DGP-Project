@@ -47,7 +47,7 @@ class IdleState:
         elif event == LEFT_UP:
             player.velocity += RUN_SPEED_PPS
         if event == REPAIR:
-            player.hp = 200
+            player.hp_amount = 200
 
     @staticmethod
     def exit(player, event):
@@ -58,7 +58,7 @@ class IdleState:
 
     @staticmethod
     def do(player):
-        if player.hp <= 0:
+        if player.hp_amount <= 0:
             player.add_event(DISABLED)
         if player.check_fired:
             player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 23
@@ -98,7 +98,7 @@ class DriveState:
 
     @staticmethod
     def do(player):
-        if player.hp <= 0:
+        if player.hp_amount <= 0:
             player.add_event(DISABLED)
         else:
             if player.check_fired:
@@ -171,7 +171,9 @@ class Player:
         self.check_fired = False
         self.timer = 0.0
         self.damage_amount_of_cannon = 200
-        self.hp = 1500  # 캐릭터 체력
+        self.max_hp = 1500
+        self.hp_amount = 1500
+        self.hp_rate = self.hp_amount / self.max_hp
 
     def fire_cannon(self):
         cannon = Cannon(self.x, self.y)
@@ -190,12 +192,13 @@ class Player:
             self.cur_state.exit(self, event)
             self.cur_state = next_state_table[self.cur_state][event]
             self.cur_state.enter(self, event)
+        self.hp_rate = self.hp_amount / self.max_hp
 
     def draw(self):
         self.cur_state.draw(self)
         draw_rectangle(*self.get_bb())
         self.font.draw(self.x - 60, self.y + 50,
-                       '(HP : %i)' % self.hp, (255, 0, 0))
+                       '(HP : %i)' % self.hp_amount, (255, 0, 0))
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:
