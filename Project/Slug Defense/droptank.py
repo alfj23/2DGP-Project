@@ -1,6 +1,7 @@
 import game_framework
 from pico2d import *
 import main_state
+from behavior_tree import BehaviorTree, SelectorNode, SequenceNode, LeafNode
 from droptank_bomb import Bomb
 import game_world
 import random
@@ -27,7 +28,7 @@ RELOAD, DIE, DRIVE, MARKING, FIRE = range(5) # 재장전/ 죽음 / 이동 / 조�
 
 # droptank States
 
-
+'''
 class IdleState:
 
     @staticmethod
@@ -149,6 +150,8 @@ next_state_table = {
     DeathState: {}, #MARKING: DeathState, DRIVE: DeathState, RELOAD: DeathState
     AttackState: {DIE: DeathState, DRIVE: DriveState, RELOAD: IdleState, FIRE: AttackState}
 }
+'''
+animation_name = ['IDLE', 'DRIVE', 'ATTACK', 'DIE']
 
 class Droptank:
     def __init__(self):
@@ -156,25 +159,38 @@ class Droptank:
         self.image = load_image('droptank.png')
         self.velocity = 0
         self.frame = 0
-        self.event_que = []
-        self.cur_state = IdleState
-        self.cur_state.enter(self, None)
+        #self.event_que = []
+        #self.cur_state = IdleState
+        #self.cur_state.enter(self, None)
         self.hp = 400
         self.atk_range = 400
         self.font = load_font('ENCR10B.TTF', 16)
         self.chk_reload = False
         self.gold = 200
 
-    def add_event(self, event):
-        self.event_que.insert(0, event)
+    #def add_event(self, event):
+        #self.event_que.insert(0, event)
+
+    def driving(self):
+        pass
+
+    def chk_distance_player(self):
+        pass
+
+    def chk_distance_barricade(self):
+        pass
+
+    def chk_distance_pow(self):
+        pass
 
     def update(self):
-        self.cur_state.do(self)
-        if len(self.event_que) > 0:
-            event = self.event_que.pop()
-            self.cur_state.exit(self, event)
-            self.cur_state = next_state_table[self.cur_state][event]
-            self.cur_state.enter(self, event)
+        #self.cur_state.do(self)
+        #if len(self.event_que) > 0:
+            #event = self.event_que.pop()
+            #self.cur_state.exit(self, event)
+            #self.cur_state = next_state_table[self.cur_state][event]
+            #self.cur_state.enter(self, event)
+        pass
 
     def get_bb(self):
         return self.x - 33, self.y - 25, self.x + 32, self.y + 20
@@ -185,7 +201,7 @@ class Droptank:
         pass
 
     def draw(self):
-        self.cur_state.draw(self)
+        #self.cur_state.draw(self)
         self.font.draw(self.x - 60, self.y + 50,
                        '(HP : %i)' % self.hp, (255, 0, 0))
         draw_rectangle(*self.get_bb())
