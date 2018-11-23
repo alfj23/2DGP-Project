@@ -35,7 +35,7 @@ class IdleState:
 
         if main_state.collide(bomb, main_state.barricade):
             game_world.remove_object(bomb)
-            main_state.barricade.hp -= bomb.damage_amount
+            main_state.barricade.hp_amount -= bomb.damage_amount
 
         if main_state.collide(bomb, main_state.player):
             game_world.remove_object(bomb)

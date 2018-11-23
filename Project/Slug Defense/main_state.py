@@ -80,13 +80,14 @@ def resume():
     pass
 
 
-global cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK
+global cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK, chk_barricade_alive
 cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK = 100, 100, 100, 200, 300
+chk_barricade_alive = True
 
 
 def handle_events():
     global gold
-    global cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK
+    global cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK, chk_barricade_alive
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -110,15 +111,17 @@ def handle_events():
             pass
         elif event.type == SDL_KEYDOWN and event.key == SDLK_3:
             # 바리게이트 수리
-            if gold - cost_BRCD_RP >= 0:
+            if (gold - cost_BRCD_RP) >= 0 and 0 < barricade.hp_amount < barricade.max_hp:
                 gold -= cost_BRCD_RP
-                barricade.hp += 200
+                barricade.hp_amount = barricade.max_hp
                 cost_BRCD_RP = cost_BRCD_RP * 2
+            elif (gold - cost_BRCD_RP) >= 0 and not chk_barricade_alive:
+                chk_barricade_alive = True
             pass
         elif event.type == SDL_KEYDOWN and event.key == SDLK_4:
             if gold - cost_BRCD_HP >= 0:
                 gold -= cost_BRCD_HP
-                barricade.hp += 200
+                barricade.hp_amount += 200
                 cost_BRCD_RP = cost_BRCD_HP * 2
             pass
         elif event.type == SDL_KEYDOWN and event.key == SDLK_5:
