@@ -26,7 +26,7 @@ pause_menu = None
 def enter():
     global pause_menu
     pause_menu = Pause_menu()
-    game_world.add_object(pause_menu, 1)
+    game_world.add_object(pause_menu, 2)
 
 
 def exit():

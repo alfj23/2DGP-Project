@@ -90,7 +90,7 @@ class Barricade:
     def update(self):
         if self.hp <= 0:
             game_world.remove_object(self)
-            self.x = -100  # 좌표를 어떻게 없애지? ㅠㅠ
+            self.x = -100
 
         pass
 
