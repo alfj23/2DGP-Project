@@ -83,7 +83,6 @@ class BrokenState:
     def do(barricade):
         if barricade.chk_alive:
             barricade.add_event(REPAIR)
-
         pass
 
     @staticmethod
@@ -110,8 +109,8 @@ class Barricade:
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
         self.max_hp = 300
-        self.hp_amount = 0 #self.max_hp
-        #self.hp_rate = int((self.hp_amount / self.max_hp) * 100)  # 체력 퍼센테이지
+        self.hp_amount = self.max_hp
+        self.hp_rate = int((self.hp_amount / self.max_hp))  # 체력 퍼센테이지
         self.chk_alive = True
 
     def update(self):

@@ -52,13 +52,13 @@ def enter():
     prisoner = Pow()
     game_world.add_object(prisoner, 1)
 
-    #global droptanks
-    #droptanks = [Droptank() for i in range(20)]
-    #game_world.add_objects(droptanks, 1)
+    global droptanks
+    droptanks = [Droptank() for i in range(20)]
+    game_world.add_objects(droptanks, 1)
 
-    #global soldiers
-    #soldiers = [Soldier() for i in range(20)]
-    #game_world.add_objects(soldiers, 1)
+    global soldiers
+    soldiers = [Soldier() for i in range(20)]
+    game_world.add_objects(soldiers, 1)
 
     global barricade
     barricade = Barricade()
@@ -123,7 +123,8 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_4:
             if gold - cost_BRCD_HP >= 0:
                 gold -= cost_BRCD_HP
-                barricade.hp_amount += 200
+                barricade.max_hp += 200
+                barricade.hp_amount = barricade.hp_rate * barricade.max_hp
                 cost_BRCD_HP = cost_BRCD_HP * 2
             pass
         elif event.type == SDL_KEYDOWN and event.key == SDLK_5:
