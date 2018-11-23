@@ -80,6 +80,17 @@ def resume():
     pass
 
 
+def get_player():
+    return player
+
+
+def get_barricade():
+    return barricade
+
+
+def get_pow():
+    return prisoner
+
 global cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK
 cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK = 100, 100, 500, 100, 300
 

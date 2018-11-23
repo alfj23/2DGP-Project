@@ -9,7 +9,7 @@ name = "droptank"
 
 # droptank Speed
 
-PIXEL_PER_METER = (10.0 / 0.5)
+PIXEL_PER_METER = (10.0 / 0.3) # 10 pixel = 30cm
 RUN_SPEED_KMPH = 20
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
@@ -172,15 +172,28 @@ class Droptank:
         #self.event_que.insert(0, event)
 
     def driving(self):
+        self.velocity = RUN_SPEED_PPS
         pass
 
     def chk_distance_player(self):
+        player = main_state.get_player()
+        distance = self.x - player.x
+        if distance < PIXEL_PER_METER * 40:
+            return BehaviorTree.SUCCESS
         pass
 
     def chk_distance_barricade(self):
+        barricade = main_state.get_barricade()
+        distance = self.x - barricade.x
+        if distance < PIXEL_PER_METER * 40:
+            return BehaviorTree.SUCCESS
         pass
 
     def chk_distance_pow(self):
+        pow = main_state.get_pow()
+        distance = self.x - pow.x
+        if distance < PIXEL_PER_METER * 40:
+            return BehaviorTree.SUCCESS
         pass
 
     def update(self):
@@ -190,6 +203,8 @@ class Droptank:
             #self.cur_state.exit(self, event)
             #self.cur_state = next_state_table[self.cur_state][event]
             #self.cur_state.enter(self, event)
+        self.frame = (int(self.frame) + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time)
+
         pass
 
     def get_bb(self):
