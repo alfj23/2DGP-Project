@@ -6,6 +6,8 @@ name = "barricade"
 # barricade Events
 REPAIR, UNDER50, DESTROYED = range(3)  # repair barricade / hp_amount under 50% / barricade destroyed
 # barricade States
+
+
 class IdleState:
     @staticmethod
     def enter(barricade, event):
@@ -60,7 +62,7 @@ class DamagedState:
         pass
 
 
-class DestroyedState:
+class BrokenState:
     @staticmethod
     def enter(barricade, event):
         pass
@@ -77,17 +79,34 @@ class DestroyedState:
     def draw(barricade):
         pass
 
+next_state_table = {
+    IdleState: {},
+    HitState: {},
+    DamagedState: {},
+    BrokenState: {}
+
+}
+
 
 class Barricade:
     image = None
 
-    def __init__(self, x=400, y=300, velocity=3):
+    def __init__(self):
         self.x, self.y = 200, 35 + 200
         self.image = load_image('barricade.png')
         self.font = load_font('ENCR10B.TTF', 16)
         self.hp = 300
+        self.cur_state = IdleState
+        self.event_que = []
+        self.cur_state.enter(self, None)
 
     def update(self):
+        self.cur_state.do(self)
+        if len(self.event_que) > 0:
+            event = self.event_que.pop
+            self.cur_state.exit(self, event)
+            self.cur_state = next_state_table[self.cur_state]
+            self.cur_state.enter(self, event)
         if self.hp <= 0:
             game_world.remove_object(self)
             self.x = -100
