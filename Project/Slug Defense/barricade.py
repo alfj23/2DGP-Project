@@ -128,6 +128,9 @@ class Barricade:
     def get_bb(self):
         return self.x - 25, self.y - 20, self.x + 25, self.y + 20
 
+    def set_background(self, bg):
+        pass
+
     def initialize(self):
         self.x = 200
         self.max_hp = 300
