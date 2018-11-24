@@ -58,7 +58,8 @@ class IdleState:
 
     @staticmethod
     def draw(droptank):
-        droptank.image.clip_draw(int(droptank.frame) * 100, 240, 100, 80, droptank.x, droptank.y)
+        cx = droptank.x - droptank.bg.window_left
+        droptank.image.clip_draw(int(droptank.frame) * 100, 240, 100, 80, cx, droptank.y)
 
 
 class DeathState:
@@ -85,7 +86,8 @@ class DeathState:
 
     @staticmethod
     def draw(droptank):
-        droptank.image.clip_draw(int(droptank.frame) * 100, 0, 100, 80, droptank.x, droptank.y)
+        cx = droptank.x - droptank.bg.window_left
+        droptank.image.clip_draw(int(droptank.frame) * 100, 0, 100, 80, cx, droptank.y)
         pass
 
 
@@ -113,7 +115,8 @@ class DriveState:
 
     @staticmethod
     def draw(droptank):
-        droptank.image.clip_draw(int(droptank.frame) * 100, 160, 100, 80, droptank.x, droptank.y)
+        cx = droptank.x - droptank.bg.window_left
+        droptank.image.clip_draw(int(droptank.frame) * 100, 160, 100, 80, cx, droptank.y)
 
 
 class AttackState:
@@ -141,7 +144,8 @@ class AttackState:
 
     @staticmethod
     def draw(droptank):
-        droptank.image.clip_draw(int(droptank.frame) * 100, 80, 100, 80, droptank.x, droptank.y)
+        cx = droptank.x - droptank.bg.window_left
+        droptank.image.clip_draw(int(droptank.frame) * 100, 80, 100, 80, cx, droptank.y)
 
 
 next_state_table = {
