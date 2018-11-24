@@ -145,14 +145,14 @@ next_state_table = {
 class Soldier:
     def __init__(self):
         self.x, self.y = random.randint(800, 4000), 32 + 200
-        self.image = load_image('./rebel_soldier/soldier.png')
+        self.image = load_image('./resource/rebel_soldier/soldier.png')
         self.velocity = 0
         self.frame = random.randint(0, 11)
         self.event_que = []
         self.cur_state = MoveState
         self.cur_state.enter(self, None)
         self.hp = 200
-        self.font = load_font('ENCR10B.TTF', 16)
+        self.font = load_font('./resource/font/ENCR10B.TTF', 16)
         self.chk_reload = False
         self.gold = 100
         self.damage_amount = 2

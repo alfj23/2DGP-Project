@@ -65,7 +65,7 @@ class Cannon:
         self.frame = 0
         self.damage_amount = main_state.player.damage_amount_of_cannon
         if Cannon.image == None:
-            self.image = load_image('./slug/cannon_ball.png')
+            self.image = load_image('./resource/slug/cannon_ball.png')
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)

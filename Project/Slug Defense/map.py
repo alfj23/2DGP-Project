@@ -4,7 +4,7 @@ __name__ = "map"
 
 class Map:
     def __init__(self):
-        self.image = load_image('./map/maaap.png')
+        self.image = load_image('./resource/map/maaap.png')
         self.canvas_width = get_canvas_width()
         self.canvas_height = get_canvas_height()
         self.w = self.image.w

@@ -54,13 +54,13 @@ def enter():
     game_world.add_object(prisoner, 1)
     prisoner.set_background(map)
 
-    #global droptanks
-    #droptanks = [Droptank() for i in range(20)]
-    #game_world.add_objects(droptanks, 1)
+    global droptanks
+    droptanks = [Droptank() for i in range(20)]
+    game_world.add_objects(droptanks, 1)
 
-    #global soldiers
-    #soldiers = [Soldier() for i in range(20)]
-    #game_world.add_objects(soldiers, 1)
+    global soldiers
+    soldiers = [Soldier() for i in range(20)]
+    game_world.add_objects(soldiers, 1)
 
     global barricade
     barricade = Barricade()

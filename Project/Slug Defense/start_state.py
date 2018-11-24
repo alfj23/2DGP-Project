@@ -9,7 +9,7 @@ logo_time = 0.0
 
 def enter():
     global image
-    image = load_image('./credit/kpu_credit.png')
+    image = load_image('./resource/credit/kpu_credit.png')
 
 
 def exit():

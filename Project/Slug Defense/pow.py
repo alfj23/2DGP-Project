@@ -85,7 +85,7 @@ next_state_table = {
 class Pow:
     def __init__(self):
         self.x, self.y = 100, 30 + 200
-        self.image = load_image('./p.o.w/P_O_W.png')
+        self.image = load_image('./resource/p.o.w/P_O_W.png')
         self.dir = 1
         self.velocity = 0
         self.frame = 0

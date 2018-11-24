@@ -8,8 +8,8 @@ __name__ = "pause_state"
 
 class Pause_menu:
     def __init__(self):
-        self.image = load_image('./UI/pause_menu.png')
-        self.font = load_font('ENCR10B.TTF', 18)
+        self.image = load_image('./resource/UI/pause_menu.png')
+        self.font = load_font('./resource/font/ENCR10B.TTF', 18)
 
     def update(self):
         pass
