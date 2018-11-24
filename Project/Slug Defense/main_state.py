@@ -86,7 +86,7 @@ def resume():
 
 
 global cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK
-cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK = 100, 100, 500, 100, 300
+cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK = 100, 100, 300, 100, 300
 
 
 def handle_events():

@@ -13,7 +13,6 @@ class IdleState:
     def enter(barricade, event):
         if event == REPAIR:
             barricade.initialize()
-        pass
 
     @staticmethod
     def exit(barricade, event):
@@ -24,14 +23,12 @@ class IdleState:
         if barricade.hp_amount <= 0:
             barricade.chk_alive = False
             barricade.add_event(DESTROYED)
-        pass
 
     @staticmethod
     def draw(barricade):
         cx = barricade.x - barricade.bg.window_left
         barricade.image.draw(cx, barricade.y)
-        pass
-
+        
 
 class HitState:
     @staticmethod
@@ -74,7 +71,6 @@ class BrokenState:
     def enter(barricade, event):
         if event == DESTROYED:
             barricade.x = -100
-        pass
 
     @staticmethod
     def exit(barricade, event):
@@ -84,7 +80,7 @@ class BrokenState:
     def do(barricade):
         if barricade.chk_alive:
             barricade.add_event(REPAIR)
-        pass
+        print(barricade.x)
 
     @staticmethod
     def draw(barricade):
@@ -134,7 +130,7 @@ class Barricade:
         pass
 
     def initialize(self):
-        self.x = 200
+        self.x = 200 #- self.bg.window_left
         self.max_hp = 300
         main_state.cost_BRCD_HP = 100
 

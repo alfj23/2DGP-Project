@@ -114,7 +114,6 @@ class DriveState:
     @staticmethod
     def draw(player):
         cx = player.x - player.bg.window_left
-        print(cx)
         if player.check_fired:
             player.image.clip_draw(int(player.frame) * 140, 80, 140, 80, cx + 40, player.y)
         else:
@@ -194,7 +193,6 @@ class Player:
             self.cur_state = next_state_table[self.cur_state][event]
             self.cur_state.enter(self, event)
         self.hp_rate = self.hp_amount / self.max_hp
-        #print(self.x)
 
     def draw(self):
         self.cur_state.draw(self)
