@@ -127,7 +127,7 @@ class Barricade:
         self.event_que.insert(0, event)
 
     def get_bb(self):
-        return self.x - 25, self.y - 20, self.x + 25, self.y + 20
+        return self.x - self.bg.window_left - 25, self.y - 20, self.x - self.bg.window_left + 25, self.y + 20
 
     def set_background(self, bg):
         self.bg = bg
