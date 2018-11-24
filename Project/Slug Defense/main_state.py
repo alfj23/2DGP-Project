@@ -71,6 +71,7 @@ def enter():
     map.set_center_object(player)
     player.set_background(map)
 
+
 def exit():
     game_world.clear()
 

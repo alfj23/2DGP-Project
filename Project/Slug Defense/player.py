@@ -33,7 +33,6 @@ key_event_table = {
 
 # Player Slug States
 
-
 class IdleState:
 
     @staticmethod
@@ -69,10 +68,11 @@ class IdleState:
 
     @staticmethod
     def draw(player):
+        cx = player.x - player.bg.window_left
         if player.check_fired:
-            player.image.clip_draw(int(player.frame) * 140, 80, 140, 80, player.x + 40, player.y)
+            player.image.clip_draw(int(player.frame) * 140, 80, 140, 80, cx + 40, player.y)
         else:
-            player.image.clip_draw(int(player.frame) * 80, 240, 80 - 3, 80, player.x, player.y)
+            player.image.clip_draw(int(player.frame) * 80, 240, 80 - 3, 80, cx, player.y)
 
 
 class DriveState:
@@ -109,14 +109,16 @@ class DriveState:
                 player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 18
 
             player.x += player.velocity * game_framework.frame_time
-            player.x = clamp(40, player.x, 1600 - 40)
+            player.x = clamp(0+40, player.x, 1600 - 40)
 
     @staticmethod
     def draw(player):
+        cx = player.x - player.bg.window_left
+        print(cx)
         if player.check_fired:
-            player.image.clip_draw(int(player.frame) * 140, 80, 140, 80, player.x + 40, player.y)
+            player.image.clip_draw(int(player.frame) * 140, 80, 140, 80, cx + 40, player.y)
         else:
-            player.image.clip_draw(int(player.frame) * 80, 160, 80, 80, player.x, player.y)
+            player.image.clip_draw(int(player.frame) * 80, 160, 80, 80, cx, player.y)
 
 
 class DamagedState:
@@ -140,8 +142,9 @@ class DamagedState:
 
     @staticmethod
     def draw(player):
-        #player.image.clip_draw(int(player.frame) * 120, 0, 120, 80, player.x, player.y)
-        player.image.clip_draw(240, 240, 80, 80, player.x, player.y)
+        cx = player.x - player.bg.window_left
+        #player.image.clip_draw(int(player.frame) * 120, 0, 120, 80, cx, player.y)
+        player.image.clip_draw(240, 240, 80, 80, cx, player.y)
         pass
 
 
@@ -159,12 +162,10 @@ next_state_table = {
 
 class Player:
     def __init__(self):
-        self.x, self.y = 1600 // 2, 40 + 200
+        self.y = 40 + 200
         self.image = load_image('slug.png')
         self.font = load_font('ENCR10B.TTF', 16)
-        self.dir = 1
-        self.velocity = 0
-        self.frame = 0
+        self.dir, self.velocity, self.frame = 1, 0, 0
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
@@ -176,14 +177,14 @@ class Player:
         self.hp_rate = self.hp_amount / self.max_hp
 
     def fire_cannon(self):
-        cannon = Cannon(self.x, self.y)
+        cannon = Cannon(self.x - self.bg.window_left, self.y)
         game_world.add_object(cannon, 1)
 
     def add_event(self, event):
         self.event_que.insert(0, event)
 
     def get_bb(self):
-        return self.x - 20, self.y - 25, self.x + 30, self.y + 20
+        return self.x - self.bg.window_left - 20, self.y - 25, self.x - self.bg.window_left + 30, self.y + 20
 
     def update(self):
         self.cur_state.do(self)
@@ -193,11 +194,12 @@ class Player:
             self.cur_state = next_state_table[self.cur_state][event]
             self.cur_state.enter(self, event)
         self.hp_rate = self.hp_amount / self.max_hp
+        #print(self.x)
 
     def draw(self):
         self.cur_state.draw(self)
         draw_rectangle(*self.get_bb())
-        self.font.draw(self.x - 60, self.y + 50,
+        self.font.draw(self.x - self.bg.window_left - 60, self.y + 50,
                        '(HP : %i)' % self.hp_amount, (255, 0, 0))
 
     def handle_event(self, event):
