@@ -64,6 +64,9 @@ class Bomb:
     def update(self):
         self.cur_state.do(self)
 
+    def set_background(self, bg):
+        self.bg = bg
+
     def get_bb(self):
         return self.x - 47, self.y - 7, self.x - 33, self.y + 7
 

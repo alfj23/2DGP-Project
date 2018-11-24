@@ -190,7 +190,6 @@ class Droptank:
 
     def set_background(self, bg):
         self.bg = bg
-        pass
 
     def fire_bomb(self):
         bomb = Bomb(self.x - self.bg.window_left, self.y)
