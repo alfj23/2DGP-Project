@@ -141,5 +141,5 @@ class Barricade:
     def draw(self):
         self.cur_state.draw(self)
         draw_rectangle(*self.get_bb())
-        self.font.draw(self.x - 60, self.y + 50,
+        self.font.draw(self.x - self.bg.window_left - 60, self.y + 50,
                        '(HP : %i)' % self.hp_amount, (255, 0, 0))
