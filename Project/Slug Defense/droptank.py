@@ -1,7 +1,6 @@
 import game_framework
 from pico2d import *
 import main_state
-from behavior_tree import BehaviorTree, SelectorNode, SequenceNode, LeafNode
 from droptank_bomb import Bomb
 import game_world
 import random
@@ -151,7 +150,7 @@ class AttackState:
 next_state_table = {
     IdleState: {DIE: DeathState, DRIVE: DriveState, MARKING: AttackState},
     DriveState: {DIE: DeathState, MARKING: AttackState},
-    DeathState: {}, #MARKING: DeathState, DRIVE: DeathState, RELOAD: DeathState
+    DeathState: {},
     AttackState: {DIE: DeathState, DRIVE: DriveState, RELOAD: IdleState, FIRE: AttackState}
 }
 
@@ -192,7 +191,8 @@ class Droptank:
         self.bg = bg
 
     def fire_bomb(self):
-        bomb = Bomb(self.x - self.bg.window_left, self.y)
+        bomb = Bomb(self.x, self.y)
+        bomb.set_background(main_state.map)
         game_world.add_object(bomb, 1)
         pass
 

@@ -43,7 +43,8 @@ class IdleState:
 
     @staticmethod
     def draw(bomb):
-        bomb.image.clip_draw(int(bomb.frame) * 14, 40, 14, 14, bomb.x - 40, bomb.y)
+        cx = bomb.x - bomb.bg.window_left
+        bomb.image.clip_draw(int(bomb.frame) * 14, 40, 14, 14, cx - 40, bomb.y)
         if bomb.x < 0 + 14:
             game_world.remove_object(bomb)  # cannon 이 범위 벗어날 시 반환됨
 
@@ -68,7 +69,7 @@ class Bomb:
         self.bg = bg
 
     def get_bb(self):
-        return self.x - 47, self.y - 7, self.x - 33, self.y + 7
+        return self.x - self.bg.window_left - 47, self.y - 7, self.x - self.bg.window_left - 33, self.y + 7
 
     def draw(self):
         self.cur_state.draw(self)

@@ -24,8 +24,6 @@ top_ui = None
 
 droptanks = []
 soldiers = []
-cannonballs = []
-droptank_bombs = []
 barricade = None
 
 global gold
@@ -60,9 +58,9 @@ def enter():
     for droptank in droptanks:
         droptank.set_background(map)
 
-    global soldiers
-    soldiers = [Soldier() for i in range(20)]
-    game_world.add_objects(soldiers, 1)
+    #global soldiers
+    #soldiers = [Soldier() for i in range(20)]
+    #game_world.add_objects(soldiers, 1)
 
     global barricade
     barricade = Barricade()
