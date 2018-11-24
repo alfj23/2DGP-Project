@@ -28,7 +28,7 @@ class IdleState:
     def draw(barricade):
         cx = barricade.x - barricade.bg.window_left
         barricade.image.draw(cx, barricade.y)
-        
+
 
 class HitState:
     @staticmethod

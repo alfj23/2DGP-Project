@@ -52,6 +52,7 @@ def enter():
     global prisoner
     prisoner = Pow()
     game_world.add_object(prisoner, 1)
+    prisoner.set_background(map)
 
     #global droptanks
     #droptanks = [Droptank() for i in range(20)]

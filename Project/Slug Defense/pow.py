@@ -50,10 +50,11 @@ class IdleState:
 
     @staticmethod
     def draw(prisoner):
+        cx = prisoner.x - prisoner.bg.window_left
         if prisoner.dir == 1:
-            prisoner.image.clip_draw(int(prisoner.frame) * 50, 0, 50, 50, prisoner.x, prisoner.y)
+            prisoner.image.clip_draw(int(prisoner.frame) * 50, 0, 50, 50, cx, prisoner.y)
         else:
-            prisoner.image.clip_draw(int(prisoner.frame) * 50, 50, 50, 50, prisoner.x, prisoner.y)
+            prisoner.image.clip_draw(int(prisoner.frame) * 50, 50, 50, 50, cx, prisoner.y)
 
 
 class WatchState:
@@ -102,6 +103,10 @@ class Pow:
             self.cur_state.exit(self, event)
             self.cur_state = next_state_table[self.cur_state][event]
             self.cur_state.enter(self, event)
+
+    def set_background(self, bg):
+        self.bg = bg
+        pass
 
     def get_bb(self):
         return self.x - 15, self.y - 15, self.x + 5, self.y + 20
