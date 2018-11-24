@@ -57,6 +57,8 @@ def enter():
     global droptanks
     droptanks = [Droptank() for i in range(20)]
     game_world.add_objects(droptanks, 1)
+    for droptank in droptanks:
+        droptank.set_background(map)
 
     global soldiers
     soldiers = [Soldier() for i in range(20)]

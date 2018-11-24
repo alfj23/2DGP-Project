@@ -171,8 +171,8 @@ class Player:
         self.check_fired = False
         self.timer = 0.0
         self.damage_amount_of_cannon = 200
-        self.max_hp = 1500
-        self.hp_amount = 1500
+        self.max_hp = 15000000000
+        self.hp_amount = self.max_hp
         self.hp_rate = self.hp_amount / self.max_hp
 
     def fire_cannon(self):

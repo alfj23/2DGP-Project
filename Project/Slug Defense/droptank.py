@@ -182,19 +182,20 @@ class Droptank:
         pass
 
     def get_bb(self):
-        return self.x - 33, self.y - 25, self.x + 32, self.y + 20
+        return self.x - self.bg.window_left - 33, self.y - 25, self.x - self.bg.window_left + 32, self.y + 20
 
     def set_background(self, bg):
+        self.bg = bg
         pass
 
     def fire_bomb(self):
-        bomb = Bomb(self.x, self.y)
+        bomb = Bomb(self.x - self.bg.window_left, self.y)
         game_world.add_object(bomb, 1)
         pass
 
     def draw(self):
         self.cur_state.draw(self)
-        self.font.draw(self.x - 60, self.y + 50,
+        self.font.draw(self.x - self.bg.window_left - 60, self.y + 50,
                        '(HP : %i)' % self.hp, (255, 0, 0))
         draw_rectangle(*self.get_bb())
 
