@@ -173,6 +173,9 @@ class Soldier:
     def get_bb(self):
         return self.x - 15, self.y - 18, self.x + 12, self.y + 22
 
+    def set_background(self, bg):
+        self.bg = bg
+
     def draw(self):
         self.cur_state.draw(self)
         self.font.draw(self.x - 60, self.y + 50,
