@@ -47,7 +47,8 @@ class IdleState:
 
     @staticmethod
     def draw(soldier):
-        soldier.image.clip_draw(int(soldier.frame) * 40, 50, 40, 50, soldier.x, soldier.y + 2)
+        cx = soldier.x - soldier.bg.window_left
+        soldier.image.clip_draw(int(soldier.frame) * 40, 50, 40, 50, cx, soldier.y + 2)
         pass
 
 
@@ -74,7 +75,8 @@ class DeathState:
 
     @staticmethod
     def draw(soldier):
-        soldier.image.clip_draw(int(soldier.frame) * 52, 150, 48, 80, soldier.x, soldier.y + 16)
+        cx = soldier.x - soldier.bg.window_left
+        soldier.image.clip_draw(int(soldier.frame) * 52, 150, 48, 80, cx, soldier.y + 16)
         pass
 
 
@@ -104,7 +106,8 @@ class MoveState:
 
     @staticmethod
     def draw(soldier):
-        soldier.image.clip_draw(int(soldier.frame) * 33, 0, 33, 44, soldier.x, soldier.y)
+        cx = soldier.x - soldier.bg.window_left
+        soldier.image.clip_draw(int(soldier.frame) * 33, 0, 33, 44, cx, soldier.y)
         pass
 
 
@@ -130,7 +133,8 @@ class AttackState:
 
     @staticmethod
     def draw(soldier):
-        soldier.image.clip_composite_draw(int(soldier.frame) * 80, 100, 80, 50, 3.141592, 'v', soldier.x, soldier.y + 2, 80, 50)
+        cx = soldier.x - soldier.bg.window_left
+        soldier.image.clip_composite_draw(int(soldier.frame) * 80, 100, 80, 50, 3.141592, 'v', cx, soldier.y + 2, 80, 50)
         pass
 
 
@@ -171,14 +175,14 @@ class Soldier:
             self.cur_state.enter(self, event)
 
     def get_bb(self):
-        return self.x - 15, self.y - 18, self.x + 12, self.y + 22
+        return self.x - self.bg.window_left - 15, self.y - 18, self.x - self.bg.window_left + 12, self.y + 22
 
     def set_background(self, bg):
         self.bg = bg
 
     def draw(self):
         self.cur_state.draw(self)
-        self.font.draw(self.x - 60, self.y + 50,
+        self.font.draw(self.x - self.bg.window_left - 60, self.y + 50,
                        '(HP : %i)' % self.hp, (255, 0, 0))
         draw_rectangle(*self.get_bb())
 
