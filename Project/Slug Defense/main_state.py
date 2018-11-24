@@ -26,8 +26,7 @@ droptanks = []
 soldiers = []
 barricade = None
 
-global gold
-gold = 3000
+
 
 
 def enter():
@@ -38,6 +37,9 @@ def enter():
     global map
     map = Map()
     game_world.add_object(map, 0)
+
+    global gold
+    gold = 3000
 
     global bottom_ui
     bottom_ui = Bottom_UI()

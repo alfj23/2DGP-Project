@@ -80,7 +80,6 @@ class BrokenState:
     def do(barricade):
         if barricade.chk_alive:
             barricade.add_event(REPAIR)
-        print(barricade.x)
 
     @staticmethod
     def draw(barricade):
