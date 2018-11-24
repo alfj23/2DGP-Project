@@ -184,6 +184,9 @@ class Droptank:
     def get_bb(self):
         return self.x - 33, self.y - 25, self.x + 32, self.y + 20
 
+    def set_background(self, bg):
+        pass
+
     def fire_bomb(self):
         bomb = Bomb(self.x, self.y)
         game_world.add_object(bomb, 1)
