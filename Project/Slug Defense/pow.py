@@ -109,7 +109,7 @@ class Pow:
         pass
 
     def get_bb(self):
-        return self.x - 15, self.y - 15, self.x + 5, self.y + 20
+        return self.x - self.bg.window_left - 15, self.y - 15, self.x - self.bg.window_left + 5, self.y + 20
 
     def draw(self):
         self.cur_state.draw(self)
