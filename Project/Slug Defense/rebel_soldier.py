@@ -148,7 +148,7 @@ next_state_table = {
 
 class Soldier:
     def __init__(self):
-        self.x, self.y = random.randint(800, 4000), 32 + 200
+        self.x, self.y = random.randint(1600, 4000), 32 + 200
         self.image = load_image('./resource/rebel_soldier/soldier.png')
         self.velocity = 0
         self.frame = random.randint(0, 11)

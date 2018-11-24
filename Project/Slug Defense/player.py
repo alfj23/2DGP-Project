@@ -207,4 +207,4 @@ class Player:
 
     def set_background(self, bg):
         self.bg = bg
-        self.x = self.bg.w / 2
+        self.x = self.bg.w / 2 - 400
