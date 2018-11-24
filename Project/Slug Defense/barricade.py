@@ -100,7 +100,7 @@ class Barricade:
 
     def __init__(self):
         self.x, self.y = 200, 35 + 200
-        self.image = load_image('barricade.png')
+        self.image = load_image('./barricade/barricade.png')
         self.font = load_font('ENCR10B.TTF', 16)
         self.event_que = []
         self.cur_state = IdleState

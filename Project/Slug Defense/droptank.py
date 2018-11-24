@@ -157,7 +157,7 @@ animation_name = ['IDLE', 'DRIVE', 'ATTACK', 'DIE']
 class Droptank:
     def __init__(self):
         self.x, self.y = random.randint(1600, 3000), 40 + 200
-        self.image = load_image('droptank.png')
+        self.image = load_image('./droptank/droptank.png')
         self.velocity = 0
         self.frame = 0
         self.event_que = []

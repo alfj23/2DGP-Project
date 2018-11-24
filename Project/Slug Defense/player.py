@@ -162,7 +162,7 @@ next_state_table = {
 class Player:
     def __init__(self):
         self.y = 40 + 200
-        self.image = load_image('slug.png')
+        self.image = load_image('./slug/slug.png')
         self.font = load_font('ENCR10B.TTF', 16)
         self.dir, self.velocity, self.frame = 1, 0, 0
         self.event_que = []

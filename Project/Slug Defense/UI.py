@@ -4,7 +4,7 @@ name = "UI"
 
 class Bottom_UI:
     def __init__(self):
-        self.image = load_image('Bottom_UI_Background.png')
+        self.image = load_image('./UI/Bottom_UI_Background.png')
         self.category_font = load_font('ENCR10B.TTF', 20)
         self.contents_font = load_font('ENCR10B.TTF', 16)
         self.y = 175
@@ -26,7 +26,7 @@ class Bottom_UI:
 
 class Top_UI:
     def __init__(self):
-        self.image = load_image('top_ui.png')
+        self.image = load_image('./UI/top_ui.png')
         self.font = load_font('ENCR10B.TTF', 40)
 
     def update(self):

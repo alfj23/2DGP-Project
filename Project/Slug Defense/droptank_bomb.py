@@ -56,7 +56,7 @@ class Bomb:
         self.frame = 0
         self.damage_amount = 50
         if Bomb.image == None:
-            self.image = load_image('droptank_bomb.png')
+            self.image = load_image('./droptank/droptank_bomb.png')
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
