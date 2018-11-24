@@ -64,6 +64,7 @@ def enter():
     global barricade
     barricade = Barricade()
     game_world.add_object(barricade, 1)
+    barricade.set_background(map)
 
     global left_wave_amount
     left_wave_amount = len(droptanks) + len(soldiers)

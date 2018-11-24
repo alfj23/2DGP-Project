@@ -28,7 +28,8 @@ class IdleState:
 
     @staticmethod
     def draw(barricade):
-        barricade.image.draw(barricade.x, barricade.y)
+        cx = barricade.x - barricade.bg.window_left
+        barricade.image.draw(cx, barricade.y)
         pass
 
 
@@ -129,6 +130,7 @@ class Barricade:
         return self.x - 25, self.y - 20, self.x + 25, self.y + 20
 
     def set_background(self, bg):
+        self.bg = bg
         pass
 
     def initialize(self):
