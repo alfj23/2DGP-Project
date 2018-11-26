@@ -49,6 +49,11 @@ class Soldier:
         pass
 
     def chk_range_barricade(self):
+        if 0 < self.x - main_state.barricade.x < self.atk_range:
+            self.velocity = 0
+            return BehaviorTree.SUCCESS
+        else:
+            return BehaviorTree.FAIL
         pass
 
     def chk_range_prisoner(self):
