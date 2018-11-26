@@ -43,14 +43,19 @@ class Soldier:
         chk_range_barricade_node = LeafNode("chk_range_barricade", self.chk_range_barricade)
         chk_range_prisoner_node = LeafNode("chk_range_prisoner", self.chk_range_prisoner)
         ready_to_atk_node = LeafNode("ready_to_atk", self.ready_to_atk)
-        attack_node = LeafNode("attack", self.attack)
-        move_forward = LeafNode("move_forward", self.move_forward)
+        stabbing_node = LeafNode("stabbing", self.stabbing)
+        move_forward_node = LeafNode("move_forward", self.move_forward)
         atk_player_node = SequenceNode("atk_player")
-        atk_player_node.add_children(chk_range_player_node, ready_to_atk_node, attack_node)
+        atk_player_node.add_children(chk_range_player_node, ready_to_atk_node, stabbing_node)
         atk_barricade_node = SequenceNode("atk_barricade")
-        atk_barricade_node.add_children(chk_range_barricade_node, ready_to_atk_node, attack_node)
+        atk_barricade_node.add_children(chk_range_barricade_node, ready_to_atk_node, stabbing_node)
         atk_prisoner_node = SequenceNode("atk_prisoner")
-        atk_prisoner_node.add_children(chk_range_prisoner_node, ready_to_atk_node, attack_node)
+        atk_prisoner_node.add_children(chk_range_prisoner_node, ready_to_atk_node, stabbing_node)
+        attack_node = SelectorNode("attack")
+        attack_node.add_children(atk_prisoner_node, atk_barricade_node, atk_player_node)
+        attack_move_node = SelectorNode("attack_move")
+        attack_move_node.add_children(attack_node, move_forward_node)
+        self.bt = BehaviorTree(attack_move_node)
         pass
 
     def chk_range_player(self):
@@ -87,7 +92,7 @@ class Soldier:
             return BehaviorTree.RUNNING
         pass
 
-    def attack(self):  # num_frame = 16
+    def stabbing(self):  # num_frame = 16
         atk_objects = [main_state.prisoner, main_state.barricade, main_state.player]
         self.chk_stabbing = True
         self.chk_ready_to_atk = False
