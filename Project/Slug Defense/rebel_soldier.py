@@ -174,6 +174,9 @@ class Soldier:
     def chk_range_barricade(self):
         pass
 
+    def chk_range_prisoner(self):
+        pass
+
 
 
     def update(self):
