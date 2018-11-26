@@ -170,7 +170,11 @@ class Soldier:
 
     def chk_range_player(self):
         pass
-    
+
+    def chk_range_barricade(self):
+        pass
+
+
 
     def update(self):
         pass
