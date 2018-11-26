@@ -237,6 +237,7 @@ class Droptank:
         self.font = load_font('./resource/font/ENCR10B.TTF', 16)
         self.chk_marking = False
         self.gold = 200
+        self.timer = 0
         self.build_behavior_tree()
 
     def build_behavior_tree(self):
@@ -244,13 +245,14 @@ class Droptank:
         chk_range_barricade_node = LeafNode("chk_range_barricade", self.chk_range_barricade)
         chk_range_prisoner_node = LeafNode("chk_range_prisoner", self.chk_range_prisoner)
         move_forward_node = LeafNode("move_forward", self.move_forward)
+        marking_node = LeafNode("marking", self.marking)
         fire_bomb_node = LeafNode("fire_bomb", self.fire_bomb)
         attack_player_node = SequenceNode("attack_player")
-        attack_player_node.add_children(chk_range_player_node, fire_bomb_node)
+        attack_player_node.add_children(chk_range_player_node, marking_node, fire_bomb_node)
         attack_barricade_node = SequenceNode("attack_barricade")
-        attack_barricade_node.add_children(chk_range_barricade_node, fire_bomb_node)
+        attack_barricade_node.add_children(chk_range_barricade_node, marking_node, fire_bomb_node)
         attack_prisoner_node = SequenceNode("attack_prisoner")
-        attack_prisoner_node.add_children(chk_range_prisoner_node, fire_bomb_node)
+        attack_prisoner_node.add_children(chk_range_prisoner_node, marking_node, fire_bomb_node)
         attack_node = SelectorNode("attack")
         attack_node.add_children(attack_player_node, attack_barricade_node, attack_prisoner_node)
         attack_move_node = SelectorNode("attack_move_node")
@@ -261,6 +263,7 @@ class Droptank:
     def chk_range_player(self):
         if self.x - main_state.player.x <= self.atk_range:
             self.velocity = 0
+            self.timer = 500
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.FAIL
@@ -269,6 +272,7 @@ class Droptank:
     def chk_range_barricade(self):
         if self.x - main_state.barricade.x <= self.atk_range:
             self.velocity = 0
+            self.timer = 500
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.FAIL
@@ -277,6 +281,7 @@ class Droptank:
     def chk_range_prisoner(self):
         if self.x - main_state.prisoner.x <= self.atk_range:
             self.velocity = 0
+            self.timer = 500
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.FAIL
@@ -291,6 +296,15 @@ class Droptank:
         bomb = Bomb(self.x, self.y)
         bomb.set_background(main_state.map)
         game_world.add_object(bomb, 1)
+        return BehaviorTree.SUCCESS
+        pass
+
+    def marking(self):
+        self.timer -= 1
+        if self.timer <= 0:
+            return BehaviorTree.SUCCESS
+        else:
+            return BehaviorTree.RUNNING
         pass
 
     def update(self):
