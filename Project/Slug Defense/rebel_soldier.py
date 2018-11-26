@@ -50,6 +50,9 @@ class Soldier:
     def attack(self):
         pass
 
+    def move_forward(self):
+        pass
+
     def update(self):
         pass
 
