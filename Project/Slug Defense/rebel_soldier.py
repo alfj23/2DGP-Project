@@ -23,7 +23,7 @@ FRAMES_PER_ACTION = 8
 
 class Soldier:
     def __init__(self):
-        self.x, self.y = random.randint(1600, 4000), 32 + 200
+        self.x, self.y = random.randint(1200, 1600), 32 + 200
         self.image = load_image('./resource/rebel_soldier/soldier.png')
         self.velocity = 0
         self.frame = random.randint(0, 11)
@@ -113,9 +113,41 @@ class Soldier:
         pass
 
     def update(self):
+        self.bt.run()
+
+        if self.velocity == 0:
+            if self.chk_ready_to_atk:
+                self.num_of_frame = 4
+            elif self.chk_stabbing:
+                self.num_of_frame = 16
+        else:
+            self.num_of_frame = 12
+        if self.hp <= 0:
+            self.velocity = 0
+            self.num_of_frame = 22
+            if int(self.frame) % 22 == 21:
+                game_world.remove_object(self)
+                main_state.left_wave_amount -= 1
+                main_state.gold += self.gold
+
+        self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time)\
+                     % self.num_of_frame
+        self.x += self.velocity * game_framework.frame_time
+        print(int(self.frame))
         pass
 
     def draw(self):
+        cx = self.x - self.bg.window_left
+        if self.velocity == 0:
+            if self.chk_ready_to_atk:
+                self.image.clip_draw(int(self.frame) * 40, 50, 40, 50, cx, self.y)
+            elif self.chk_stabbing:
+                self.image.clip_composite_draw(int(self.frame) * 80, 100, 80, 50, 3.141592, 'v', cx, self.y + 2, 80, 50)
+        else:
+            self.image.clip_draw(int(self.frame) * 33, 0, 33, 44, cx, self.y)
+        if self.hp <= 0:
+            self.image.clip_draw(int(self.frame) * 52, 150, 48, 80, cx, self.y + 16)
+
         self.font.draw(self.x - self.bg.window_left - 60, self.y + 50, '(HP : %i)' % self.hp, (255, 0, 0))
         draw_rectangle(*self.get_bb())
 

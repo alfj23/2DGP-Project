@@ -6,6 +6,8 @@ import game_framework
 import game_world
 from behavior_tree import BehaviorTree, SelectorNode, SequenceNode, LeafNode
 
+__name__ = "droptank"
+
 # droptank Speed
 
 PIXEL_PER_METER = (10.0 / 0.4)  # 10 pixel = 30cm
@@ -139,7 +141,7 @@ class Droptank:
         else:
             self.image.clip_draw(int(self.frame) * 100, 160, 100, 80, cx, self.y)
         if self.hp <= 0:
-            self.image.clip_draw(int(self.frame) * 100, 0 , 100, 80, cx, self.y)
+            self.image.clip_draw(int(self.frame) * 100, 0, 100, 80, cx, self.y)
         self.font.draw(self.x - self.bg.window_left - 60, self.y + 50,
                        '(HP : %i)' % self.hp, (255, 0, 0))
         draw_rectangle(*self.get_bb())
