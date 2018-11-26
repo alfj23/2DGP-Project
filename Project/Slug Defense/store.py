@@ -10,6 +10,7 @@ key_event_table = {
     (SDL_KEYDOWN, SDLK_5): UPGRADE_SKILL_DAMAGE
 }
 
+#  슬러그 스킬 구현 시 스킬 데미지 업 기능 구현해야함.
 
 class Store:
     def __init__(self):

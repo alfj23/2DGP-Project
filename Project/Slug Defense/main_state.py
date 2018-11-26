@@ -100,8 +100,15 @@ cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK = 100, 100, 300, 100, 300
 '''
 
 def handle_events():
+    global left_wave_amount
+    global prisoner
     events = get_events()
     for event in events:
+        if left_wave_amount == 0:
+            print("state clear!")
+        if prisoner:
+            pass
+        
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
