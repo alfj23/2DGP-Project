@@ -75,7 +75,18 @@ class Soldier:
             return BehaviorTree.RUNNING
         pass
 
-    def attack(self):
+    def attack(self):  # num_frame = 16
+        atk_objects = [main_state.prisoner, main_state.barricade, main_state.player]
+        self.chk_stabbing = True
+        self.chk_ready_to_atk = False
+        if int(self.frame) % 16 == 15:
+            for atk_object in atk_objects:
+                if main_state.collide(self, atk_object):
+                    atk_object.hp_amount -= self.damage_amount
+                    self.atk_cool_time = 500
+                    return BehaviorTree.SUCCESS
+        else:
+            BehaviorTree.RUNNING
         pass
 
     def move_forward(self):
