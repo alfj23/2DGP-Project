@@ -82,7 +82,7 @@ class Soldier:
         if int(self.frame) % 16 == 15:
             for atk_object in atk_objects:
                 if main_state.collide(self, atk_object):
-                    atk_object.hp_amount -= self.damage_amount
+                    atk_object.hp_amount -= self.damage_amount  # 이거 가능한지 모르겠다.
                     self.atk_cool_time = 500
                     return BehaviorTree.SUCCESS
         else:
@@ -90,6 +90,9 @@ class Soldier:
         pass
 
     def move_forward(self):
+        self.chk_ready_to_atk = self.chk_stabbing = False
+        self.velocity = -RUN_SPEED_PPS
+        return BehaviorTree.SUCCESS
         pass
 
     def update(self):
