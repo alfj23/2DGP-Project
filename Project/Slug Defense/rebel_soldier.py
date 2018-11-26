@@ -42,6 +42,9 @@ class Soldier:
         chk_range_player_node = LeafNode("chk_range_player", self.chk_range_player)
         chk_range_barricade_node = LeafNode("chk_range_barricade", self.chk_range_barricade)
         chk_range_prisoner_node = LeafNode("chk_range_prisoner", self.chk_range_prisoner)
+        ready_to_atk_node = LeafNode("ready_to_atk", self.ready_to_atk)
+        attack_node = LeafNode("attack", self.attack)
+        move_forward = LeafNode("move_forward", self.move_forward)
         pass
 
     def chk_range_player(self):
