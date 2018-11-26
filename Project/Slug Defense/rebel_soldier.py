@@ -31,6 +31,7 @@ class Soldier:
         self.atk_cool_time = 500
         self.font = load_font('./resource/font/ENCR10B.TTF', 16)
         self.chk_stabbing = False
+        self.chk_ready_to_atk = False
         self.gold = 100
         self.damage_amount = 2
         self.atk_range = 45
@@ -65,6 +66,13 @@ class Soldier:
         pass
 
     def ready_to_atk(self):
+        self.chk_ready_to_atk = True
+        self.chk_stabbing = False
+        self.atk_cool_time -= 1
+        if self.atk_cool_time <= 0:
+            return BehaviorTree.SUCCESS
+        else:
+            return BehaviorTree.RUNNING
         pass
 
     def attack(self):
