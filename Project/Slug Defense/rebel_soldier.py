@@ -39,6 +39,9 @@ class Soldier:
         self.num_of_frame = 0
 
     def build_behavior_tree(self):
+        chk_range_player_node = LeafNode("chk_range_player", self.chk_range_player)
+        chk_range_barricade_node = LeafNode("chk_range_barricade", self.chk_range_barricade)
+        chk_range_prisoner_node = LeafNode("chk_range_prisoner", self.chk_range_prisoner)
         pass
 
     def chk_range_player(self):
