@@ -164,6 +164,7 @@ class Droptank:
         self.image = load_image('./resource/droptank/droptank.png')
         self.velocity = 0
         self.frame = 0
+
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
@@ -228,7 +229,7 @@ FRAMES_PER_ACTION = 8
 
 class Droptank:
     def __init__(self):
-        self.x, self.y = random.randint(1600, 3000), 40 + 200
+        self.x, self.y = random.randint(1200, 1600), 40 + 200
         self.image = load_image('./resource/droptank/droptank.png')
         self.velocity = 0
         self.frame = 0
@@ -239,6 +240,7 @@ class Droptank:
         self.gold = 200
         self.timer = 0
         self.build_behavior_tree()
+        self.num_of_frame = 0
 
     def build_behavior_tree(self):
         chk_range_player_node = LeafNode("chk_range_player", self.chk_range_player)
@@ -247,6 +249,7 @@ class Droptank:
         move_forward_node = LeafNode("move_forward", self.move_forward)
         marking_node = LeafNode("marking", self.marking)
         fire_bomb_node = LeafNode("fire_bomb", self.fire_bomb)
+        die_node = LeafNode("die", self.draw)
         attack_player_node = SequenceNode("attack_player")
         attack_player_node.add_children(chk_range_player_node, marking_node, fire_bomb_node)
         attack_barricade_node = SequenceNode("attack_barricade")
@@ -256,32 +259,32 @@ class Droptank:
         attack_node = SelectorNode("attack")
         attack_node.add_children(attack_player_node, attack_barricade_node, attack_prisoner_node)
         attack_move_node = SelectorNode("attack_move_node")
-        attack_move_node.add_children(attack_node, move_forward_node)
+        attack_move_node.add_children(die_node, attack_node, move_forward_node)
         self.bt = BehaviorTree(attack_move_node)
         pass
 
     def chk_range_player(self):
-        if self.x - main_state.player.x <= self.atk_range:
+        if 0 < self.x - main_state.player.x <= self.atk_range:
             self.velocity = 0
-            self.timer = 500
+            self.timer = 1000
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.FAIL
         pass
 
     def chk_range_barricade(self):
-        if self.x - main_state.barricade.x <= self.atk_range:
+        if 0 < self.x - main_state.barricade.x <= self.atk_range:
             self.velocity = 0
-            self.timer = 500
+            self.timer = 1000
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.FAIL
         pass
 
     def chk_range_prisoner(self):
-        if self.x - main_state.prisoner.x <= self.atk_range:
+        if 0 < self.x - main_state.prisoner.x <= self.atk_range:
             self.velocity = 0
-            self.timer = 500
+            self.timer = 1000
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.FAIL
@@ -289,10 +292,12 @@ class Droptank:
 
     def move_forward(self):
         self.velocity = -RUN_SPEED_PPS
+        self.chk_marking = False
         return BehaviorTree.SUCCESS
         pass
 
     def fire_bomb(self):
+        self.chk_marking = False
         bomb = Bomb(self.x, self.y)
         bomb.set_background(main_state.map)
         game_world.add_object(bomb, 1)
@@ -300,6 +305,7 @@ class Droptank:
         pass
 
     def marking(self):
+        self.chk_marking = True
         self.timer -= 1
         if self.timer <= 0:
             return BehaviorTree.SUCCESS
@@ -307,16 +313,47 @@ class Droptank:
             return BehaviorTree.RUNNING
         pass
 
+    def die(self):
+        if self.hp <= 0:
+            self.frame = 0
+            if int(self.frame) % 8 == 7:
+                game_world.remove_object(self)
+                return BehaviorTree.SUCCESS
+        else:
+            return BehaviorTree.FAIL
+        pass
+
     def update(self):
         self.bt.run()
 
+        if self.velocity == 0:
+            if self.chk_marking:  # 아이들 모션 출력해줘야함.
+                self.num_of_frame = 2
+            elif not self.chk_marking:  # 공격 모션
+                self.num_of_frame = 8
+        else:  # 이동 애니메이션 출력
+            self.num_of_frame = 3
+
+        if self.hp <= 0:  # 사망 애니메이션 출력
+            self.num_of_frame = 7
+
+
         self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME *
-                      game_framework.frame_time) % FRAMES_PER_ACTION
+                      game_framework.frame_time) % self.num_of_frame
         self.x += self.velocity * game_framework.frame_time
         pass
 
     def draw(self):
-        self.image.clip_draw(int(self.frame) * 100, 0, 100, 80, self.x, self.y)
+        cx = self.x - self.bg.window_left
+        if self.velocity == 0:
+            if self.chk_marking:
+                self.image.clip_draw(int(self.frame) * 100, 240, 100, 80, cx, self.y)
+            elif not self.chk_marking:
+                self.image.clip_draw(int(self.frame) * 100, 80, 100, 80, cx, self.y)
+        else:
+            self.image.clip_draw(int(self.frame) * 100, 160, 100, 80, cx, self.y)
+        if self.hp <= 0:
+            self.image.clip_draw(int(self.frame) * 100, 0 , 100, 80, cx, self.y)
         self.font.draw(self.x - self.bg.window_left - 60, self.y + 50,
                        '(HP : %i)' % self.hp, (255, 0, 0))
         draw_rectangle(*self.get_bb())

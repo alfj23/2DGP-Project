@@ -57,7 +57,7 @@ def enter():
     prisoner.set_background(map)
 
     global droptanks
-    droptanks = [Droptank() for i in range(20)]
+    droptanks = [Droptank() for i in range(2)]
     game_world.add_objects(droptanks, 1)
     for droptank in droptanks:
         droptank.set_background(map)
@@ -82,6 +82,7 @@ def enter():
     global store
     store = Store()
 
+
 def exit():
     game_world.clear()
 
@@ -93,11 +94,6 @@ def pause():
 def resume():
     pass
 
-
-'''
-global cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK
-cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK = 100, 100, 300, 100, 300
-'''
 
 def handle_events():
     global left_wave_amount
@@ -117,45 +113,6 @@ def handle_events():
         else:
             player.handle_event(event)
             store.handle_event(event)
-        '''
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_1:  # 키입력으로 상점 상호작용 처리.
-            # 플레이어 공격력 증가
-            if gold - cost_ATK >= 0:
-                gold -= cost_ATK
-                player.damage_amount_of_cannon += 50
-                cost_ATK = cost_ATK * 2
-            pass
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_2:
-            # 플레이어 최대 체력 증가
-            if gold - cost_HP >= 0:
-                gold -= cost_HP
-                player.max_hp += 200
-                player.hp_amount = player.hp_rate * player.max_hp
-                cost_HP = cost_HP * 2
-            pass
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_3:
-            # 바리게이트 수리
-            if (gold - cost_BRCD_RP) >= 0 and 0 < barricade.hp_amount < barricade.max_hp:
-                gold -= cost_BRCD_RP
-                barricade.hp_amount = barricade.max_hp
-                cost_BRCD_RP = cost_BRCD_RP * 2
-            elif (gold - cost_BRCD_RP) >= 0 and not barricade.chk_alive:
-                barricade.chk_alive = True
-                gold -= cost_BRCD_RP
-                barricade.hp_amount = barricade.max_hp
-                cost_BRCD_RP = cost_BRCD_RP * 2
-            pass
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_4:
-            if gold - cost_BRCD_HP >= 0:
-                gold -= cost_BRCD_HP
-                barricade.max_hp += 200
-                barricade.hp_amount = barricade.hp_rate * barricade.max_hp
-                cost_BRCD_HP = cost_BRCD_HP * 2
-            pass
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_5:
-            # 스킬 데미지 업그레이드 ==> 현재 스킬 미구현으로 업그레이드 또한 미구현
-            pass
-        '''
 
 
 def update():
