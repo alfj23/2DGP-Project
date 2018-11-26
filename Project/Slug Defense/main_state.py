@@ -106,9 +106,10 @@ def handle_events():
     for event in events:
         if left_wave_amount == 0:
             print("state clear!")
-        if prisoner:
+        if prisoner.hp_amount < 0:
+            print("state fail!")
             pass
-        
+
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:

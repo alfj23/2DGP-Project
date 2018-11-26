@@ -14,8 +14,8 @@ RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 # POW Speed
 
-TIME_PER_ACTION = 1.0 # 액션 당 시간
-ACTION_PER_TIME = 0.5  # 액션 마다 달라서 따로 빼놓음?
+TIME_PER_ACTION = 1.0  # 액션 당 시간
+ACTION_PER_TIME = 1.0  # 액션 마다 달라서 따로 빼놓음?
 FRAMES_PER_ACTION = 13
 
 # POW States
@@ -89,6 +89,7 @@ class Pow:
         self.dir = 1
         self.velocity = 0
         self.frame = 0
+        self.hp_amount = 1
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)

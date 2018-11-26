@@ -41,6 +41,10 @@ class IdleState:
             game_world.remove_object(bomb)
             main_state.player.hp_amount -= bomb.damage_amount
 
+        if main_state.collide(bomb, main_state.prisoner):
+            game_world.remove_object(bomb)
+            main_state.prisoner.hp_amount -= bomb.damage_amount
+
     @staticmethod
     def draw(bomb):
         cx = bomb.x - bomb.bg.window_left

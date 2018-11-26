@@ -94,7 +94,9 @@ class MoveState:
 
     @staticmethod
     def do(soldier):
-        if 0 < soldier.x - main_state.player.x <= soldier.atk_range:
+        if (0 < soldier.x - main_state.player.x <= soldier.atk_range
+            or 0 < soldier.x - main_state.barricade.x <= soldier.atk_range
+            or 0 < soldier.x - main_state.prisoner.x <= soldier.atk_range):
             soldier.add_event(ATTACK)
         if soldier.hp <= 0:
             soldier.add_event(DIE)
@@ -124,11 +126,17 @@ class AttackState:
 
     @staticmethod
     def do(soldier):
-        if soldier.x - main_state.player.x > soldier.atk_range or soldier.x - main_state.player.x < 0:
+        if (soldier.x - main_state.player.x > soldier.atk_range 
+            or soldier.x - main_state.barricade.x > soldier.atk_range
+            or soldier.x - main_state.prisoner.x > soldier.atk_range):
             soldier.add_event(MOVE)
         soldier.frame = (soldier.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 16
         if main_state.collide(main_state.player, soldier) and int(soldier.frame) % 16 == 15:
             main_state.player.hp_amount -= soldier.damage_amount
+        elif main_state.collide(main_state.barricade, soldier) and int(soldier.frame) % 16 == 15:
+            main_state.barricade.hp_amount -= soldier.damage_amount
+        elif main_state.collide(main_state.prisoner, soldier) and int(soldier.frame) % 16  == 15:
+            main_state.prisoner.hp_amount -= soldier.damage_amount
         pass
 
     @staticmethod
