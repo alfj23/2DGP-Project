@@ -32,9 +32,10 @@ class Soldier:
         self.font = load_font('./resource/font/ENCR10B.TTF', 16)
         self.chk_stabbing = False
         self.chk_ready_to_atk = False
+        self.chk_dying = False
         self.gold = 100
         self.damage_amount = 2
-        self.atk_range = 45
+        self.atk_range = 35
         self.build_behavior_tree()
         self.num_of_frame = 0
 
@@ -92,7 +93,7 @@ class Soldier:
             return BehaviorTree.RUNNING
         pass
 
-    def stabbing(self):  # num_frame = 16
+    def stabbing(self):
         atk_objects = [main_state.prisoner, main_state.barricade, main_state.player]
         self.chk_stabbing = True
         self.chk_ready_to_atk = False
@@ -123,6 +124,9 @@ class Soldier:
         else:
             self.num_of_frame = 12
         if self.hp <= 0:
+            if not self.chk_dying:
+                self.frame = 0
+                self.chk_dying = True
             self.velocity = 0
             self.num_of_frame = 22
             if int(self.frame) % 22 == 21:
