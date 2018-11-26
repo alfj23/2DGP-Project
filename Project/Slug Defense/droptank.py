@@ -237,6 +237,7 @@ class Droptank:
         self.atk_range = 400
         self.font = load_font('./resource/font/ENCR10B.TTF', 16)
         self.chk_marking = False
+        self.chk_alive = True
         self.gold = 200
         self.timer = 0
         self.build_behavior_tree()
@@ -249,7 +250,6 @@ class Droptank:
         move_forward_node = LeafNode("move_forward", self.move_forward)
         marking_node = LeafNode("marking", self.marking)
         fire_bomb_node = LeafNode("fire_bomb", self.fire_bomb)
-        die_node = LeafNode("die", self.draw)
         attack_player_node = SequenceNode("attack_player")
         attack_player_node.add_children(chk_range_player_node, marking_node, fire_bomb_node)
         attack_barricade_node = SequenceNode("attack_barricade")
@@ -259,7 +259,7 @@ class Droptank:
         attack_node = SelectorNode("attack")
         attack_node.add_children(attack_player_node, attack_barricade_node, attack_prisoner_node)
         attack_move_node = SelectorNode("attack_move_node")
-        attack_move_node.add_children(die_node, attack_node, move_forward_node)
+        attack_move_node.add_children(attack_node, move_forward_node)
         self.bt = BehaviorTree(attack_move_node)
         pass
 
@@ -313,16 +313,6 @@ class Droptank:
             return BehaviorTree.RUNNING
         pass
 
-    def die(self):
-        if self.hp <= 0:
-            self.frame = 0
-            if int(self.frame) % 8 == 7:
-                game_world.remove_object(self)
-                return BehaviorTree.SUCCESS
-        else:
-            return BehaviorTree.FAIL
-        pass
-
     def update(self):
         self.bt.run()
 
@@ -336,10 +326,12 @@ class Droptank:
 
         if self.hp <= 0:  # 사망 애니메이션 출력
             self.num_of_frame = 7
+            if int(self.frame) % 7 == 6:
+                game_world.remove_object(self)
+                main_state.left_wave_amount -= 1
+                main_state.gold += self.gold
 
-
-        self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME *
-                      game_framework.frame_time) % self.num_of_frame
+        self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % self.num_of_frame
         self.x += self.velocity * game_framework.frame_time
         pass
 
