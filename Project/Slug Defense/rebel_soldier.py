@@ -94,9 +94,9 @@ class MoveState:
 
     @staticmethod
     def do(soldier):
-        if (0 < soldier.x - main_state.player.x <= soldier.atk_range
-            or 0 < soldier.x - main_state.barricade.x <= soldier.atk_range
-            or 0 < soldier.x - main_state.prisoner.x <= soldier.atk_range):
+        if 0 < soldier.x - main_state.player.x <= soldier.atk_range \
+                or 0 < soldier.x - main_state.barricade.x <= soldier.atk_range \
+                or 0 < soldier.x - main_state.prisoner.x <= soldier.atk_range:
             soldier.add_event(ATTACK)
         if soldier.hp <= 0:
             soldier.add_event(DIE)

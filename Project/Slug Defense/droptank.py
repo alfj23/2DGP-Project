@@ -237,9 +237,9 @@ class Droptank:
         self.atk_range = 400
         self.font = load_font('./resource/font/ENCR10B.TTF', 16)
         self.chk_marking = False
-        self.chk_alive = True
+        self.chk_firing = False
         self.gold = 200
-        self.timer = 0
+        self.timer = 800
         self.build_behavior_tree()
         self.num_of_frame = 0
 
@@ -261,70 +261,69 @@ class Droptank:
         attack_move_node = SelectorNode("attack_move_node")
         attack_move_node.add_children(attack_node, move_forward_node)
         self.bt = BehaviorTree(attack_move_node)
-        pass
 
     def chk_range_player(self):
         if 0 < self.x - main_state.player.x <= self.atk_range:
             self.velocity = 0
-            self.timer = 1000
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.FAIL
-        pass
 
     def chk_range_barricade(self):
         if 0 < self.x - main_state.barricade.x <= self.atk_range:
             self.velocity = 0
-            self.timer = 1000
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.FAIL
-        pass
 
     def chk_range_prisoner(self):
         if 0 < self.x - main_state.prisoner.x <= self.atk_range:
             self.velocity = 0
-            self.timer = 1000
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.FAIL
-        pass
 
     def move_forward(self):
         self.velocity = -RUN_SPEED_PPS
         self.chk_marking = False
         return BehaviorTree.SUCCESS
-        pass
 
     def fire_bomb(self):
         self.chk_marking = False
-        bomb = Bomb(self.x, self.y)
-        bomb.set_background(main_state.map)
-        game_world.add_object(bomb, 1)
-        return BehaviorTree.SUCCESS
-        pass
-
-    def marking(self):
-        self.chk_marking = True
-        self.timer -= 1
-        if self.timer <= 0:
+        self.chk_firing = True
+        if int(self.frame) % 8 == 7:
+            bomb = Bomb(self.x, self.y)
+            bomb.set_background(main_state.map)
+            game_world.add_object(bomb, 1)
+            self.timer = 800
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.RUNNING
-        pass
+
+    def marking(self):
+        self.chk_marking = True
+        self.chk_firing = False
+        self.timer -= 1
+        if self.timer <= 0:
+            return BehaviorTree.SUCCESS
+        elif self.x - main_state.player.x > self.atk_range:
+            return BehaviorTree.FAIL
+        else:
+            return BehaviorTree.RUNNING
 
     def update(self):
         self.bt.run()
 
         if self.velocity == 0:
-            if self.chk_marking:  # 아이들 모션 출력해줘야함.
+            if self.chk_marking:  # 아이들 애니메이션.
                 self.num_of_frame = 2
-            elif not self.chk_marking:  # 공격 모션
+            elif self.chk_firing:  # 공격 애니메이션.
                 self.num_of_frame = 8
+
         else:  # 이동 애니메이션 출력
             self.num_of_frame = 3
 
-        if self.hp <= 0:  # 사망 애니메이션 출력
+        if self.hp <= 0:  # 사망 애니메이션
             self.num_of_frame = 7
             if int(self.frame) % 7 == 6:
                 game_world.remove_object(self)
@@ -333,14 +332,13 @@ class Droptank:
 
         self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % self.num_of_frame
         self.x += self.velocity * game_framework.frame_time
-        pass
 
     def draw(self):
         cx = self.x - self.bg.window_left
         if self.velocity == 0:
             if self.chk_marking:
                 self.image.clip_draw(int(self.frame) * 100, 240, 100, 80, cx, self.y)
-            elif not self.chk_marking:
+            elif self.chk_firing:
                 self.image.clip_draw(int(self.frame) * 100, 80, 100, 80, cx, self.y)
         else:
             self.image.clip_draw(int(self.frame) * 100, 160, 100, 80, cx, self.y)
