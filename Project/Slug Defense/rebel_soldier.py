@@ -45,6 +45,12 @@ class Soldier:
         ready_to_atk_node = LeafNode("ready_to_atk", self.ready_to_atk)
         attack_node = LeafNode("attack", self.attack)
         move_forward = LeafNode("move_forward", self.move_forward)
+        atk_player_node = SequenceNode("atk_player")
+        atk_player_node.add_children(chk_range_player_node, ready_to_atk_node, attack_node)
+        atk_barricade_node = SequenceNode("atk_barricade")
+        atk_barricade_node.add_children(chk_range_barricade_node, ready_to_atk_node, attack_node)
+        atk_prisoner_node = SequenceNode("atk_prisoner")
+        atk_prisoner_node.add_children(chk_range_prisoner_node, ready_to_atk_node, attack_node)
         pass
 
     def chk_range_player(self):
