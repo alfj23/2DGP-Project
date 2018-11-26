@@ -126,7 +126,7 @@ class AttackState:
 
     @staticmethod
     def do(soldier):
-        if (soldier.x - main_state.player.x > soldier.atk_range 
+        if (soldier.x - main_state.player.x > soldier.atk_range
             or soldier.x - main_state.barricade.x > soldier.atk_range
             or soldier.x - main_state.prisoner.x > soldier.atk_range):
             soldier.add_event(MOVE)
