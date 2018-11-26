@@ -1,7 +1,8 @@
-import game_framework
 from pico2d import *
+import game_framework
 import main_state
 import game_world
+from behavior_tree import BehaviorTree, LeafNode, SelectorNode, SequenceNode
 import random
 
 __name__ = "rebel_soldier"
