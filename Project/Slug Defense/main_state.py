@@ -14,6 +14,8 @@ from droptank import Droptank
 from barricade import Barricade
 from UI import Bottom_UI, Top_UI
 from rebel_soldier import Soldier
+import store
+
 __name__ = "MainState"
 
 player = None
@@ -91,9 +93,10 @@ def resume():
     pass
 
 
+'''
 global cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK
 cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK = 100, 100, 300, 100, 300
-
+'''
 
 def handle_events():
     global gold
@@ -104,7 +107,10 @@ def handle_events():
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
                 game_framework.push_state(pause_state)
-
+        else:
+            player.handle_event(event)
+            store.handle_event(event)
+        '''
         elif event.type == SDL_KEYDOWN and event.key == SDLK_1:  # 키입력으로 상점 상호작용 처리.
             # 플레이어 공격력 증가
             if gold - cost_ATK >= 0:
@@ -142,9 +148,7 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_5:
             # 스킬 데미지 업그레이드 ==> 현재 스킬 미구현으로 업그레이드 또한 미구현
             pass
-
-        else:
-            player.handle_event(event)
+        '''
 
 
 def update():
