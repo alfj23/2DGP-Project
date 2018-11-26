@@ -19,7 +19,7 @@ TIME_PER_ACTION = 0.5  # 액션 당 시간
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 8
 
-
+'''
 # soldier Events
 
 ATTACK, DIE, MOVE = range(3)
@@ -152,6 +152,7 @@ next_state_table = {
     DeathState: {},
     AttackState: {DIE: DeathState, MOVE: MoveState}
 }
+'''
 
 
 class Soldier:
@@ -160,9 +161,6 @@ class Soldier:
         self.image = load_image('./resource/rebel_soldier/soldier.png')
         self.velocity = 0
         self.frame = random.randint(0, 11)
-        self.event_que = []
-        self.cur_state = MoveState
-        self.cur_state.enter(self, None)
         self.hp = 200
         self.font = load_font('./resource/font/ENCR10B.TTF', 16)
         self.chk_reload = False
@@ -170,17 +168,16 @@ class Soldier:
         self.damage_amount = 2
         self.atk_range = 45
 
-
-    def add_event(self, event):
-        self.event_que.insert(0, event)
+    def chk_range_player(self):
+        pass
+    
 
     def update(self):
-        self.cur_state.do(self)
-        if len(self.event_que) > 0:
-            event = self.event_que.pop()
-            self.cur_state.exit(self, event)
-            self.cur_state = next_state_table[self.cur_state][event]
-            self.cur_state.enter(self, event)
+        pass
+
+    def draw(self):
+        self.font.draw(self.x - self.bg.window_left - 60, self.y + 50, '(HP : %i)' % self.hp, (255, 0, 0))
+        draw_rectangle(*self.get_bb())
 
     def get_bb(self):
         return self.x - self.bg.window_left - 15, self.y - 18, self.x - self.bg.window_left + 12, self.y + 22
@@ -188,11 +185,3 @@ class Soldier:
     def set_background(self, bg):
         self.bg = bg
 
-    def draw(self):
-        self.cur_state.draw(self)
-        self.font.draw(self.x - self.bg.window_left - 60, self.y + 50,
-                       '(HP : %i)' % self.hp, (255, 0, 0))
-        draw_rectangle(*self.get_bb())
-
-    def handle_event(self, event):
-        pass
