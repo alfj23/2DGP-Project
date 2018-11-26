@@ -14,7 +14,7 @@ from droptank import Droptank
 from barricade import Barricade
 from UI import Bottom_UI, Top_UI
 from rebel_soldier import Soldier
-import store
+from store import Store
 
 __name__ = "MainState"
 
@@ -23,7 +23,7 @@ map = None
 prisoner = None
 bottom_ui = None
 top_ui = None
-
+store = None
 droptanks = []
 soldiers = []
 barricade = None
@@ -56,7 +56,6 @@ def enter():
     game_world.add_object(prisoner, 1)
     prisoner.set_background(map)
 
-
     global droptanks
     droptanks = [Droptank() for i in range(20)]
     game_world.add_objects(droptanks, 1)
@@ -80,6 +79,8 @@ def enter():
     map.set_center_object(player)
     player.set_background(map)
 
+    global store
+    store = Store()
 
 def exit():
     game_world.clear()
@@ -99,8 +100,6 @@ cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK = 100, 100, 300, 100, 300
 '''
 
 def handle_events():
-    global gold
-    global cost_ATK, cost_HP, cost_BRCD_RP, cost_BRCD_HP, cost_SK, chk_barricade_alive
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
