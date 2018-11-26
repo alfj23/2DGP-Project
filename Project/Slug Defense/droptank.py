@@ -34,6 +34,7 @@ class Droptank:
         self.font = load_font('./resource/font/ENCR10B.TTF', 16)
         self.chk_marking = False
         self.chk_firing = False
+        self.chk_dying = False
         self.gold = 200
         self.timer = 800
         self.build_behavior_tree()
@@ -122,6 +123,9 @@ class Droptank:
             self.num_of_frame = 3
 
         if self.hp <= 0:  # 사망 애니메이션
+            if not self.chk_dying:
+                self.frame = 0
+                self.chk_dying = True
             self.num_of_frame = 7
             if int(self.frame) % 7 == 6:
                 game_world.remove_object(self)
