@@ -47,6 +47,9 @@ class Soldier:
     def ready_to_atk(self):
         pass
 
+    def attack(self):
+        pass
+
     def update(self):
         pass
 
