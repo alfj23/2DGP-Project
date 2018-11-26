@@ -34,6 +34,11 @@ class Soldier:
         self.gold = 100
         self.damage_amount = 2
         self.atk_range = 45
+        self.build_behavior_tree()
+        self.num_of_frame = 0
+
+    def build_behavior_tree(self):
+        pass
 
     def chk_range_player(self):
         pass
