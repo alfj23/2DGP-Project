@@ -41,7 +41,7 @@ def update():
 def draw():
     clear_canvas()
     main_state.draw()
-    pause_menu.draw
+    pause_menu.draw()
     update_canvas()
 
 

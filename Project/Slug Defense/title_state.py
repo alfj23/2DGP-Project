@@ -1,6 +1,7 @@
 import game_framework
 from pico2d import *
 import main_state
+import world_build_state
 
 __name__ = "TitleState"
 image = None
@@ -25,6 +26,7 @@ def handle_events():
             if (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
                 game_framework.quit()
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
+                world_build_state.create_stage1()  # 게임 시작시 스테이지 1 생성
                 game_framework.change_state(main_state)
 
 

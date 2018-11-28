@@ -42,13 +42,13 @@ class Droptank:
         self.damage_amount = Bomb.damage_amount
 
     def __getstate__(self):
-        state = {'x': self.x, 'y': self.y, 'hp_amount': self.hp_amount, 'damage_amount': self.damage_amount}
+        state = {'x': self.x, 'hp_amount': self.hp_amount, 'damage_amount': self.damage_amount}
         return state
 
     def __setstate__(self, state):
         self.__init__()
         self.__dict__.update(state)
-        
+
     def build_behavior_tree(self):
         chk_range_player_node = LeafNode("chk_range_player", self.chk_range_player)
         chk_range_barricade_node = LeafNode("chk_range_barricade", self.chk_range_barricade)

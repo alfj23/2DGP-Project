@@ -6,6 +6,7 @@ from pico2d import *
 import game_framework
 import game_world
 import pause_state
+import world_build_state
 
 from player import Player
 from map import Map
@@ -101,9 +102,10 @@ def handle_events():
     events = get_events()
     for event in events:
         if left_wave_amount == 0:
-            print("state clear!")
+            game_framework.change_state(world_build_state)
         if prisoner.hp_amount < 0:
             print("state fail!")
+            #game_framework.change_state(gameover_state)
             pass
 
         if event.type == SDL_QUIT:
