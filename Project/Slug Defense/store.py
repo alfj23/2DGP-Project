@@ -47,6 +47,9 @@ class Store:
                     main_state.barricade.chk_alive = True
                     main_state.gold -= self.cost_BRCD_RP
                     self.cost_BRCD_RP *= 2
+                    
+            elif key_event == UPGRADE_BARRICADE_HP:
+                pass
 
             elif key_event == UPGRADE_SKILL_DAMAGE:
                 pass
