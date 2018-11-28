@@ -29,7 +29,7 @@ class Droptank:
         self.image = load_image('./resource/droptank/droptank.png')
         self.velocity = 0
         self.frame = 0
-        self.hp = 400
+        self.hp_amount = 400
         self.atk_range = 400
         self.font = load_font('./resource/font/ENCR10B.TTF', 16)
         self.chk_marking = False
@@ -39,6 +39,10 @@ class Droptank:
         self.timer = 800
         self.build_behavior_tree()
         self.num_of_frame = 0
+
+    def __getstate__(self):
+        state = {'x': self.x, 'y': self.y, 'hp_amount': self.hp_amount
+        }
 
     def build_behavior_tree(self):
         chk_range_player_node = LeafNode("chk_range_player", self.chk_range_player)
@@ -122,7 +126,7 @@ class Droptank:
         else:  # 이동 애니메이션 출력
             self.num_of_frame = 3
 
-        if self.hp <= 0:  # 사망 애니메이션
+        if self.hp_amount <= 0:  # 사망 애니메이션
             self.velocity = 0
             if not self.chk_dying:
                 self.frame = 0
@@ -146,10 +150,10 @@ class Droptank:
                 self.image.clip_draw(int(self.frame) * 100, 80, 100, 80, cx, self.y)
         else:
             self.image.clip_draw(int(self.frame) * 100, 160, 100, 80, cx, self.y)
-        if self.hp <= 0:
+        if self.hp_amount <= 0:
             self.image.clip_draw(int(self.frame) * 100, 0, 100, 80, cx, self.y)
         self.font.draw(self.x - self.bg.window_left - 60, self.y + 50,
-                       '(HP : %i)' % self.hp, (255, 0, 0))
+                       '(HP : %i)' % self.hp_amount, (255, 0, 0))
         draw_rectangle(*self.get_bb())
 
     def get_bb(self):

@@ -27,7 +27,7 @@ class Soldier:
         self.image = load_image('./resource/rebel_soldier/soldier.png')
         self.velocity = 0
         self.frame = random.randint(0, 11)
-        self.hp = 200
+        self.hp_amount = 200
         self.atk_cool_time = 300
         self.font = load_font('./resource/font/ENCR10B.TTF', 16)
         self.chk_stabbing = False
@@ -118,7 +118,7 @@ class Soldier:
                 self.num_of_frame = 16
         else:
             self.num_of_frame = 12
-        if self.hp <= 0:
+        if self.hp_amount <= 0:
             if not self.chk_dying:
                 self.frame = 0
                 self.chk_dying = True
@@ -143,10 +143,10 @@ class Soldier:
                 self.image.clip_composite_draw(int(self.frame) * 80, 100, 80, 50, 3.141592, 'v', cx, self.y + 2, 80, 50)
         else:
             self.image.clip_draw(int(self.frame) * 33, 0, 33, 44, cx, self.y)
-        if self.hp <= 0:
+        if self.hp_amount <= 0:
             self.image.clip_draw(int(self.frame) * 52, 150, 48, 80, cx, self.y + 16)
 
-        self.font.draw(self.x - self.bg.window_left - 60, self.y + 50, '(HP : %i)' % self.hp, (255, 0, 0))
+        self.font.draw(self.x - self.bg.window_left - 60, self.y + 50, '(HP : %i)' % self.hp_amount, (255, 0, 0))
         draw_rectangle(*self.get_bb())
 
     def get_bb(self):

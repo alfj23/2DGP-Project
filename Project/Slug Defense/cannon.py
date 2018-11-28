@@ -37,15 +37,15 @@ class IdleState:
         for droptank in main_state.droptanks:
             if main_state.collide(cannon, droptank):
 
-                if droptank.hp > 0:
-                    droptank.hp -= cannon.damage_amount
+                if droptank.hp_amount > 0:
+                    droptank.hp_amount -= cannon.damage_amount
                     game_world.remove_object(cannon)
                 break
         for soldier in main_state.soldiers:
             if main_state.collide(cannon, soldier):
 
-                if soldier.hp > 0:
-                    soldier.hp -= cannon.damage_amount
+                if soldier.hp_amount > 0:
+                    soldier.hp_amount -= cannon.damage_amount
                     game_world.remove_object(cannon)
                 break
         pass
