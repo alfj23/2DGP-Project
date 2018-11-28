@@ -123,6 +123,7 @@ class Droptank:
             self.num_of_frame = 3
 
         if self.hp <= 0:  # 사망 애니메이션
+            self.velocity = 0
             if not self.chk_dying:
                 self.frame = 0
                 self.chk_dying = True

@@ -49,9 +49,10 @@ class Store:
                     self.cost_BRCD_RP *= 2
 
             elif key_event == UPGRADE_BARRICADE_HP:
-                if main_state.gold - self.cost_BRCD_HP >= 0:
-                    main_state.gold - self.cost_BRCD_HP
+                if main_state.gold - self.cost_BRCD_HP >= 0 and main_state.barricade.hp_amount > 0:
+                    main_state.gold -= self.cost_BRCD_HP
                     main_state.barricade.max_hp += 200
+                    self.cost_BRCD_HP *= 2
                     main_state.barricade.hp_amount = main_state.barricade.max_hp * main_state.barricade.hp_rate
                 pass
 
