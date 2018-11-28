@@ -20,6 +20,7 @@ prisoner = None
 map = None
 
 droptanks = []
+soldiers = []
 
 menu = None
 font = None
@@ -37,7 +38,7 @@ def exit():
     pass
 
 
-def create_stage1():
+def build_stage1():
     global player, droptanks, barricade, prisoner, map
     map = Map()
     game_world.add_object(map, 0)
@@ -62,8 +63,25 @@ def create_stage1():
         droptank.set_background(map)
 
 
+def build_stage2():
+    pass
+
+
+def build_stage3():
+    pass
+
+
+def build_stage4():
+    pass
+
+
+def build_stage5():
+    pass
+
+
 def get_map():
     return map
+
 
 def get_player():
     return player

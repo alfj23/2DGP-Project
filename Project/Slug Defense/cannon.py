@@ -42,15 +42,15 @@ class IdleState:
                     droptank.hp_amount -= cannon.damage_amount
                     game_world.remove_object(cannon)
                 break
-                '''
-        for soldier in main_state.soldiers:
+
+        for soldier in world_build_state.soldiers:
             if main_state.collide(cannon, soldier):
 
                 if soldier.hp > 0:
                     soldier.hp -= cannon.damage_amount
                     game_world.remove_object(cannon)
                 break
-                '''
+
         pass
 
     @staticmethod

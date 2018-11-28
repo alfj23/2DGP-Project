@@ -22,22 +22,28 @@ FRAMES_PER_ACTION = 8
 
 
 class Soldier:
-    def __init__(self):
-        self.x, self.y = random.randint(1200, 1600), 32 + 200
+    def __init__(self, x=0, hp_amount=0, damage_amount=0):
+        self.x, self.y = x, 32 + 200
         self.image = load_image('./resource/rebel_soldier/soldier.png')
         self.velocity = 0
         self.frame = random.randint(0, 11)
-        self.hp_amount = 200
+        self.hp_amount = hp_amount
         self.atk_cool_time = 300
         self.font = load_font('./resource/font/ENCR10B.TTF', 16)
         self.chk_stabbing = False
         self.chk_ready_to_atk = False
         self.chk_dying = False
         self.gold = 100
-        self.damage_amount = 2
+        self.damage_amount = damage_amount
         self.atk_range = 35
         self.build_behavior_tree()
         self.num_of_frame = 0
+
+    def __getstate__(self):
+        pass
+
+    def __setstate__(self, state):
+        pass
 
     def build_behavior_tree(self):
         chk_range_player_node = LeafNode("chk_range_player", self.chk_range_player)
