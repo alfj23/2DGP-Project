@@ -129,6 +129,7 @@ class Droptank:
             self.num_of_frame = 7
             if int(self.frame) % 7 == 6:
                 game_world.remove_object(self)
+                self.x = -100
                 main_state.left_wave_amount -= 1
                 main_state.gold += self.gold
 

@@ -9,7 +9,7 @@ __name__ = "rebel_soldier"
 # soldier Speed
 
 PIXEL_PER_METER = (10.0 / 0.3)
-RUN_SPEED_KMPH = 10
+RUN_SPEED_KMPH = 12
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -28,7 +28,7 @@ class Soldier:
         self.velocity = 0
         self.frame = random.randint(0, 11)
         self.hp = 200
-        self.atk_cool_time = 500
+        self.atk_cool_time = 300
         self.font = load_font('./resource/font/ENCR10B.TTF', 16)
         self.chk_stabbing = False
         self.chk_ready_to_atk = False
@@ -57,15 +57,15 @@ class Soldier:
         attack_move_node = SelectorNode("attack_move")
         attack_move_node.add_children(attack_node, move_forward_node)
         self.bt = BehaviorTree(attack_move_node)
-        pass
 
     def chk_range_player(self):
-        if 0 < self.x - main_state.player.x < self.atk_range:
+        if main_state.barricade.hp_amount <= 0:
+            return BehaviorTree.FAIL
+        elif 0 < self.x - main_state.player.x < self.atk_range:
             self.velocity = 0
             return BehaviorTree.SUCCESS
         else:
-            return BehaviorTree.FAIL
-        pass
+            return  BehaviorTree.FAIL
 
     def chk_range_barricade(self):
         if 0 < self.x - main_state.barricade.x < self.atk_range:
@@ -73,7 +73,6 @@ class Soldier:
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.FAIL
-        pass
 
     def chk_range_prisoner(self):
         if 0 < self.x - main_state.prisoner.x < self.atk_range:
@@ -81,7 +80,6 @@ class Soldier:
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.FAIL
-        pass
 
     def ready_to_atk(self):
         self.chk_ready_to_atk = True
@@ -91,7 +89,6 @@ class Soldier:
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.RUNNING
-        pass
 
     def stabbing(self):
         atk_objects = [main_state.prisoner, main_state.barricade, main_state.player]
@@ -100,18 +97,16 @@ class Soldier:
         if int(self.frame) % 16 == 15:
             for atk_object in atk_objects:
                 if main_state.collide(self, atk_object):
-                    atk_object.hp_amount -= self.damage_amount  # 이거 가능한지 모르겠다.
-                    self.atk_cool_time = 500
+                    atk_object.hp_amount -= self.damage_amount
+                    self.atk_cool_time = 300
                     return BehaviorTree.SUCCESS
         else:
             BehaviorTree.RUNNING
-        pass
 
     def move_forward(self):
         self.chk_ready_to_atk = self.chk_stabbing = False
         self.velocity = -RUN_SPEED_PPS
         return BehaviorTree.SUCCESS
-        pass
 
     def update(self):
         self.bt.run()
@@ -137,8 +132,6 @@ class Soldier:
         self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time)\
                      % self.num_of_frame
         self.x += self.velocity * game_framework.frame_time
-        print(int(self.frame))
-        pass
 
     def draw(self):
         cx = self.x - self.bg.window_left

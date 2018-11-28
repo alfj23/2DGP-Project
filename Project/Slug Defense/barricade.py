@@ -131,6 +131,7 @@ class Barricade:
     def initialize(self):
         self.x = 200 #- self.bg.window_left
         self.max_hp = 300
+        self.hp_amount = self.max_hp
         main_state.cost_BRCD_HP = 100
 
     def draw(self):

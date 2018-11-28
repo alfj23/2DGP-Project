@@ -176,7 +176,7 @@ class Player:
         self.hp_rate = self.hp_amount / self.max_hp
 
     def fire_cannon(self):
-        cannon = Cannon(self.x - self.bg.window_left, self.y)
+        cannon = Cannon(self.x - self.bg.window_left - 10, self.y)
         game_world.add_object(cannon, 1)
 
     def add_event(self, event):

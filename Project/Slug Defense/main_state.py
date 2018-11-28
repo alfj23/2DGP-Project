@@ -57,14 +57,14 @@ def enter():
     prisoner.set_background(map)
 
     global droptanks
-    #droptanks = [Droptank() for i in range(2)]
-    #game_world.add_objects(droptanks, 1)
-    #for droptank in droptanks:
-        #droptank.set_background(map)
+    droptanks = [Droptank() for i in range(5)]
+    game_world.add_objects(droptanks, 1)
+    for droptank in droptanks:
+        droptank.set_background(map)
 
     global soldiers
-    soldiers = [Soldier() for i in range(2)]
-    game_world.add_objects(soldiers, 1)
+    #soldiers = [Soldier() for i in range(20)]
+    #game_world.add_objects(soldiers, 1)
     for soldier in soldiers:
         soldier.set_background(map)
 
