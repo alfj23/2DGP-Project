@@ -52,7 +52,7 @@ def enter():
     player = world_build_state.get_player()
     prisoner = world_build_state.get_prisoner()
     barricade = world_build_state.get_barricade()
-    left_wave_amount = len(world_build_state.droptanks)
+    left_wave_amount = len(world_build_state.droptanks) + len(world_build_state.soldiers)
     '''
     global player
     player = Player()

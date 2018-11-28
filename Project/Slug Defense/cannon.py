@@ -46,8 +46,8 @@ class IdleState:
         for soldier in world_build_state.soldiers:
             if main_state.collide(cannon, soldier):
 
-                if soldier.hp > 0:
-                    soldier.hp -= cannon.damage_amount
+                if soldier.hp_amount > 0:
+                    soldier.hp_amount -= cannon.damage_amount
                     game_world.remove_object(cannon)
                 break
 

@@ -62,6 +62,15 @@ def build_stage1():
     for droptank in droptanks:
         droptank.set_background(map)
 
+    with open('stage1_soldier.json', 'r') as f:
+        soldier_list = json.load(f)
+
+    for data in soldier_list:
+        soldiers.append(Soldier(data['x'], data['hp_amount'], data['damage_amount']))
+    game_world.add_objects(soldiers, 1)
+    for soldier in soldiers:
+        soldier.set_background(map)
+
 
 def build_stage2():
     pass
