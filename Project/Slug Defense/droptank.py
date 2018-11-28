@@ -25,11 +25,11 @@ FRAMES_PER_ACTION = 8
 
 class Droptank:
     def __init__(self, x=0, hp_amount=0,damage_amount=0):
-        self.x, self.y = random.randint(1200, 1600), 40 + 200
+        self.x, self.y = x * PIXEL_PER_METER, 40 + 200
         self.image = load_image('./resource/droptank/droptank.png')
         self.velocity = 0
         self.frame = 0
-        self.hp_amount = 400
+        self.hp_amount = hp_amount
         self.atk_range = 400
         self.font = load_font('./resource/font/ENCR10B.TTF', 16)
         self.chk_marking = False
@@ -39,7 +39,7 @@ class Droptank:
         self.timer = 800
         self.build_behavior_tree()
         self.num_of_frame = 0
-        self.damage_amount = 50
+        self.damage_amount = damage_amount
 
     def __getstate__(self):
         state = {'x': self.x, 'hp_amount': self.hp_amount, 'damage_amount': self.damage_amount}

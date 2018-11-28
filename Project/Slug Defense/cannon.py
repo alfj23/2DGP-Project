@@ -35,20 +35,22 @@ class IdleState:
         cannon.x += cannon.velocity * game_framework.frame_time
         cannon.frame = (cannon.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) % 4
 
+        for droptank in world_build_state.droptanks:
+            if main_state.collide(cannon, droptank):
 
-        if main_state.collide(cannon, world_build_state.droptank):
+                if droptank.hp_amount > 0:
+                    droptank.hp_amount -= cannon.damage_amount
+                    game_world.remove_object(cannon)
+                break
+                '''
+        for soldier in main_state.soldiers:
+            if main_state.collide(cannon, soldier):
 
-            if world_build_state.droptank.hp_amount > 0:
-                world_build_state.droptank.hp_amount -= cannon.damage_amount
-                game_world.remove_object(cannon)
-
-#        for soldier in main_state.soldiers:
- #           if main_state.collide(cannon, soldier):
-#
- #               if soldier.hp_amount > 0:
-  #                  soldier.hp_amount -= cannon.damage_amount
-   #                 game_world.remove_object(cannon)
-    # x           break
+                if soldier.hp > 0:
+                    soldier.hp -= cannon.damage_amount
+                    game_world.remove_object(cannon)
+                break
+                '''
         pass
 
     @staticmethod

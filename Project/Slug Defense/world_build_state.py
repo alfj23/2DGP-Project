@@ -19,7 +19,7 @@ barricade = None
 prisoner = None
 map = None
 
-droptank = None
+droptanks = []
 
 menu = None
 font = None
@@ -38,7 +38,7 @@ def exit():
 
 
 def create_stage1():
-    global player, droptank, barricade, prisoner, map
+    global player, droptanks, barricade, prisoner, map
     map = Map()
     game_world.add_object(map, 0)
     player = Player()
@@ -58,9 +58,10 @@ def create_stage1():
     for data in droptank_list:
         droptank = Droptank(data['x'], data['hp_amount'], data['damage_amount'])
         game_world.add_object(droptank, 1)
+        #for droptank in droptanks:
         droptank.set_background(map)
     pass
-
+    #print(len(droptank_list))
 
 def get_map():
     return map
