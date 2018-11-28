@@ -29,6 +29,8 @@ def enter():
     global menu, font
     menu = load_image('./resource/UI/pause_menu.png')
     font = load_font('./resource/font/ENCR10B.TTF', 18)
+    hide_cursor()
+    hide_lattice()
     pass
 
 
@@ -54,7 +56,7 @@ def build_stage1():
     prisoner.set_background(map)
 
     with open('stage1_droptank.json', 'r') as f:
-        droptank_list = json.load(f)  #droptank_list에 역직렬화 해서 넣음.
+        droptank_list = json.load(f)  # droptank_list에 역직렬화 해서 넣음.
 
     for data in droptank_list:
         droptanks.append(Droptank(data['x'], data['hp_amount'], data['damage_amount']))
@@ -73,19 +75,139 @@ def build_stage1():
 
 
 def build_stage2():
-    pass
+    global player, droptanks, barricade, prisoner, map
+    map = Map()
+    game_world.add_object(map, 0)
+    player = Player()
+    game_world.add_object(player, 1)
+    map.set_center_object(player)
+    player.set_background(map)
+    barricade = Barricade()
+    game_world.add_object(barricade, 1)
+    barricade.set_background(map)
+    prisoner = Pow()
+    game_world.add_object(prisoner, 1)
+    prisoner.set_background(map)
+
+    with open('stage1_droptank.json', 'r') as f:
+        droptank_list = json.load(f)  # droptank_list에 역직렬화 해서 넣음.
+
+    for data in droptank_list:
+        droptanks.append(Droptank(data['x'], data['hp_amount'], data['damage_amount']))
+    game_world.add_objects(droptanks, 1)
+    for droptank in droptanks:
+        droptank.set_background(map)
+
+    with open('stage1_soldier.json', 'r') as f:
+        soldier_list = json.load(f)
+
+    for data in soldier_list:
+        soldiers.append(Soldier(data['x'], data['hp_amount'], data['damage_amount']))
+    game_world.add_objects(soldiers, 1)
+    for soldier in soldiers:
+        soldier.set_background(map)
 
 
 def build_stage3():
-    pass
+    global player, droptanks, barricade, prisoner, map
+    map = Map()
+    game_world.add_object(map, 0)
+    player = Player()
+    game_world.add_object(player, 1)
+    map.set_center_object(player)
+    player.set_background(map)
+    barricade = Barricade()
+    game_world.add_object(barricade, 1)
+    barricade.set_background(map)
+    prisoner = Pow()
+    game_world.add_object(prisoner, 1)
+    prisoner.set_background(map)
+
+    with open('stage1_droptank.json', 'r') as f:
+        droptank_list = json.load(f)  # droptank_list에 역직렬화 해서 넣음.
+
+    for data in droptank_list:
+        droptanks.append(Droptank(data['x'], data['hp_amount'], data['damage_amount']))
+    game_world.add_objects(droptanks, 1)
+    for droptank in droptanks:
+        droptank.set_background(map)
+
+    with open('stage1_soldier.json', 'r') as f:
+        soldier_list = json.load(f)
+
+    for data in soldier_list:
+        soldiers.append(Soldier(data['x'], data['hp_amount'], data['damage_amount']))
+    game_world.add_objects(soldiers, 1)
+    for soldier in soldiers:
+        soldier.set_background(map)
 
 
 def build_stage4():
-    pass
+    global player, droptanks, barricade, prisoner, map
+    map = Map()
+    game_world.add_object(map, 0)
+    player = Player()
+    game_world.add_object(player, 1)
+    map.set_center_object(player)
+    player.set_background(map)
+    barricade = Barricade()
+    game_world.add_object(barricade, 1)
+    barricade.set_background(map)
+    prisoner = Pow()
+    game_world.add_object(prisoner, 1)
+    prisoner.set_background(map)
+
+    with open('stage1_droptank.json', 'r') as f:
+        droptank_list = json.load(f)  # droptank_list에 역직렬화 해서 넣음.
+
+    for data in droptank_list:
+        droptanks.append(Droptank(data['x'], data['hp_amount'], data['damage_amount']))
+    game_world.add_objects(droptanks, 1)
+    for droptank in droptanks:
+        droptank.set_background(map)
+
+    with open('stage1_soldier.json', 'r') as f:
+        soldier_list = json.load(f)
+
+    for data in soldier_list:
+        soldiers.append(Soldier(data['x'], data['hp_amount'], data['damage_amount']))
+    game_world.add_objects(soldiers, 1)
+    for soldier in soldiers:
+        soldier.set_background(map)
 
 
 def build_stage5():
-    pass
+    global player, droptanks, barricade, prisoner, map
+    map = Map()
+    game_world.add_object(map, 0)
+    player = Player()
+    game_world.add_object(player, 1)
+    map.set_center_object(player)
+    player.set_background(map)
+    barricade = Barricade()
+    game_world.add_object(barricade, 1)
+    barricade.set_background(map)
+    prisoner = Pow()
+    game_world.add_object(prisoner, 1)
+    prisoner.set_background(map)
+
+    with open('stage1_droptank.json', 'r') as f:
+        droptank_list = json.load(f)  # droptank_list에 역직렬화 해서 넣음.
+
+    for data in droptank_list:
+        droptanks.append(Droptank(data['x'], data['hp_amount'], data['damage_amount']))
+    game_world.add_objects(droptanks, 1)
+    for droptank in droptanks:
+        droptank.set_background(map)
+
+    with open('stage1_soldier.json', 'r') as f:
+        soldier_list = json.load(f)
+
+    for data in soldier_list:
+        soldiers.append(Soldier(data['x'], data['hp_amount'], data['damage_amount']))
+    game_world.add_objects(soldiers, 1)
+    for soldier in soldiers:
+        soldier.set_background(map)
 
 
 def get_map():
@@ -113,9 +235,11 @@ def update():
 
 
 def draw():
-    clear_canvas()
     main_state.draw()
     menu.draw(get_canvas_width()//2, get_canvas_height()//2)
-    font.draw(380, 385, 'STAGE CLEAR!', (255, 255, 255))
+    font.draw(335, 385, 'STAGE CLEAR!', (255, 255, 255))
+    font.draw(315, 335, 'N NEXT STAGE', (255, 255, 255))
+    font.draw(315, 295, 'R REPLAY STAGE', (255, 255, 255))
+    font.draw(310, 255, 'ESC BACK TO TITLE', (255, 255, 255))
     update_canvas()
     pass

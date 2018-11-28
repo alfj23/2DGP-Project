@@ -95,6 +95,7 @@ def enter():
     
 '''
 
+
 def exit():
     game_world.clear()
 
@@ -112,8 +113,8 @@ def handle_events():
     global prisoner
     events = get_events()
     for event in events:
-        #if left_wave_amount == 0:
-            #game_framework.change_state(world_build_state)
+        if left_wave_amount == 0:
+            game_framework.change_state(world_build_state)
         if prisoner.hp_amount < 0:
             print("state fail!")
             #game_framework.change_state(gameover_state)

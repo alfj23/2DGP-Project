@@ -2,6 +2,7 @@ __name__ = "game_world"
 # layer 0: Background Objects
 # layer 1: Foreground Objects
 # layer 2: UIs
+
 objects = [[], [], []]
 
 
@@ -15,7 +16,7 @@ def add_objects(l, layer):
 
 
 def remove_object(o):  # 게임월드에서 객체 삭제하기
-    for i in range(len(objects)):  # 리스트 안에 리스트가 있으므로 어디 있는지 찾아야함. len(object) = 2 임. 확장성있는 코드~
+    for i in range(len(objects)):  # 리스트 안에 리스트가 있으므로 어디 있는지 찾아야함. len(object) = 3 임. 확장성있는 코드~
         if o in objects[i]:
             objects[i].remove(o)
             del o  # 메모리 반환
@@ -25,7 +26,7 @@ def remove_object(o):  # 게임월드에서 객체 삭제하기
 def clear():
     for o in all_objects():
         del o
-    objects.clear()
+    #objects.clear()
 
 
 def all_objects():  # 중요 :
