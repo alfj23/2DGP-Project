@@ -4,6 +4,23 @@ import game_world
 import main_state
 import json
 
+from player import Player
+from map import Map
+from pow import Pow
+from droptank import Droptank
+from barricade import Barricade
+from rebel_soldier import Soldier
+from store import Store
+
+__name__ = "world_build_state"
+
+player = None
+barricade = None
+prisoner = None
+map = None
+
+menu = None
+font = None
 
 def enter():
     global menu, font
@@ -13,11 +30,49 @@ def enter():
 
 
 def exit():
+    global menu, font
+    del menu, font
     pass
 
 
 def create_stage1():
+    global player, droptank, droptank_list, barricade, prisoner, map
+    map = Map()
+    game_world.add_object(map, 0)
+    player = Player()
+    game_world.add_object(player, 1)
+    map.set_center_object(player)
+    player.set_background(map)
+    barricade = Barricade()
+    game_world.add_object(barricade, 1)
+    barricade.set_background(map)
+    prisoner = Pow()
+    game_world.add_object(prisoner, 1)
+    prisoner.set_background(map)
+
+    with open('stage1_droptank.json', 'r') as f:
+        droptank_list = json.load(f)
+
+    for data in droptank_list:
+        droptank = Droptank(data['x'], data['hp_amount'], data['damage_amount'])
+        game_world.add_object(droptank, 1)
+        droptank.set_background(map)
     pass
+
+
+def get_map():
+    return map
+
+def get_player():
+    return player
+
+
+def get_barricade():
+    return barricade
+
+
+def get_prisoner():
+    return prisoner
 
 
 def handle_events():

@@ -24,7 +24,7 @@ FRAMES_PER_ACTION = 8
 
 
 class Droptank:
-    def __init__(self):
+    def __init__(self, x=0, hp_amount=0,damage_amount=0):
         self.x, self.y = random.randint(1200, 1600), 40 + 200
         self.image = load_image('./resource/droptank/droptank.png')
         self.velocity = 0
@@ -39,7 +39,7 @@ class Droptank:
         self.timer = 800
         self.build_behavior_tree()
         self.num_of_frame = 0
-        self.damage_amount = Bomb.damage_amount
+        self.damage_amount = 50
 
     def __getstate__(self):
         state = {'x': self.x, 'hp_amount': self.hp_amount, 'damage_amount': self.damage_amount}
@@ -100,7 +100,7 @@ class Droptank:
         self.chk_marking = False
         self.chk_firing = True
         if int(self.frame) % 8 == 7:
-            bomb = Bomb(self.x, self.y)
+            bomb = Bomb(self.x, self.y, self.damage_amount)
             bomb.set_background(main_state.map)
             game_world.add_object(bomb, 1)
             self.timer = 800

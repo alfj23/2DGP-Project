@@ -25,21 +25,16 @@ prisoner = None
 bottom_ui = None
 top_ui = None
 store = None
-droptanks = []
-soldiers = []
+#droptanks = []
+#soldiers = []
 barricade = None
 
 
 
 
 def enter():
-    global player
-    player = Player()
-    game_world.add_object(player, 1)
-
-    global map
-    map = Map()
-    game_world.add_object(map, 0)
+    global store
+    store = Store()
 
     global gold
     gold = 3000
@@ -52,37 +47,52 @@ def enter():
     top_ui = Top_UI()
     game_world.add_object(top_ui, 2)
 
+    global player, prisoner, barricade, map
+    map = world_build_state.get_map()
+    player = world_build_state.get_player()
+    prisoner = world_build_state.get_prisoner()
+    barricade = world_build_state.get_barricade()
+    '''
+    global player
+    player = Player()
+    game_world.add_object(player, 1)
+
+    global map
+    map = Map()
+    game_world.add_object(map, 0)
+
+    
+
     global prisoner
     prisoner = Pow()
     game_world.add_object(prisoner, 1)
     prisoner.set_background(map)
 
-    global droptanks
+    #global droptanks
     #droptanks = [Droptank() for i in range(5)]
     #game_world.add_objects(droptanks, 1)
-    for droptank in droptanks:
-        droptank.set_background(map)
+    #for droptank in droptanks:
+        #droptank.set_background(map)
 
-    global soldiers
-    soldiers = [Soldier() for i in range(20)]
-    game_world.add_objects(soldiers, 1)
-    for soldier in soldiers:
-        soldier.set_background(map)
+    #global soldiers
+    #soldiers = [Soldier() for i in range(20)]
+    #game_world.add_objects(soldiers, 1)
+    #for soldier in soldiers:
+        #soldier.set_background(map)
 
     global barricade
     barricade = Barricade()
     game_world.add_object(barricade, 1)
     barricade.set_background(map)
 
-    global left_wave_amount
-    left_wave_amount = len(droptanks) + len(soldiers)
+    #global left_wave_amount
+    #left_wave_amount = len(droptanks) + len(soldiers)
 
     map.set_center_object(player)
     player.set_background(map)
 
-    global store
-    store = Store()
-
+    
+'''
 
 def exit():
     game_world.clear()
@@ -101,8 +111,8 @@ def handle_events():
     global prisoner
     events = get_events()
     for event in events:
-        if left_wave_amount == 0:
-            game_framework.change_state(world_build_state)
+        #if left_wave_amount == 0:
+            #game_framework.change_state(world_build_state)
         if prisoner.hp_amount < 0:
             print("state fail!")
             #game_framework.change_state(gameover_state)

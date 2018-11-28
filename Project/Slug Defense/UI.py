@@ -35,4 +35,4 @@ class Top_UI:
     def draw(self):
         self.image.draw(800//2, 550)
         self.font.draw(30, 540, 'GOLD : %i' % main_state.gold, (255, 255, 0))
-        self.font.draw(300, 540, 'WAVE : %i' % main_state.left_wave_amount, (255, 255, 255))
+        #self.font.draw(300, 540, 'WAVE : %i' % main_state.left_wave_amount, (255, 255, 255))
