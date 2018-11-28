@@ -126,6 +126,7 @@ class Soldier:
             self.num_of_frame = 22
             if int(self.frame) % 22 == 21:
                 game_world.remove_object(self)
+                self.x = -100
                 main_state.left_wave_amount -= 1
                 main_state.gold += self.gold
 
