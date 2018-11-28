@@ -19,6 +19,8 @@ barricade = None
 prisoner = None
 map = None
 
+droptank = None
+
 menu = None
 font = None
 
@@ -36,7 +38,7 @@ def exit():
 
 
 def create_stage1():
-    global player, droptank, droptank_list, barricade, prisoner, map
+    global player, droptank, barricade, prisoner, map
     map = Map()
     game_world.add_object(map, 0)
     player = Player()
@@ -51,7 +53,7 @@ def create_stage1():
     prisoner.set_background(map)
 
     with open('stage1_droptank.json', 'r') as f:
-        droptank_list = json.load(f)
+        droptank_list = json.load(f)  #droptank_list에 역직렬화 해서 넣음.
 
     for data in droptank_list:
         droptank = Droptank(data['x'], data['hp_amount'], data['damage_amount'])
