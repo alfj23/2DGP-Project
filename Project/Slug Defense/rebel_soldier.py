@@ -23,7 +23,7 @@ FRAMES_PER_ACTION = 8
 
 class Soldier:
     def __init__(self, x=0, hp_amount=0, damage_amount=0):
-        self.x, self.y = x, 32 + 200
+        self.x, self.y = x * PIXEL_PER_METER, 32 + 200
         self.image = load_image('./resource/rebel_soldier/soldier.png')
         self.velocity = 0
         self.frame = random.randint(0, 11)
@@ -40,10 +40,12 @@ class Soldier:
         self.num_of_frame = 0
 
     def __getstate__(self):
-        pass
+        state = {'x': self.x, 'hp_amount': self.hp_amount, 'damage_amount':self.damage_amount}
+        return state
 
     def __setstate__(self, state):
-        pass
+        self.__init__()
+        self.__dict__.update(state)
 
     def build_behavior_tree(self):
         chk_range_player_node = LeafNode("chk_range_player", self.chk_range_player)
