@@ -47,11 +47,12 @@ def enter():
     top_ui = Top_UI()
     game_world.add_object(top_ui, 2)
 
-    global player, prisoner, barricade, map
+    global player, prisoner, barricade, map, left_wave_amount
     map = world_build_state.get_map()
     player = world_build_state.get_player()
     prisoner = world_build_state.get_prisoner()
     barricade = world_build_state.get_barricade()
+    left_wave_amount = len(world_build_state.droptanks)
     '''
     global player
     player = Player()
