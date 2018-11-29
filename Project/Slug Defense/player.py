@@ -3,6 +3,7 @@ from pico2d import *
 from cannon import Cannon
 from slug_skill import Missile
 import game_world
+import main_state
 import time
 
 __name__ = "player"
@@ -184,8 +185,9 @@ class Player:
         game_world.add_object(cannon, 1)
 
     def fire_missile(self):
-        missile = Missile(10 - self.bg.window_left, 20)
+        missile = Missile(10 , 10)
         game_world.add_object(missile, 1)
+        missile.set_background(main_state.map)
 
     def add_event(self, event):
         self.event_que.insert(0, event)

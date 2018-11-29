@@ -42,7 +42,8 @@ class FallingState:
 
     @staticmethod
     def draw(missile):
-        missile.image.clip_draw(int(missile.frame)*40, 0, 40, 100, missile.x, missile.y)
+        cx = missile.x - missile.bg.window_left
+        missile.image.clip_draw(int(missile.frame)*40, 0, 40, 100, cx, missile.y)
         pass
 
 
@@ -69,7 +70,8 @@ class ExploringState:
 
     @staticmethod
     def draw(missile):
-        missile.image.clip_draw(int(missile.frame)*150, 100, 150, 160, missile.x, missile.y)
+        cx = missile.x - missile.bg.window_left
+        missile.image.clip_draw(int(missile.frame)*150, 100, 150, 160, cx, missile.y)
         pass
 
 
@@ -98,6 +100,7 @@ class Missile:
         self.event_que.insert(0, event)
 
     def set_background(self, bg):
+        self.bg = bg
         pass
 
     def update(self):
@@ -110,7 +113,7 @@ class Missile:
         pass
 
     def get_bb(self):
-        return self.x - 100, self.y - 100, self.x + 100, self.y + 100
+        return self.x - 50 - self.bg.window_left, self.y - 70, self.x + 50 - self.bg.window_left, self.y + 30
         pass
 
     def draw(self):
