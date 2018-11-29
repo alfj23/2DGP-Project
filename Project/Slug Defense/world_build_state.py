@@ -2,6 +2,7 @@ from pico2d import *
 import game_framework
 import game_world
 import main_state
+import title_state
 import json
 
 from player import Player
@@ -227,6 +228,20 @@ def get_prisoner():
 
 
 def handle_events():
+    events = get_events()
+    for event in events:
+        if event.type == SDL_QUIT:
+            game_framework.quit()
+        else:
+            if (event.type, event.key) == (SDL_KEYDOWN, SDLK_n):  # 다음 스테이지로 이동해야함.
+                build_stage2()
+                game_framework.change_state(main_state)
+                pass
+            elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_r):  # 현 스테이지 다시 시작.
+                pass
+            elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):  # 타이틀로 이동.
+                game_framework.change_state(title_state)  
+
     pass
 
 

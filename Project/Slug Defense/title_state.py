@@ -1,4 +1,5 @@
 import game_framework
+import game_world
 from pico2d import *
 import main_state
 import world_build_state

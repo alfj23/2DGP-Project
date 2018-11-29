@@ -19,7 +19,7 @@ class Pause_menu:
         self.image.draw(800//2, 600//2)
         self.font.draw(380, 385, 'MENU', (0, 0, 0))
         self.font.draw(330, 320, 'X: Exit Game', (255, 255, 255))
-        #self.font.draw(310, 250, 'T: Back to title', (255, 255, 255))
+        self.font.draw(310, 250, 'T: Back to title', (255, 255, 255))
 
 pause_menu = None
 
@@ -55,22 +55,10 @@ def handle_events():
             game_framework.pop_state()
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_x):
             game_framework.quit()
-        '''
-        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_t): 버그때문에 이 부분은 사용하지 않을 예정임.
-            
-            game_world.remove_object(main_state.player)
-            game_world.remove_object(main_state.barricade)
-            game_world.remove_object(main_state.prisoner)
-            for droptank in world_build_state.droptanks:
-                game_world.remove_object(droptank)
-            for soldier in world_build_state.soldiers:
-                game_world.remove_object(soldier)
-            game_world.remove_object(world_build_state.soldiers)
-            game_world.remove_object(main_state.map)
-            game_world.remove_object(main_state.Top_UI)
-            game_world.remove_object(main_state.Bottom_UI)
+        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_t):
+            game_world.clear()
             game_framework.change_state(title_state)
-            '''
+
 
 
 def pause():

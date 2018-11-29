@@ -7,7 +7,7 @@ import game_framework
 import game_world
 import pause_state
 import world_build_state
-
+import title_state
 from player import Player
 from map import Map
 from pow import Pow
@@ -28,7 +28,7 @@ store = None
 #droptanks = []
 #soldiers = []
 barricade = None
-
+chk_stage_cleared = None
 
 
 
@@ -111,10 +111,13 @@ def resume():
 def handle_events():
     global left_wave_amount
     global prisoner
+    global chk_stage_cleared
+    chk_stage_cleared = False
     events = get_events()
     for event in events:
         if left_wave_amount == 0:
-            game_framework.change_state(world_build_state)
+            chk_stage_cleared = True
+            game_framework.push_state(world_build_state)
         if prisoner.hp_amount < 0:
             print("state fail!")
             #game_framework.change_state(gameover_state)
