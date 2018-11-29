@@ -38,7 +38,6 @@ def enter():
 def exit():
     global menu, font
     del menu, font
-    game_world.clear()
     pass
 
 
@@ -74,8 +73,12 @@ def build_stage1():
     game_world.add_objects(soldiers, 1)
     for soldier in soldiers:
         soldier.set_background(map)
-
-
+    '''
+    droptanks = [Droptank(30, 200, 10) for i in range(20)]
+    game_world.add_objects(droptanks, 1)
+    for droptank in droptanks:
+        droptank.set_background(map)
+    '''
 def build_stage2():
     global player, droptanks, barricade, prisoner, map
     map = Map()
@@ -241,6 +244,7 @@ def handle_events():
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_r):  # 현 스테이지 다시 시작.
                 pass
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):  # 타이틀로 이동.
+                game_world.clear()
                 game_framework.change_state(title_state)
 
     pass

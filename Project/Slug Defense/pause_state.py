@@ -29,7 +29,6 @@ def enter():
     pause_menu = Pause_menu()
     game_world.add_object(pause_menu, 2)
 
-
 def exit():
     game_world.remove_object(pause_menu)
     pass
@@ -56,16 +55,6 @@ def handle_events():
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_x):
             game_framework.quit()
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_t):
-            game_world.clear()
-            print(len(game_world.objects))
+            main_state.chk_back_to_title = True
             print(game_world.objects)
-            game_framework.change_state(title_state)
-
-
-
-def pause():
-    pass
-
-
-def resume():
-    pass
+            game_framework.pop_state()

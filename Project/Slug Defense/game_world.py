@@ -22,6 +22,13 @@ def remove_object(o):  # 게임월드에서 객체 삭제하기
             break
 
 
+def remove_objects():
+    for i in range(len(objects)):
+        for o in objects[i]:
+            objects[i].remove(o)
+            del o
+
+
 def clear():
     for l in objects:
         l.clear()

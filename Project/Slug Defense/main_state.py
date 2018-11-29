@@ -25,12 +25,9 @@ prisoner = None
 bottom_ui = None
 top_ui = None
 store = None
-#droptanks = []
-#soldiers = []
 barricade = None
 chk_stage_cleared = None
-
-
+chk_back_to_title = False
 
 def enter():
     global store
@@ -47,6 +44,7 @@ def enter():
     top_ui = Top_UI()
     game_world.add_object(top_ui, 2)
 
+
     global player, prisoner, barricade, map, left_wave_amount
     map = world_build_state.get_map()
     player = world_build_state.get_player()
@@ -54,13 +52,9 @@ def enter():
     barricade = world_build_state.get_barricade()
     left_wave_amount = len(world_build_state.droptanks) + len(world_build_state.soldiers)
 
-    print(len(game_world.objects))
-    print(game_world.objects)
-
+    print("entered main_state : ", game_world.objects)
 def exit():
     game_world.clear()
-    print(len(game_world.objects))
-    print(game_world.objects)
 
 
 def pause():
@@ -68,6 +62,12 @@ def pause():
 
 
 def resume():
+    global chk_back_to_title
+    if chk_back_to_title:
+        #game_world.clear()
+        chk_back_to_title = False
+        game_framework.change_state(title_state)
+        print(game_world.objects)
     pass
 
 
@@ -89,7 +89,10 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-                game_framework.push_state(pause_state)
+            #game_framework.push_state(pause_state)
+            game_framework.change_state(title_state)
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_q:
+            game_world.clear()
         else:
             player.handle_event(event)
             store.handle_event(event)
