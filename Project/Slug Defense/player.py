@@ -188,12 +188,15 @@ class Player:
         game_world.add_object(cannon, 1)
 
     def fire_missile(self):
-        missiles = [Missile(5, 10), Missile(7, 11), Missile(9, 12), Missile(11, 13), Missile(13, 14), Missile(15, 15),
-                    Missile(17, 16), Missile(19, 17), Missile(21, 18), Missile(23, 19), Missile(25, 20), Missile(27, 21),
-                    Missile(29, 22), Missile(31, 23)]
-        game_world.add_objects(missiles, 1)
-        for missile in missiles:
-            missile.set_background(main_state.map)
+        if main_state.gold - main_state.store.cost_capet_bombing >= 0:
+            main_state.store.casting_skill()
+            missiles = [Missile(5, 10), Missile(7, 11), Missile(9, 12), Missile(11, 13), Missile(13, 14), Missile(15, 15),
+                        Missile(17, 16), Missile(19, 17), Missile(21, 18), Missile(23, 19), Missile(25, 20), Missile(27, 21),
+                        Missile(29, 22), Missile(31, 23)]
+            game_world.add_objects(missiles, 1)
+            for missile in missiles:
+                missile.set_background(main_state.map)
+
 
     def add_event(self, event):
         self.event_que.insert(0, event)

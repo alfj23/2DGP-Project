@@ -1,13 +1,14 @@
 from pico2d import *
 import main_state
 
-UPGRADE_SLUG_ATK, UPGRADE_SLUG_HP, REPAIR_BARRICADE, UPGRADE_BARRICADE_HP, UPGRADE_SKILL_DAMAGE = range(5)
+UPGRADE_SLUG_ATK, UPGRADE_SLUG_HP, REPAIR_BARRICADE, UPGRADE_BARRICADE_HP, UPGRADE_SKILL_DAMAGE, CASTING_CAPET_BOMBING = range(6)
 key_event_table = {
     (SDL_KEYDOWN, SDLK_1): UPGRADE_SLUG_ATK,
     (SDL_KEYDOWN, SDLK_2): UPGRADE_SLUG_HP,
     (SDL_KEYDOWN, SDLK_3): REPAIR_BARRICADE,
     (SDL_KEYDOWN, SDLK_4): UPGRADE_BARRICADE_HP,
-    (SDL_KEYDOWN, SDLK_5): UPGRADE_SKILL_DAMAGE
+    (SDL_KEYDOWN, SDLK_5): UPGRADE_SKILL_DAMAGE,
+    (SDL_KEYDOWN, SDLK_z): CASTING_CAPET_BOMBING
 }
 
 #  슬러그 스킬 구현 시 스킬 데미지 업 기능 구현해야함.
@@ -20,7 +21,6 @@ class Store:
         self.cost_BRCD_HP = 100
         self.cost_slug_SK = 500  # upgrade capet_bombing damage_amount
         self.cost_capet_bombing = 1000
-
 
     def handle_event(self, event):
         if(event.type, event.key) in key_event_table:
@@ -63,5 +63,14 @@ class Store:
                     self.cost_slug_SK *= 2
                     print(main_state.player.damage_amount_of_skill)
                 pass
+            '''
+            elif key_event == CASTING_CAPET_BOMBING :
+                if main_state.gold - self.cost_capet_bombing >= 0 and main_state.player.chk_call_bomber:
+                    main_state.gold -= self.cost_capet_bombing
+                pass
+            '''
+
+    def casting_skill(self):
+        main_state.gold -= self.cost_capet_bombing
 
 
