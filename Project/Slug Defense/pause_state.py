@@ -57,6 +57,8 @@ def handle_events():
             game_framework.quit()
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_t):
             game_world.clear()
+            print(len(game_world.objects))
+            print(game_world.objects)
             game_framework.change_state(title_state)
 
 

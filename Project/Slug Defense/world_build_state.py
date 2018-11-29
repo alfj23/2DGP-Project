@@ -38,6 +38,7 @@ def enter():
 def exit():
     global menu, font
     del menu, font
+    game_world.clear()
     pass
 
 
@@ -240,7 +241,7 @@ def handle_events():
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_r):  # 현 스테이지 다시 시작.
                 pass
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):  # 타이틀로 이동.
-                game_framework.change_state(title_state)  
+                game_framework.change_state(title_state)
 
     pass
 
@@ -250,8 +251,9 @@ def update():
 
 
 def draw():
+    clear_canvas()
     main_state.draw()
-    menu.draw(get_canvas_width()//2, get_canvas_height()//2)
+    menu.draw(get_canvas_width() // 2, get_canvas_height() // 2)
     font.draw(335, 385, 'STAGE CLEAR!', (255, 255, 255))
     font.draw(315, 335, 'N NEXT STAGE', (255, 255, 255))
     font.draw(315, 295, 'R REPLAY STAGE', (255, 255, 255))

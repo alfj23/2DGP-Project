@@ -4,15 +4,14 @@ __name__ = "game_world"
 # layer 2: UIs
 
 objects = [[], [], []]
-print(len(objects))
-print(objects)
-def add_object(o, layer): #게임월드에 객체 넣기
-    objects[layer].append(o) # 몇번 레이언지 알려주기
+
+
+def add_object(o, layer):  #게임월드에 객체 넣기
+    objects[layer].append(o)  # 몇번 레이언지 알려주기
 
 
 def add_objects(l, layer):
-    for o in l:
-        add_object(o, layer)
+    objects[layer] += l
 
 
 def remove_object(o):  # 게임월드에서 객체 삭제하기
@@ -24,11 +23,8 @@ def remove_object(o):  # 게임월드에서 객체 삭제하기
 
 
 def clear():
-    for o in all_objects():
-        del o
-    objects.clear()
-    print(len(objects))
-    print(objects)
+    for l in objects:
+        l.clear()
 
 
 def all_objects():  # 중요 :

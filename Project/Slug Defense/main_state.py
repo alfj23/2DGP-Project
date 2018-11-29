@@ -53,51 +53,14 @@ def enter():
     prisoner = world_build_state.get_prisoner()
     barricade = world_build_state.get_barricade()
     left_wave_amount = len(world_build_state.droptanks) + len(world_build_state.soldiers)
-    '''
-    global player
-    player = Player()
-    game_world.add_object(player, 1)
 
-    global map
-    map = Map()
-    game_world.add_object(map, 0)
-
-    
-
-    global prisoner
-    prisoner = Pow()
-    game_world.add_object(prisoner, 1)
-    prisoner.set_background(map)
-
-    #global droptanks
-    #droptanks = [Droptank() for i in range(5)]
-    #game_world.add_objects(droptanks, 1)
-    #for droptank in droptanks:
-        #droptank.set_background(map)
-
-    #global soldiers
-    #soldiers = [Soldier() for i in range(20)]
-    #game_world.add_objects(soldiers, 1)
-    #for soldier in soldiers:
-        #soldier.set_background(map)
-
-    global barricade
-    barricade = Barricade()
-    game_world.add_object(barricade, 1)
-    barricade.set_background(map)
-
-    #global left_wave_amount
-    #left_wave_amount = len(droptanks) + len(soldiers)
-
-    map.set_center_object(player)
-    player.set_background(map)
-
-    
-'''
-
+    print(len(game_world.objects))
+    print(game_world.objects)
 
 def exit():
     game_world.clear()
+    print(len(game_world.objects))
+    print(game_world.objects)
 
 
 def pause():
@@ -117,7 +80,7 @@ def handle_events():
     for event in events:
         if left_wave_amount == 0:
             chk_stage_cleared = True
-            game_framework.push_state(world_build_state)
+            game_framework.change_state(world_build_state)
         if prisoner.hp_amount < 0:
             print("state fail!")
             #game_framework.change_state(gameover_state)
