@@ -18,8 +18,8 @@ RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 # droptank Speed
 
-TIME_PER_ACTION = 1.25  # 액션 당 시간
-ACTION_PER_TIME = 1.25 / TIME_PER_ACTION
+TIME_PER_ACTION = 1.2  # 액션 당 시간
+ACTION_PER_TIME = 1.8 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 8
 
 
@@ -151,11 +151,11 @@ class Droptank:
         if self.velocity == 0:
             if self.chk_marking:
                 self.image.clip_draw(int(self.frame) * 100, 240, 100, 80, cx, self.y)
-            elif self.chk_firing:
+            elif self.chk_firing and not self.chk_dying:
                 self.image.clip_draw(int(self.frame) * 100, 80, 100, 80, cx, self.y)
         else:
             self.image.clip_draw(int(self.frame) * 100, 160, 100, 80, cx, self.y)
-        if self.hp_amount <= 0:
+        if self.chk_dying:
             self.image.clip_draw(int(self.frame) * 100, 0, 100, 80, cx, self.y)
         self.font.draw(self.x - self.bg.window_left - 60, self.y + 50,
                        '(HP : %i)' % self.hp_amount, (255, 0, 0))

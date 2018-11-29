@@ -88,7 +88,7 @@ class Missile:
 
     def __init__(self, x=0, y=0):
         if Missile.image == None:
-            self.image = load_image('./resource/skill/skill.png')
+            Missile.image = load_image('./resource/skill/skill.png')
         self.x, self.y = x * PIXEL_PER_METER, y * PIXEL_PER_METER
         self.velocity = 0
         self.frame = 0
@@ -116,4 +116,3 @@ class Missile:
 
     def draw(self):
         self.cur_state.draw(self)
-        draw_rectangle(*self.get_bb())

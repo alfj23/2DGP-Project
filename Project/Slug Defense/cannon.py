@@ -35,7 +35,8 @@ class IdleState:
         cannon.x += cannon.velocity * game_framework.frame_time
         cannon.frame = (cannon.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) % 4
 
-        if cannon.x > 1600 - 20:
+        print(cannon.x)
+        if cannon.x > 800 - 7:
             game_world.remove_object(cannon)  # cannon 이 범위 벗어날 시 반환됨
 
         for droptank in world_build_state.droptanks:

@@ -43,7 +43,6 @@ def exit():
 
 def build_stage1():
     global player, droptanks, barricade, prisoner, map
-    print(len(game_world.objects[1]) + len(game_world.objects[0]) + len(game_world.objects[2]))
     map = Map()
     game_world.add_object(map, 0)
 

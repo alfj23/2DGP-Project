@@ -27,10 +27,8 @@ def handle_events():
             if (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
                 game_framework.quit()
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
-                print(len(game_world.objects[1]) + len(game_world.objects[0]) + len(game_world.objects[2]))
                 world_build_state.build_stage1()  # 게임 시작시 스테이지 1 생성
                 game_framework.change_state(main_state)
-                print(len(game_world.objects[1]) + len(game_world.objects[0]) + len(game_world.objects[2]))
 
 
 def draw():
