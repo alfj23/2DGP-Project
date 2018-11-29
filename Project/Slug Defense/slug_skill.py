@@ -25,10 +25,9 @@ class FallingState:
     @staticmethod
     def enter(missile, event):
         missile.velocity -= RUN_SPEED_PPS
-        pass
 
     @staticmethod
-    def exit(missile,event):
+    def exit(missile, event):
         pass
 
     @staticmethod
@@ -38,13 +37,11 @@ class FallingState:
 
         if main_state.collide(main_state.map, missile):
             missile.add_event(EXPLORE)
-        pass
 
     @staticmethod
     def draw(missile):
         cx = missile.x - missile.bg.window_left
         missile.image.clip_draw(int(missile.frame)*40, 0, 40, 100, cx, missile.y)
-        pass
 
 
 class ExploringState:
@@ -52,7 +49,6 @@ class ExploringState:
     def enter(missile, event):
         missile.frame = 0
         missile.velocity = 0
-        pass
 
     @staticmethod
     def exit(missile, event):
@@ -61,18 +57,24 @@ class ExploringState:
     @staticmethod
     def do(missile):
         missile.frame = (missile.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 24
+        if int(missile.frame) % 24 == 23:
+            game_world.remove_object(missile)
         for droptank in world_build_state.droptanks:
             if main_state.collide(droptank, missile):
-                droptank.hp_amount -= missile.damage_amount
-            if int(missile.frame) % 24 == 23:
-                game_world.remove_object(missile)
+                if droptank.hp_amount > 0:
+                    droptank.hp_amount -= missile.damage_amount
+
+        for soldier in world_build_state.soldiers:
+            if main_state.collide(soldier, missile):
+                if soldier.hp_amount > 0:
+                    soldier.hp_amount -= missile.damage_amount
+
         pass
 
     @staticmethod
     def draw(missile):
         cx = missile.x - missile.bg.window_left
         missile.image.clip_draw(int(missile.frame)*150, 100, 150, 160, cx, missile.y)
-        pass
 
 
 next_state_table = {
@@ -94,14 +96,12 @@ class Missile:
         self.event_que = []
         self.cur_state = FallingState
         self.cur_state.enter(self, None)
-        pass
 
     def add_event(self, event):
         self.event_que.insert(0, event)
 
     def set_background(self, bg):
         self.bg = bg
-        pass
 
     def update(self):
         self.cur_state.do(self)
@@ -110,13 +110,10 @@ class Missile:
             self.cur_state.exit(self, event)
             self.cur_state = next_state_table[self.cur_state][event]
             self.cur_state.enter(self, event)
-        pass
 
     def get_bb(self):
         return self.x - 50 - self.bg.window_left, self.y - 70, self.x + 50 - self.bg.window_left, self.y + 30
-        pass
 
     def draw(self):
         self.cur_state.draw(self)
         draw_rectangle(*self.get_bb())
-        pass

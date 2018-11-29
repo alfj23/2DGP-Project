@@ -23,14 +23,15 @@ FRAMES_PER_ACTION = 20
 
 
 # Player Slug Events
-RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, FIRE_CANNON, DISABLED, REPAIR = range(7)
+RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, FIRE_CANNON, FIRE_MISSILES, DISABLED, REPAIR = range(8)
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
     (SDL_KEYDOWN, SDLK_LEFT): LEFT_DOWN,
     (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
-    (SDL_KEYDOWN, SDLK_x): FIRE_CANNON
+    (SDL_KEYDOWN, SDLK_x): FIRE_CANNON,
+    (SDL_KEYDOWN, SDLK_z): FIRE_MISSILES
 }
 
 # Player Slug States
@@ -55,7 +56,8 @@ class IdleState:
         if event == FIRE_CANNON:
             player.frame = 0
             player.check_fired = True
-            #player.fire_cannon()
+            player.fire_cannon()
+        elif event == FIRE_MISSILES:
             player.fire_missile()
 
     @staticmethod
@@ -97,7 +99,8 @@ class DriveState:
         if event == FIRE_CANNON:
             player.frame = 0
             player.check_fired = True
-            #player.fire_cannon()
+            player.fire_cannon()
+        elif event == FIRE_MISSILES:
             player.fire_missile()
 
     @staticmethod
@@ -133,7 +136,8 @@ class DamagedState:
 
     @staticmethod
     def exit(player, event):
-        pass
+        if event == FIRE_MISSILES:
+            player.fire_missile()
 
     @staticmethod
     def do(player):
@@ -152,14 +156,13 @@ class DamagedState:
 
 
 next_state_table = {
-    IdleState: {RIGHT_UP: DriveState, LEFT_UP: DriveState,
-                RIGHT_DOWN: DriveState, LEFT_DOWN: DriveState,
-                FIRE_CANNON: IdleState, DISABLED: DamagedState},
+    IdleState: {RIGHT_UP: DriveState, LEFT_UP: DriveState, RIGHT_DOWN: DriveState, LEFT_DOWN: DriveState,
+                FIRE_CANNON: IdleState, FIRE_MISSILES: IdleState,DISABLED: DamagedState},
     DriveState: {RIGHT_UP: IdleState, LEFT_UP: IdleState,
                  LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState,
-                 FIRE_CANNON: DriveState, DISABLED: DamagedState},
+                 FIRE_CANNON: DriveState, FIRE_MISSILES: DriveState, DISABLED: DamagedState},
     DamagedState: {REPAIR: IdleState, RIGHT_UP: IdleState, RIGHT_DOWN: IdleState, LEFT_UP: IdleState,
-                   LEFT_DOWN: IdleState, FIRE_CANNON: IdleState}
+                   LEFT_DOWN: IdleState, FIRE_CANNON: IdleState, FIRE_MISSILES: IdleState,}
 }
 
 
