@@ -43,16 +43,20 @@ def exit():
 
 def build_stage1():
     global player, droptanks, barricade, prisoner, map
+    print(len(game_world.objects[1]) + len(game_world.objects[0]) + len(game_world.objects[2]))
     map = Map()
     game_world.add_object(map, 0)
+
     player = Player()
     game_world.add_object(player, 1)
     map.set_center_object(player)
     player.set_background(map)
     barricade = Barricade()
+
     game_world.add_object(barricade, 1)
     barricade.set_background(map)
     prisoner = Pow()
+
     game_world.add_object(prisoner, 1)
     prisoner.set_background(map)
 
@@ -73,12 +77,9 @@ def build_stage1():
     game_world.add_objects(soldiers, 1)
     for soldier in soldiers:
         soldier.set_background(map)
-    '''
-    droptanks = [Droptank(30, 200, 10) for i in range(20)]
-    game_world.add_objects(droptanks, 1)
-    for droptank in droptanks:
-        droptank.set_background(map)
-    '''
+    print(len(game_world.objects[1]) + len(game_world.objects[0]) + len(game_world.objects[2]))
+
+
 def build_stage2():
     global player, droptanks, barricade, prisoner, map
     map = Map()
@@ -183,15 +184,19 @@ def build_stage4():
 
 def build_stage5():
     global player, droptanks, barricade, prisoner, map
+
     map = Map()
     game_world.add_object(map, 0)
+
     player = Player()
     game_world.add_object(player, 1)
     map.set_center_object(player)
     player.set_background(map)
+
     barricade = Barricade()
     game_world.add_object(barricade, 1)
     barricade.set_background(map)
+
     prisoner = Pow()
     game_world.add_object(prisoner, 1)
     prisoner.set_background(map)
@@ -244,7 +249,6 @@ def handle_events():
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_r):  # 현 스테이지 다시 시작.
                 pass
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):  # 타이틀로 이동.
-                game_world.clear()
                 game_framework.change_state(title_state)
 
     pass
