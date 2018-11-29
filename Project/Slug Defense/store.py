@@ -61,14 +61,9 @@ class Store:
                     main_state.gold -= self.cost_slug_SK
                     main_state.player.damage_amount_of_skill *= 1.5
                     self.cost_slug_SK *= 2
+                    self.cost_capet_bombing *= 1.5
                     print(main_state.player.damage_amount_of_skill)
                 pass
-            '''
-            elif key_event == CASTING_CAPET_BOMBING :
-                if main_state.gold - self.cost_capet_bombing >= 0 and main_state.player.chk_call_bomber:
-                    main_state.gold -= self.cost_capet_bombing
-                pass
-            '''
 
     def casting_skill(self):
         main_state.gold -= self.cost_capet_bombing
