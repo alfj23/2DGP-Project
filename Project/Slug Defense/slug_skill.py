@@ -6,8 +6,8 @@ import game_framework
 
 #missile Speed
 
-PIXEL_PER_METER = (10.0 / 0.15)
-RUN_SPEED_KMPH = 40
+PIXEL_PER_METER = (10.0 / 0.20)
+RUN_SPEED_KMPH = 30
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -24,6 +24,7 @@ EXPLORE = range(1)
 class FallingState:
     @staticmethod
     def enter(missile, event):
+        missile.velocity -= RUN_SPEED_PPS
         pass
 
     @staticmethod
@@ -32,16 +33,24 @@ class FallingState:
 
     @staticmethod
     def do(missile):
+        missile.y += missile.velocity * game_framework.frame_time
+        missile.frame = (missile.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) % 13
+
+        if main_state.collide(main_state.map, missile):
+            missile.add_event(EXPLORE)
         pass
 
     @staticmethod
     def draw(missile):
+        missile.m_image.clip_draw(int(missile.frame)*40, 0, 40, 100, missile.x, missile.y)
         pass
 
 
 class ExploringState:
     @staticmethod
     def enter(missile, event):
+        missile.frame = 0
+        missile.velocity = 0
         pass
 
     @staticmethod
@@ -50,10 +59,12 @@ class ExploringState:
 
     @staticmethod
     def do(missile):
+        missile.frame = (missile.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 24
         pass
 
     @staticmethod
     def draw(missile):
+        missile.e_image.clip.draw
         pass
 
 
@@ -64,14 +75,11 @@ next_state_table = {
 
 
 class Missile:
-    m_image = None  # missile image
-    e_image = None  # explosion image
+    image = None
 
     def __init__(self, x=0, y=0):
-        if Missile.m_image == None:
-            self.m_image = load_image('./resource/skill/skill_missile')
-        if Missile.e_image == None:
-            self.e_image = load_image('./resource/skill/skill_explosion')
+        if Missile.image == None:
+            self.image = load_image('./resource/skill/skill.png')
         self.x, self.y = x * PIXEL_PER_METER, y * PIXEL_PER_METER
         self.velocity = 0
         self.frame = 0
