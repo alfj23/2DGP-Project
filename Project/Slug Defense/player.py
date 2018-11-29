@@ -1,6 +1,7 @@
 import game_framework
 from pico2d import *
 from cannon import Cannon
+from slug_skill import Missile
 import game_world
 import time
 
@@ -53,7 +54,8 @@ class IdleState:
         if event == FIRE_CANNON:
             player.frame = 0
             player.check_fired = True
-            player.fire_cannon()
+            #player.fire_cannon()
+            player.fire_missile()
 
     @staticmethod
     def do(player):
@@ -94,7 +96,8 @@ class DriveState:
         if event == FIRE_CANNON:
             player.frame = 0
             player.check_fired = True
-            player.fire_cannon()
+            #player.fire_cannon()
+            player.fire_missile()
 
     @staticmethod
     def do(player):
@@ -179,6 +182,10 @@ class Player:
     def fire_cannon(self):
         cannon = Cannon(self.x - self.bg.window_left - 10, self.y)
         game_world.add_object(cannon, 1)
+
+    def fire_missile(self):
+        missile = Missile(10 - self.bg.window_left, 20)
+        game_world.add_object(missile, 1)
 
     def add_event(self, event):
         self.event_que.insert(0, event)

@@ -66,6 +66,10 @@ def resume():
     if chk_back_to_title:
         #game_world.clear()
         chk_back_to_title = False
+        for droptank in world_build_state.droptanks:
+            game_world.remove_object(droptank)
+        for soldier in world_build_state.soldiers:
+            game_world.remove_object(soldier)
         game_framework.change_state(title_state)
         print(game_world.objects)
     pass

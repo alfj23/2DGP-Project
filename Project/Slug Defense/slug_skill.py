@@ -61,12 +61,15 @@ class ExploringState:
     def do(missile):
         missile.frame = (missile.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 24
         for droptank in world_build_state.droptanks:
-            if main_state.collide()
+            if main_state.collide(droptank, missile):
+                droptank.hp_amount -= missile.damage_amount
+            if int(missile.frame) % 24 == 23:
+                game_world.remove_object(missile)
         pass
 
     @staticmethod
     def draw(missile):
-        missile.image.clip.draw(int(missile.frame)*150, 160, 150, 160, missile.x, missile.y)
+        missile.image.clip_draw(int(missile.frame)*150, 100, 150, 160, missile.x, missile.y)
         pass
 
 
@@ -107,7 +110,7 @@ class Missile:
         pass
 
     def get_bb(self):
-        return
+        return self.x - 100, self.y - 100, self.x + 100, self.y + 100
         pass
 
     def draw(self):

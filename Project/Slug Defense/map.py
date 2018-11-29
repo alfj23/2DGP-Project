@@ -19,7 +19,7 @@ class Map:
         pass
 
     def get_bb(self):
-        return self.window_left, self.window_bottom + 200, self.window_left + 799, self.window_bottom + 215
+        return self.window_left - 1600, self.window_bottom + 200, self.window_left + 1600, self.window_bottom + 215
 
     def draw(self):
         #self.image.draw_to_origin(self.x - 2, self.y, 1600 * 1.367, 220 * 1.367)  # 맵 높이 300으로 늘리기 위해 배율을 1.367로 하였음.
