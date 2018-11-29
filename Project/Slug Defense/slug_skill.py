@@ -67,7 +67,15 @@ class Missile:
     m_image = None  # missile image
     e_image = None  # explosion image
 
-    def __init__(self):
+    def __init__(self, x=0, y=0):
+        if Missile.m_image == None:
+            self.m_image = load_image('./resource/skill/skill_missile')
+        if Missile.e_image == None:
+            self.e_image = load_image('./resource/skill/skill_explosion')
+        self.x, self.y = x * PIXEL_PER_METER, y * PIXEL_PER_METER
+        self.velocity = 0
+        self.frame = 0
+        self.damage_amount = main_state.player.damage_amount_of_skill
         self.event_que = []
         self.cur_state = FallingState
         self.cur_state.enter(self, None)

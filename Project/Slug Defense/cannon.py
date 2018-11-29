@@ -63,7 +63,7 @@ class IdleState:
 class Cannon:
     image = None
 
-    def __init__(self, x=400, y=300, velocity=3):
+    def __init__(self, x=0, y=0, velocity=3):
         self.x, self.y, self.velocity = x, y, velocity
         self.frame = 0
         self.damage_amount = main_state.player.damage_amount_of_cannon
