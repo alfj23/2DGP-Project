@@ -77,7 +77,6 @@ def build_stage1():
     game_world.add_objects(soldiers, 1)
     for soldier in soldiers:
         soldier.set_background(map)
-    print(len(game_world.objects[1]) + len(game_world.objects[0]) + len(game_world.objects[2]))
 
 
 def build_stage2():

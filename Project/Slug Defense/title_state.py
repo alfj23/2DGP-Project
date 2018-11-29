@@ -11,8 +11,6 @@ image = None
 def enter():
     global image
     image = load_image('./resource/title/title.png')
-    print("entered title_state", game_world.objects)
-    print(len(game_world.objects[1]))
 
 
 def exit():

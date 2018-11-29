@@ -31,7 +31,6 @@ chk_back_to_title = False
 
 def enter():
     global store
-    print(len(game_world.objects[1]) + len(game_world.objects[0]) + len(game_world.objects[2]))
     store = Store()
 
     global gold
@@ -53,9 +52,6 @@ def enter():
     barricade = world_build_state.get_barricade()
     left_wave_amount = len(world_build_state.droptanks) + len(world_build_state.soldiers)
 
-    print("entered main_state : ", game_world.objects)
-    print(len(game_world.objects[1]) + len(game_world.objects[0]) + len(game_world.objects[2]))
-
 
 def exit():
     world_build_state.droptanks.clear()
@@ -70,15 +66,8 @@ def pause():
 def resume():
     global chk_back_to_title
     if chk_back_to_title:
-        #game_world.clear()
         chk_back_to_title = False
-        for droptank in world_build_state.droptanks:
-            game_world.remove_object(droptank)
-        for soldier in world_build_state.soldiers:
-            game_world.remove_object(soldier)
         game_framework.change_state(title_state)
-        print(game_world.objects)
-    pass
 
 
 def handle_events():
@@ -99,8 +88,7 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            #game_framework.push_state(pause_state)
-            game_framework.change_state(title_state)
+            game_framework.push_state(pause_state)
         elif event.type == SDL_KEYDOWN and event.key == SDLK_q:
             game_world.clear()
         else:
