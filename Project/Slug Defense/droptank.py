@@ -159,7 +159,6 @@ class Droptank:
             self.image.clip_draw(int(self.frame) * 100, 0, 100, 80, cx, self.y)
         self.font.draw(self.x - self.bg.window_left - 60, self.y + 50,
                        '(HP : %i)' % self.hp_amount, (255, 0, 0))
-        draw_rectangle(*self.get_bb())
 
     def get_bb(self):
         return self.x - self.bg.window_left - 33, self.y - 25, self.x - self.bg.window_left + 32, self.y + 20

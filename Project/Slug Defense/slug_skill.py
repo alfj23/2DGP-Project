@@ -112,7 +112,7 @@ class Missile:
             self.cur_state.enter(self, event)
 
     def get_bb(self):
-        return self.x - 50 - self.bg.window_left, self.y - 70, self.x + 50 - self.bg.window_left, self.y + 30
+        return self.x - 50 - self.bg.window_left, self.y - 60, self.x + 50 - self.bg.window_left, self.y + 30
 
     def draw(self):
         self.cur_state.draw(self)

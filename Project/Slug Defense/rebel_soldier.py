@@ -155,7 +155,6 @@ class Soldier:
             self.image.clip_draw(int(self.frame) * 52, 150, 48, 80, cx, self.y + 16)
 
         self.font.draw(self.x - self.bg.window_left - 60, self.y + 50, '(HP : %i)' % self.hp_amount, (255, 0, 0))
-        draw_rectangle(*self.get_bb())
 
     def get_bb(self):
         return self.x - self.bg.window_left - 15, self.y - 18, self.x - self.bg.window_left + 12, self.y + 22

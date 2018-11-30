@@ -15,7 +15,7 @@ class Bottom_UI:
 
     def draw(self):
         self.image.draw(800//2, 100)
-        self.icon.clip_draw(0 * 58, 0, 58, 60, 240, 100)  # skill icon
+        self.icon.clip_draw(0 * 58, 0, 58, 60, 300, 90)  # skill icon
         self.icon.clip_draw(1 * 58, 0, 58, 60, 735, self.y - 50)  # skill upgrade icon
         self.icon.clip_draw(4 * 59, 0, 58, 60, 455, self.y - 50)  # slug_cannon_damage_upgrade_icon
         self.icon.clip_draw(5 * 59, 0, 58, 60, 455, self.y - 125)  # slug_max_hp_upgrade_icon
@@ -30,7 +30,11 @@ class Bottom_UI:
         self.contents_font.draw(570, self.y - 87, '3:%i'%main_state.store.cost_BRCD_RP, (255, 0, 0))
         self.contents_font.draw(570, self.y - 160, '4:%i'%main_state.store.cost_BRCD_HP, (255, 0, 0))
         self.contents_font.draw(710, self.y - 87, '5:%i'%main_state.store.cost_slug_SK, (255, 0, 0))
-        self.contents_font.draw(215, self.y - 120, 'z:%i'%main_state.store.cost_carpet_bombing, (255, 0, 0))
+        self.contents_font.draw(275, self.y - 130, 'z:%i'%main_state.store.cost_carpet_bombing, (255, 0, 0))
+
+        self.contents_font.draw(30, self.y - 50, 'HP:%i'%main_state.player.hp_amount, (255, 0, 0))
+        self.contents_font.draw(30, self.y - 100, 'DMG:%i' %main_state.player.damage_amount_of_cannon, (0, 0, 0))
+        self.contents_font.draw(30, self.y - 150, 'SKILL-DMG:%i'%main_state.player.damage_amount_of_skill,  (0 ,0, 0))
 
         pass
 
