@@ -36,16 +36,14 @@ class FiredState:
     @staticmethod
     def do(bomb):  # 사거리 400
         bomb.x += bomb.velocity * game_framework.frame_time
-        bomb.frame = (bomb.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 20
-
+        bomb.y += bomb.velocity * game_framework.frame_time
+        bomb.frame = 0
 
 
     @staticmethod
     def draw(bomb):
         cx = bomb.x - bomb.bg.window_left
         bomb.image.clip_draw(int(bomb.frame) * 14, 40, 14, 14, cx - 40, bomb.y)
-        if bomb.x < 0 + 14:
-            game_world.remove_object(bomb)  # cannon 이 범위 벗어날 시 반환됨
 
 
 class LandedState:
@@ -59,6 +57,7 @@ class LandedState:
 
     @staticmethod
     def do(bomb):
+        bomb.frame = (bomb.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 18
         pass
 
     @staticmethod
@@ -116,6 +115,7 @@ class Bomb:
         self.event_que = []
         self.cur_state = FiredState
         self.cur_state.enter(self, None)
+        self.ctr_point1, self.ctr_point2 = (self.x - 100, self.y - 50), (self.x - 200, self.y - 100)
 
     def update(self):
         self.cur_state.do(self)
