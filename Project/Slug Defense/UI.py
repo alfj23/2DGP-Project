@@ -22,6 +22,7 @@ class Bottom_UI:
         self.contents_font.draw(455, self.y - 90, '3 : Repair Barricade', (0, 0, 0))
         self.contents_font.draw(455, self.y - 120, '4 : Upgrade BRCDE HP', (0, 0, 0))
         self.contents_font.draw(455, self.y - 150, '5 : Upgrade Skill DMG', (0, 0, 0))
+        self.contents_font.draw(215, self.y - 100, 'z : capet bombing', (0, 0, 0))
         pass
 
 class Top_UI:
