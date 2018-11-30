@@ -49,7 +49,17 @@ class FiredState:
         print(i)
         if main_state.collide(bomb, main_state.map):
             bomb.add_event(LANDING)
+        if main_state.collide(bomb, main_state.barricade):
+            main_state.barricade.hp_amount -= bomb.damage_amount
+            bomb.add_event(EXPLOSION)
 
+        if main_state.collide(bomb, main_state.player):
+            main_state.player.hp_amount -= bomb.damage_amount
+            bomb.add_event(EXPLOSION)
+
+        if main_state.collide(bomb, main_state.prisoner):
+            main_state.prisoner.hp_amount -= bomb.damage_amount
+            bomb.add_event(EXPLOSION)
 
     @staticmethod
     def draw(bomb):
@@ -72,18 +82,16 @@ class LandedState:
         bomb.frame = (bomb.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 20
         bomb.x += bomb.velocity * game_framework.frame_time
         if main_state.collide(bomb, main_state.barricade):
-            game_world.remove_object(bomb)
             main_state.barricade.hp_amount -= bomb.damage_amount
+            bomb.add_event(EXPLOSION)
 
         if main_state.collide(bomb, main_state.player):
-            #game_world.remove_object(bomb)
             main_state.player.hp_amount -= bomb.damage_amount
             bomb.add_event(EXPLOSION)
 
         if main_state.collide(bomb, main_state.prisoner):
-            game_world.remove_object(bomb)
             main_state.prisoner.hp_amount -= bomb.damage_amount
-        pass
+            bomb.add_event(EXPLOSION)
 
     @staticmethod
     def draw(bomb):
@@ -108,12 +116,14 @@ class ExplodedState:
     @staticmethod
     def do(bomb):
         bomb.frame = (bomb.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 18
+        if int(bomb.frame) % 18 == 17:
+            game_world.remove_object(bomb)
         pass
 
     @staticmethod
     def draw(bomb):
         cx = bomb.x - bomb.bg.window_left
-        bomb.image.clip_draw(int(bomb.frame) * 40, 0, 40, 40, cx - 40, bomb.y + 14)
+        bomb.image.clip_draw(int(bomb.frame) * 40, 0, 40, 40, cx - 50, bomb.y + 14)
         pass
 
 
