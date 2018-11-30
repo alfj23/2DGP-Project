@@ -69,14 +69,14 @@ class LandedState:
 
     @staticmethod
     def do(bomb):
-        bomb.frame = (bomb.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 18
+        bomb.frame = (bomb.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 20
         bomb.x += bomb.velocity * game_framework.frame_time
         if main_state.collide(bomb, main_state.barricade):
             game_world.remove_object(bomb)
             main_state.barricade.hp_amount -= bomb.damage_amount
 
         if main_state.collide(bomb, main_state.player):
-            game_world.remove_object(bomb)
+            #game_world.remove_object(bomb)
             main_state.player.hp_amount -= bomb.damage_amount
             bomb.add_event(EXPLOSION)
 
@@ -98,6 +98,7 @@ class ExplodedState:
     @staticmethod
     def enter(bomb, event):
         bomb.frame = 0
+        bomb.velocity = 0
         pass
 
     @staticmethod
@@ -111,6 +112,8 @@ class ExplodedState:
 
     @staticmethod
     def draw(bomb):
+        cx = bomb.x - bomb.bg.window_left
+        bomb.image.clip_draw(int(bomb.frame) * 40, 0, 40, 40, cx - 40, bomb.y + 14)
         pass
 
 
