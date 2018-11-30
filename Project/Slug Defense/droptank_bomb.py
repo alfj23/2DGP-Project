@@ -1,4 +1,5 @@
 from pico2d import *
+import random
 import game_world
 import main_state
 import game_framework
@@ -26,7 +27,10 @@ class FiredState:
 
     @staticmethod
     def enter(bomb, event):
-        bomb.velocity -= RUN_SPEED_PPS
+        bomb.velocity = -RUN_SPEED_PPS
+        bomb.frame = random.randint(0, 19)
+        global i
+        i = 0
         pass
 
     @staticmethod
@@ -35,20 +39,28 @@ class FiredState:
 
     @staticmethod
     def do(bomb):  # 사거리 400
-        bomb.x += bomb.velocity * game_framework.frame_time
-        bomb.y += bomb.velocity * game_framework.frame_time
-        bomb.frame = 0
+        global i
+        t = i / 300
+        bomb.x = ((2*t**2 - 3*t+1)*bomb.ctr_point0[0]\
+               + (-4*t**2 + 4*t)*bomb.ctr_point1[0] + (2*t**22 - t)*bomb.ctr_point2[0])
+        bomb.y = ((2 * t ** 2 - 3 * t + 1)*bomb.ctr_point0[1]\
+                 + (-4 * t ** 2 + 4 * t)*bomb.ctr_point1[1] + (2 * t ** 22 - t)*bomb.ctr_point2[1])
+        i += 1 + bomb.velocity * game_framework.frame_time
+        print(i)
+        if main_state.collide(bomb, main_state.map):
+            bomb.add_event(LANDING)
 
 
     @staticmethod
     def draw(bomb):
         cx = bomb.x - bomb.bg.window_left
-        bomb.image.clip_draw(int(bomb.frame) * 14, 40, 14, 14, cx - 40, bomb.y)
+        bomb.image.clip_draw(bomb.frame * 14, 40, 14, 14, cx - 40, bomb.y)
 
 
 class LandedState:
     @staticmethod
     def enter(bomb, event):
+        bomb.velocity = -RUN_SPEED_PPS
         pass
 
     @staticmethod
@@ -58,6 +70,19 @@ class LandedState:
     @staticmethod
     def do(bomb):
         bomb.frame = (bomb.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 18
+        bomb.x += bomb.velocity * game_framework.frame_time
+        if main_state.collide(bomb, main_state.barricade):
+            game_world.remove_object(bomb)
+            main_state.barricade.hp_amount -= bomb.damage_amount
+
+        if main_state.collide(bomb, main_state.player):
+            game_world.remove_object(bomb)
+            main_state.player.hp_amount -= bomb.damage_amount
+            bomb.add_event(EXPLOSION)
+
+        if main_state.collide(bomb, main_state.prisoner):
+            game_world.remove_object(bomb)
+            main_state.prisoner.hp_amount -= bomb.damage_amount
         pass
 
     @staticmethod
@@ -72,6 +97,7 @@ class LandedState:
 class ExplodedState:
     @staticmethod
     def enter(bomb, event):
+        bomb.frame = 0
         pass
 
     @staticmethod
@@ -80,17 +106,7 @@ class ExplodedState:
 
     @staticmethod
     def do(bomb):
-        if main_state.collide(bomb, main_state.barricade):
-            game_world.remove_object(bomb)
-            main_state.barricade.hp_amount -= bomb.damage_amount
-
-        if main_state.collide(bomb, main_state.player):
-            game_world.remove_object(bomb)
-            main_state.player.hp_amount -= bomb.damage_amount
-
-        if main_state.collide(bomb, main_state.prisoner):
-            game_world.remove_object(bomb)
-            main_state.prisoner.hp_amount -= bomb.damage_amount
+        bomb.frame = (bomb.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 18
         pass
 
     @staticmethod
@@ -107,15 +123,19 @@ next_state_table = {
 class Bomb:
     image = None
 
-    def __init__(self, x=400, y=300, damage_amount=50,velocity=1):
-        self.x, self.y,self.damage_amount, self.velocity = x, y,damage_amount, velocity
+    def __init__(self, x=400, y=300, damage_amount=50, velocity=1):
+        self.x, self.y, self.damage_amount, self.velocity = x, y, damage_amount, velocity
         self.frame = 0
         if Bomb.image == None:
             self.image = load_image('./resource/droptank/droptank_bomb.png')
         self.event_que = []
         self.cur_state = FiredState
         self.cur_state.enter(self, None)
-        self.ctr_point1, self.ctr_point2 = (self.x - 100, self.y - 50), (self.x - 200, self.y - 100)
+        self.ctr_point0 = (self.x, self.y)
+        self.ctr_point1, self.ctr_point2 = (self.x - 200, self.y - 5), (self.x - 250, self.y - 10)
+
+    def add_event(self, event):
+        self.event_que.insert(0, event)
 
     def update(self):
         self.cur_state.do(self)

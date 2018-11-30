@@ -24,9 +24,11 @@ FRAMES_PER_ACTION = 8
 
 
 class Droptank:
+    image = None
     def __init__(self, x=0, hp_amount=0,damage_amount=0):
         self.x, self.y = x * PIXEL_PER_METER, 40 + 200
-        self.image = load_image('./resource/droptank/droptank.png')
+        if Droptank.image == None:
+            Droptank.image = load_image('./resource/droptank/droptank.png')
         self.velocity = 0
         self.frame = 0
         self.hp_amount = hp_amount
@@ -103,7 +105,7 @@ class Droptank:
             bomb = Bomb(self.x, self.y, self.damage_amount)
             bomb.set_background(main_state.map)
             game_world.add_object(bomb, 1)
-            self.timer = 800
+            self.timer = 200
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.RUNNING
