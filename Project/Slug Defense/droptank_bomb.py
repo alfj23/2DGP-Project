@@ -73,6 +73,10 @@ class LandedState:
 
     @staticmethod
     def draw(bomb):
+        cx = bomb.x - bomb.bg.window_left
+        bomb.image.clip_draw(int(bomb.frame) * 14, 40, 14, 14, cx - 40, bomb.y)
+        if bomb.x < 0 + 14:
+            game_world.remove_object(bomb)  # cannon 이 범위 벗어날 시 반환됨
         pass
 
 
@@ -94,9 +98,9 @@ class ExplodedState:
         pass
 
 
-next_state_table ={
-    FiredState: {},
-    LandedState: {},
+next_state_table = {
+    FiredState: {LANDING: LandedState, EXPLOSION: ExplodedState},
+    LandedState: {EXPLOSION: ExplodedState},
     ExplodedState: {}
 }
 
