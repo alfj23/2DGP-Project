@@ -20,7 +20,7 @@ class Store:
         self.cost_BRCD_RP = 300  # BRCD == Barricade
         self.cost_BRCD_HP = 100
         self.cost_slug_SK = 500  # upgrade capet_bombing damage_amount
-        self.cost_capet_bombing = 1000
+        self.cost_carpet_bombing = 1000
 
     def handle_event(self, event):
         if(event.type, event.key) in key_event_table:
@@ -61,11 +61,11 @@ class Store:
                     main_state.gold -= self.cost_slug_SK
                     main_state.player.damage_amount_of_skill *= 1.5
                     self.cost_slug_SK *= 2
-                    self.cost_capet_bombing *= 1.5
+                    self.cost_carpet_bombing *= 1.5
                     print(main_state.player.damage_amount_of_skill)
                 pass
 
     def casting_skill(self):
-        main_state.gold -= self.cost_capet_bombing
+        main_state.gold -= self.cost_carpet_bombing
 
 

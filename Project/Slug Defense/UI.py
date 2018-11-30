@@ -26,11 +26,12 @@ class Bottom_UI:
         self.category_font.draw(265, self.y, 'Skill', (0, 0, 0))
         self.category_font.draw(575, self.y, 'Store', (0, 0, 0))
         self.contents_font.draw(430, self.y - 87, '1:%i'%main_state.store.cost_slug_ATK, (255, 0, 0))
-        self.contents_font.draw(455, self.y - 60, '2 : Upgrade HP', (0, 0, 0))
-        self.contents_font.draw(455, self.y - 90, '3 : Repair Barricade', (0, 0, 0))
-        self.contents_font.draw(455, self.y - 120, '4 : Upgrade BRCDE HP', (0, 0, 0))
-        self.contents_font.draw(455, self.y - 150, '5 : Upgrade Skill DMG', (0, 0, 0))
-        #self.contents_font.draw(215, self.y - 100, 'z : carpet bombing', (0, 0, 0))
+        self.contents_font.draw(430, self.y - 160, '2:%i'%main_state.store.cost_slug_HP, (255, 0, 0))
+        self.contents_font.draw(570, self.y - 87, '3:%i'%main_state.store.cost_BRCD_RP, (255, 0, 0))
+        self.contents_font.draw(570, self.y - 160, '4:%i'%main_state.store.cost_BRCD_HP, (255, 0, 0))
+        self.contents_font.draw(710, self.y - 87, '5:%i'%main_state.store.cost_slug_SK, (255, 0, 0))
+        self.contents_font.draw(215, self.y - 120, 'z:%i'%main_state.store.cost_carpet_bombing, (255, 0, 0))
+
         pass
 
 class Top_UI:
@@ -44,4 +45,4 @@ class Top_UI:
     def draw(self):
         self.image.draw(800//2, 550)
         self.font.draw(30, 540, 'GOLD : %i' % main_state.gold, (255, 255, 0))
-        self.font.draw(300, 540, 'WAVE : %i' % main_state.left_wave_amount, (255, 255, 255))
+        self.font.draw(350, 540, 'WAVE : %i' % main_state.left_wave_amount, (255, 255, 255))

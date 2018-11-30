@@ -188,7 +188,7 @@ class Player:
         game_world.add_object(cannon, 1)
 
     def fire_missile(self):
-        if main_state.gold - main_state.store.cost_capet_bombing >= 0:
+        if main_state.gold - main_state.store.cost_carpet_bombing >= 0:
             main_state.store.casting_skill()
             missiles = [Missile(5, 10), Missile(7, 11), Missile(9, 12), Missile(11, 13), Missile(13, 14), Missile(15, 15),
                         Missile(17, 16), Missile(19, 17), Missile(21, 18), Missile(23, 19), Missile(25, 20), Missile(27, 21),
