@@ -17,7 +17,12 @@ TIME_PER_ACTION = 0.5  # 액션 당 시간
 ACTION_PER_TIME = 1 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 20
 
-class IdleState:
+# bomb Events
+
+LANDING, EXPLOSION = range(2)
+
+
+class FiredState:
 
     @staticmethod
     def enter(bomb, event):
@@ -53,6 +58,48 @@ class IdleState:
             game_world.remove_object(bomb)  # cannon 이 범위 벗어날 시 반환됨
 
 
+class LandedState:
+    @staticmethod
+    def enter(bomb, event):
+        pass
+
+    @staticmethod
+    def exit(bomb, event):
+        pass
+
+    @staticmethod
+    def do(bomb):
+        pass
+
+    @staticmethod
+    def draw(bomb):
+        pass
+
+
+class ExplodedState:
+    @staticmethod
+    def enter(bomb, event):
+        pass
+
+    @staticmethod
+    def exit(bomb, event):
+        pass
+
+    @staticmethod
+    def do(bomb):
+        pass
+
+    @staticmethod
+    def draw(bomb):
+        pass
+
+
+next_state_table ={
+    FiredState: {},
+    LandedState: {},
+    ExplodedState: {}
+}
+
 class Bomb:
     image = None
 
@@ -62,11 +109,16 @@ class Bomb:
         if Bomb.image == None:
             self.image = load_image('./resource/droptank/droptank_bomb.png')
         self.event_que = []
-        self.cur_state = IdleState
+        self.cur_state = FiredState
         self.cur_state.enter(self, None)
 
     def update(self):
         self.cur_state.do(self)
+        if len(self.event_que) > 0:
+            event = self.event_que.pop()
+            self.cur_state.exit(self, event)
+            self.cur_state = next_state_table[self.cur_state][event]
+            self.cur_state.enter(self, event)
 
     def set_background(self, bg):
         self.bg = bg
