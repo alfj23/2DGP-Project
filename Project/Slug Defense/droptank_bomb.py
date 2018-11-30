@@ -38,17 +38,7 @@ class FiredState:
         bomb.x += bomb.velocity * game_framework.frame_time
         bomb.frame = (bomb.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 20
 
-        if main_state.collide(bomb, main_state.barricade):
-            game_world.remove_object(bomb)
-            main_state.barricade.hp_amount -= bomb.damage_amount
 
-        if main_state.collide(bomb, main_state.player):
-            game_world.remove_object(bomb)
-            main_state.player.hp_amount -= bomb.damage_amount
-
-        if main_state.collide(bomb, main_state.prisoner):
-            game_world.remove_object(bomb)
-            main_state.prisoner.hp_amount -= bomb.damage_amount
 
     @staticmethod
     def draw(bomb):
@@ -91,6 +81,17 @@ class ExplodedState:
 
     @staticmethod
     def do(bomb):
+        if main_state.collide(bomb, main_state.barricade):
+            game_world.remove_object(bomb)
+            main_state.barricade.hp_amount -= bomb.damage_amount
+
+        if main_state.collide(bomb, main_state.player):
+            game_world.remove_object(bomb)
+            main_state.player.hp_amount -= bomb.damage_amount
+
+        if main_state.collide(bomb, main_state.prisoner):
+            game_world.remove_object(bomb)
+            main_state.prisoner.hp_amount -= bomb.damage_amount
         pass
 
     @staticmethod
