@@ -11,12 +11,12 @@
   {"x": 80, "hp_amount": 300, "damage_amount": 50},
   {"x": 82, "hp_amount": 300, "damage_amount": 50},
   {"x": 83, "hp_amount": 300, "damage_amount": 50},
-  {"x": 100, "hp_amount": 300, "damage_amount": 50},
-  {"x": 105, "hp_amount": 300, "damage_amount": 50},
-  {"x": 132, "hp_amount": 300, "damage_amount": 50},
-  {"x": 134, "hp_amount": 300, "damage_amount": 50},
-  {"x": 135, "hp_amount": 300, "damage_amount": 50},
-  {"x": 137, "hp_amount": 300, "damage_amount": 50},
-  {"x": 140, "hp_amount": 300, "damage_amount": 50},
-  {"x": 141, "hp_amount": 300, "damage_amount": 50}
+  {"x": 100, "hp_amount": 500, "damage_amount": 80},
+  {"x": 105, "hp_amount": 500, "damage_amount": 80},
+  {"x": 132, "hp_amount": 500, "damage_amount": 80},
+  {"x": 134, "hp_amount": 500, "damage_amount": 80},
+  {"x": 135, "hp_amount": 500, "damage_amount": 80},
+  {"x": 137, "hp_amount": 500, "damage_amount": 80},
+  {"x": 140, "hp_amount": 500, "damage_amount": 80},
+  {"x": 141, "hp_amount": 500, "damage_amount": 80}
 ]
