@@ -36,6 +36,7 @@ def draw():
 
 
 def handle_events():
+    global bgm
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -52,6 +53,7 @@ def handle_events():
                     world_build_state.build_stage4()
                 elif main_state.cleared_stage_count == 5:
                     world_build_state.build_stage5()
+                bgm.stop()
                 game_framework.change_state(main_state)
 
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):  # 타이틀로 이동.

@@ -173,6 +173,8 @@ class Player:
         self.y = 40 + 200
         self.image = load_image('./resource/slug/slug.png')
         self.font = load_font('./resource/font/ENCR10B.TTF', 16)
+        self.cannon_sound = load_wav('./resource/sounds/semishoot.wav')
+        self.cannon_sound.set_volume(20)
         self.dir, self.velocity, self.frame = 1, 0, 0
         self.event_que = []
         self.cur_state = IdleState
@@ -186,6 +188,7 @@ class Player:
         self.hp_rate = self.hp_amount / self.max_hp
 
     def fire_cannon(self):
+        self.cannon_sound.play(1)
         cannon = Cannon(self.x - self.bg.window_left - 10, self.y)
         game_world.add_object(cannon, 1)
 

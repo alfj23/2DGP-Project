@@ -43,6 +43,7 @@ class IdleState:
 
                 if droptank.hp_amount > 0:
                     droptank.hp_amount -= cannon.damage_amount
+                    cannon.impact.play(1)
                     game_world.remove_object(cannon)
                     break
         for soldier in world_build_state.soldiers:
@@ -50,6 +51,7 @@ class IdleState:
 
                 if soldier.hp_amount > 0:
                     soldier.hp_amount -= cannon.damage_amount
+                    cannon.impact.play(1)
                     game_world.remove_object(cannon)
                     break
         pass
@@ -61,13 +63,16 @@ class IdleState:
 
 class Cannon:
     image = None
-
+    impact = None
     def __init__(self, x=0, y=0, velocity=3):
         self.x, self.y, self.velocity = x, y, velocity
         self.frame = 0
         self.damage_amount = main_state.player.damage_amount_of_cannon
         if Cannon.image == None:
-            self.image = load_image('./resource/slug/cannon_ball.png')
+            Cannon.image = load_image('./resource/slug/cannon_ball.png')
+        if Cannon.impact == None:
+            Cannon.impact = load_wav('./resource/sounds/impact.wav')
+            Cannon.impact.set_volume(32)
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)

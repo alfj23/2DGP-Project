@@ -30,7 +30,7 @@ def enter():
 
     background = load_image('./resource/result/mission_complete.png')
     font = load_font('./resource/font/ENCR10B.TTF', 18)
-    bgm = load_music('./resource/sounds/mission_complete.mp3')
+    bgm = load_music('./resource/sounds/mission_complete.wav')
     bgm.set_volume(64)
     bgm.play(1)
     draw()
@@ -237,6 +237,7 @@ def get_prisoner():
 
 
 def handle_events():
+    global bgm
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -252,7 +253,8 @@ def handle_events():
                 elif main_state.cleared_stage_count == 4:
                     build_stage5()
                 elif main_state.cleared_stage_count == 5:
-                    pass
+                    game_framework.change_state(title_state)
+                bgm.stop()
                 game_framework.change_state(main_state)
                 pass
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_r):  # 현 스테이지 다시 시작.
@@ -281,7 +283,7 @@ def draw():
     clear_canvas()
     background.draw(get_canvas_width() // 2, get_canvas_height() // 2)
     if main_state.cleared_stage_count == 5:
-        font.draw(135, 385, 'ALL STAGE CLEAR!', (255, 255, 255))
+        font.draw(105, 385, 'ALL STAGE CLEAR!', (255, 255, 255))
         font.draw(115, 295, 'R REPLAY STAGE', (255, 255, 255))
         font.draw(115, 255, 'ESC BACK TO TITLE', (255, 255, 255))
     else:
