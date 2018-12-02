@@ -28,6 +28,7 @@ store = None
 barricade = None
 chk_stage_cleared = None
 chk_back_to_title = False
+cleared_stage_count = 0
 
 def enter():
     global store
@@ -73,13 +74,14 @@ def resume():
 def handle_events():
     global left_wave_amount
     global prisoner
-    global chk_stage_cleared
+    global chk_stage_cleared, cleared_stage_count
     chk_stage_cleared = False
     events = get_events()
     for event in events:
-        #if left_wave_amount == 0:
-            #chk_stage_cleared = True
-            #game_framework.change_state(world_build_state)
+        if left_wave_amount == 0:
+            chk_stage_cleared = True
+            cleared_stage_count += 1
+            game_framework.change_state(world_build_state)
         if prisoner.hp_amount < 0:
             print("state fail!")
             #game_framework.change_state(gameover_state)

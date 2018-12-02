@@ -28,8 +28,11 @@ font = None
 
 def enter():
     global menu, font
+    global stage1_cleared, stage2_cleared, stage3_cleared, stage4_cleared, stage5_cleared
+
     menu = load_image('./resource/UI/pause_menu.png')
     font = load_font('./resource/font/ENCR10B.TTF', 18)
+    draw()
     hide_cursor()
     hide_lattice()
     pass
@@ -64,7 +67,6 @@ def build_stage1():
 
     for data in droptank_list:
         droptanks.append(Droptank(data['x'], data['hp_amount'], data['damage_amount']))
-        break
     game_world.add_objects(droptanks, 1)
     for droptank in droptanks:
         droptank.set_background(map)
@@ -74,7 +76,7 @@ def build_stage1():
 
     for data in soldier_list:
         soldiers.append(Soldier(data['x'], data['hp_amount'], data['damage_amount']))
-    #game_world.add_objects(soldiers, 1)
+    game_world.add_objects(soldiers, 1)
     for soldier in soldiers:
         soldier.set_background(map)
 
@@ -242,7 +244,16 @@ def handle_events():
             game_framework.quit()
         else:
             if (event.type, event.key) == (SDL_KEYDOWN, SDLK_n):  # 다음 스테이지로 이동해야함.
-                build_stage2()
+                if(main_state.cleared_stage_count == 1):
+                    build_stage2()
+                elif (main_state.cleared_stage_count == 2):
+                    build_stage3()
+                elif (main_state.cleared_stage_count == 3):
+                    build_stage4()
+                elif main_state.cleared_stage_count == 4:
+                    build_stage5()
+                elif main_state.cleared_stage_count == 5:
+                    pass
                 game_framework.change_state(main_state)
                 pass
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_r):  # 현 스테이지 다시 시작.
@@ -259,7 +270,6 @@ def update():
 
 def draw():
     clear_canvas()
-    main_state.draw()
     menu.draw(get_canvas_width() // 2, get_canvas_height() // 2)
     font.draw(335, 385, 'STAGE CLEAR!', (255, 255, 255))
     font.draw(315, 335, 'N NEXT STAGE', (255, 255, 255))

@@ -45,7 +45,7 @@ class FiredState:
                + (-4*t**2 + 4*t)*bomb.ctr_point1[0] + (2*t**22 - t)*bomb.ctr_point2[0])
         bomb.y = ((2 * t ** 2 - 3 * t + 1)*bomb.ctr_point0[1]\
                  + (-4 * t ** 2 + 4 * t)*bomb.ctr_point1[1] + (2 * t ** 22 - t)*bomb.ctr_point2[1])
-        i += 1 + bomb.velocity * game_framework.frame_time
+        i += 1 #+ bomb.velocity * game_framework.frame_time
         print(i)
         if main_state.collide(bomb, main_state.map):
             bomb.add_event(LANDING)
@@ -166,4 +166,4 @@ class Bomb:
 
     def draw(self):
         self.cur_state.draw(self)
-        draw_rectangle(*self.get_bb())
+        #draw_rectangle(*self.get_bb())
