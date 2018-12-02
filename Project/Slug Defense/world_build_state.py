@@ -26,10 +26,13 @@ menu = None
 font = None
 
 def enter():
-    global font, background
+    global font, background, bgm
 
     background = load_image('./resource/result/mission_complete.png')
     font = load_font('./resource/font/ENCR10B.TTF', 18)
+    bgm = load_music('./resource/sounds/mission_complete.mp3')
+    bgm.set_volume(64)
+    bgm.play(1)
     draw()
     hide_cursor()
     hide_lattice()
@@ -275,7 +278,6 @@ def update():
 
 
 def draw():
-    print(main_state.cleared_stage_count)
     clear_canvas()
     background.draw(get_canvas_width() // 2, get_canvas_height() // 2)
     if main_state.cleared_stage_count == 5:

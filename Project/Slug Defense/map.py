@@ -10,6 +10,7 @@ class Map:
         self.w = self.image.w
         self.h = 220 * 1.367
 
+
     def set_center_object(self, player):
         self.center_object = player
 

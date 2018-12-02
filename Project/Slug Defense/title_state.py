@@ -11,7 +11,9 @@ image = None
 def enter():
     global image, bgm
     image = load_image('./resource/title/title.png')
-
+    bgm = load_music('./resource/sounds/title.mp3')
+    bgm.set_volume(64)
+    bgm.repeat_play()
 def exit():
     global image
     del(image)

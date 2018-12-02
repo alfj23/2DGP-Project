@@ -48,6 +48,10 @@ def enter():
     barricade = world_build_state.get_barricade()
     left_wave_amount = len(world_build_state.droptanks) + len(world_build_state.soldiers)
 
+    global bgm
+    bgm = load_music('./resource/sounds/maingame.mp3')
+    bgm.set_volume(64)
+    bgm.repeat_play()
 
 def exit():
     world_build_state.droptanks.clear()
@@ -69,7 +73,7 @@ def resume():
 def handle_events():
     global left_wave_amount
     global prisoner_dying
-    global chk_stage_cleared, cleared_stage_count
+    global chk_stage_cleared, cleared_stage_count, bgm
     chk_stage_cleared = False
     prisoner_dying = False
     events = get_events()
@@ -77,6 +81,7 @@ def handle_events():
         if left_wave_amount == 0:
             chk_stage_cleared = True
             cleared_stage_count += 1
+            bgm.stop()
             game_framework.change_state(world_build_state)
         if prisoner_dying:
             game_framework.change_state(gameover_state)
