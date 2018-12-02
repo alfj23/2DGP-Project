@@ -27,8 +27,9 @@ menu = None
 font = None
 
 def enter():
-    global menu, font
+    global menu, font, background
 
+    background = load_image('./resource/result/mission_complete.png')
     menu = load_image('./resource/UI/pause_menu.png')
     font = load_font('./resource/font/ENCR10B.TTF', 18)
     draw()
@@ -37,8 +38,8 @@ def enter():
 
 
 def exit():
-    global menu, font
-    del menu, font
+    global menu, font, background
+    del menu, font, background
     pass
 
 
@@ -278,9 +279,10 @@ def update():
 
 def draw():
     clear_canvas()
-    menu.draw(get_canvas_width() // 2, get_canvas_height() // 2)
-    font.draw(335, 385, 'STAGE CLEAR!', (255, 255, 255))
-    font.draw(315, 335, 'N NEXT STAGE', (255, 255, 255))
-    font.draw(315, 295, 'R REPLAY STAGE', (255, 255, 255))
-    font.draw(310, 255, 'ESC BACK TO TITLE', (255, 255, 255))
+    background.draw(get_canvas_width() // 2, get_canvas_height() // 2)
+    menu.draw(get_canvas_width() // 4, get_canvas_height() // 2)
+    font.draw(135, 385, 'STAGE CLEAR!', (255, 255, 255))
+    font.draw(115, 335, 'N NEXT STAGE', (255, 255, 255))
+    font.draw(115, 295, 'R REPLAY STAGE', (255, 255, 255))
+    font.draw(110, 255, 'ESC BACK TO TITLE', (255, 255, 255))
     update_canvas()
