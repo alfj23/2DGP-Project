@@ -60,7 +60,7 @@ def build_stage1():
     game_world.add_object(prisoner, 1)
     prisoner.set_background(map)
 
-    with open('stage1_droptank.json', 'r') as f:
+    with open('./stages/stage1_droptank.json', 'r') as f:
         droptank_list = json.load(f)  # droptank_list에 역직렬화 해서 넣음.
 
     for data in droptank_list:
@@ -69,7 +69,7 @@ def build_stage1():
     for droptank in droptanks:
         droptank.set_background(map)
 
-    with open('stage1_soldier.json', 'r') as f:
+    with open('./stages/stage1_soldier.json', 'r') as f:
         soldier_list = json.load(f)
 
     for data in soldier_list:
@@ -94,7 +94,7 @@ def build_stage2():
     game_world.add_object(prisoner, 1)
     prisoner.set_background(map)
 
-    with open('stage2_droptank.json', 'r') as f:
+    with open('./stages/stage2_droptank.json', 'r') as f:
         droptank_list = json.load(f)  # droptank_list에 역직렬화 해서 넣음.
 
     for data in droptank_list:
@@ -103,7 +103,7 @@ def build_stage2():
     for droptank in droptanks:
         droptank.set_background(map)
 
-    with open('stage2_soldier.json', 'r') as f:
+    with open('./stages/stage2_soldier.json', 'r') as f:
         soldier_list = json.load(f)
 
     for data in soldier_list:
@@ -128,7 +128,7 @@ def build_stage3():
     game_world.add_object(prisoner, 1)
     prisoner.set_background(map)
 
-    with open('stage3_droptank.json', 'r') as f:
+    with open('./stages/stage3_droptank.json', 'r') as f:
         droptank_list = json.load(f)  # droptank_list에 역직렬화 해서 넣음.
 
     for data in droptank_list:
@@ -137,7 +137,7 @@ def build_stage3():
     for droptank in droptanks:
         droptank.set_background(map)
 
-    with open('stage3_soldier.json', 'r') as f:
+    with open('./stages/stage3_soldier.json', 'r') as f:
         soldier_list = json.load(f)
 
     for data in soldier_list:
@@ -162,7 +162,7 @@ def build_stage4():
     game_world.add_object(prisoner, 1)
     prisoner.set_background(map)
 
-    with open('stage4_droptank.json', 'r') as f:
+    with open('./stages/stage4_droptank.json', 'r') as f:
         droptank_list = json.load(f)  # droptank_list에 역직렬화 해서 넣음.
 
     for data in droptank_list:
@@ -171,7 +171,7 @@ def build_stage4():
     for droptank in droptanks:
         droptank.set_background(map)
 
-    with open('stage4_soldier.json', 'r') as f:
+    with open('./stages/stage4_soldier.json', 'r') as f:
         soldier_list = json.load(f)
 
     for data in soldier_list:
@@ -200,7 +200,7 @@ def build_stage5():
     game_world.add_object(prisoner, 1)
     prisoner.set_background(map)
 
-    with open('stage5_droptank.json', 'r') as f:
+    with open('./stages/stage5_droptank.json', 'r') as f:
         droptank_list = json.load(f)  # droptank_list에 역직렬화 해서 넣음.
 
     for data in droptank_list:
@@ -209,7 +209,7 @@ def build_stage5():
     for droptank in droptanks:
         droptank.set_background(map)
 
-    with open('stage5_soldier.json', 'r') as f:
+    with open('./stages/stage5_soldier.json', 'r') as f:
         soldier_list = json.load(f)
 
     for data in soldier_list:
@@ -267,7 +267,6 @@ def handle_events():
                     build_stage5()
                 game_framework.change_state(main_state)
 
-                pass
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):  # 타이틀로 이동.
                 main_state.cleared_stage_count = 0
                 game_framework.change_state(title_state)
