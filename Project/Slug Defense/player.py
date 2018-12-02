@@ -8,16 +8,16 @@ import main_state
 __name__ = "player"
 # Player Slug Drive Speed
 
-PIXEL_PER_METER = (10.0 / 0.4)
-RUN_SPEED_KMPH = 40.0
+PIXEL_PER_METER = (10.0 / 0.5)
+RUN_SPEED_KMPH = 50.0
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 # Player Slug Action Speed
 
-TIME_PER_ACTION = 0.5  # 액션 당 시간
-ACTION_PER_TIME = 1.0 / TIME_PER_ACTION # 액션 마다 달라서 따로 빼놓음?
+TIME_PER_ACTION = 0.5
+ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 20
 
 
@@ -194,13 +194,12 @@ class Player:
     def fire_missile(self):
         if main_state.gold - main_state.store.cost_carpet_bombing >= 0:
             main_state.store.casting_skill()
-            missiles = [Missile(5, 10), Missile(7, 11), Missile(9, 12), Missile(11, 13), Missile(13, 14), Missile(15, 15),
+            missiles = [Missile(1, 8), Missile(3, 9),Missile(5, 10), Missile(7, 11), Missile(9, 12), Missile(11, 13), Missile(13, 14), Missile(15, 15),
                         Missile(17, 16), Missile(19, 17), Missile(21, 18), Missile(23, 19), Missile(25, 20), Missile(27, 21),
                         Missile(29, 22), Missile(31, 23)]
             game_world.add_objects(missiles, 1)
             for missile in missiles:
                 missile.set_background(main_state.map)
-
 
     def add_event(self, event):
         self.event_que.insert(0, event)

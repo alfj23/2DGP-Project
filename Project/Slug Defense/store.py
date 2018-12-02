@@ -75,8 +75,6 @@ class Store:
                     main_state.player.damage_amount_of_skill *= 1.5
                     self.cost_slug_SK *= 2
                     self.cost_carpet_bombing *= 1.5
-                    print(main_state.player.damage_amount_of_skill)
-                pass
 
     def casting_skill(self):
         main_state.gold -= self.cost_carpet_bombing

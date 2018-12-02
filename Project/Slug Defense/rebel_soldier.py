@@ -68,13 +68,15 @@ class Soldier:
         self.bt = BehaviorTree(attack_move_node)
 
     def chk_range_player(self):
-        if main_state.barricade.hp_amount <= 0:
-            return BehaviorTree.FAIL
-        elif 0 < self.x - main_state.player.x < self.atk_range:
+        if 0 < self.x - main_state.player.x < self.atk_range:
             self.velocity = 0
+            if main_state.player.hp_amount <= 0:
+                return BehaviorTree.FAIL
+            elif main_state.barricade.hp_amount <= 0:
+                return BehaviorTree.FAIL
             return BehaviorTree.SUCCESS
         else:
-            return  BehaviorTree.FAIL
+            return BehaviorTree.FAIL
 
     def chk_range_barricade(self):
         if 0 < self.x - main_state.barricade.x < self.atk_range:

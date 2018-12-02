@@ -31,7 +31,6 @@ class FiredState:
         bomb.frame = random.randint(0, 19)
         global i
         i = 0
-        pass
 
     @staticmethod
     def exit(bomb, event):
@@ -74,7 +73,6 @@ class LandedState:
     @staticmethod
     def enter(bomb, event):
         bomb.velocity = -RUN_SPEED_PPS
-        pass
 
     @staticmethod
     def exit(bomb, event):
@@ -102,7 +100,6 @@ class LandedState:
         bomb.image.clip_draw(int(bomb.frame) * 14, 40, 14, 14, cx - 40, bomb.y)
         if bomb.x < 0 + 14:
             game_world.remove_object(bomb)  # cannon 이 범위 벗어날 시 반환됨
-        pass
 
 
 class ExplodedState:
@@ -111,7 +108,6 @@ class ExplodedState:
         bomb.frame = 0
         bomb.velocity = 0
         bomb.explose()
-        pass
 
     @staticmethod
     def exit(bomb, event):
@@ -122,13 +118,11 @@ class ExplodedState:
         bomb.frame = (bomb.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 18
         if int(bomb.frame) % 18 == 17:
             game_world.remove_object(bomb)
-        pass
 
     @staticmethod
     def draw(bomb):
         cx = bomb.x - bomb.bg.window_left
         bomb.image.clip_draw(int(bomb.frame) * 40, 0, 40, 40, cx - 50, bomb.y + 14)
-        pass
 
 
 next_state_table = {
@@ -136,6 +130,7 @@ next_state_table = {
     LandedState: {EXPLOSION: ExplodedState},
     ExplodedState: {}
 }
+
 
 class Bomb:
     image = None

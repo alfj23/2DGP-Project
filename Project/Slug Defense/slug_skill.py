@@ -34,7 +34,6 @@ class FallingState:
     def do(missile):
         missile.y += missile.velocity * game_framework.frame_time
         missile.frame = (missile.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) % 13
-
         if main_state.collide(main_state.map, missile):
             missile.add_event(EXPLORE)
 
@@ -49,7 +48,6 @@ class ExploringState:
     def enter(missile, event):
         missile.frame = 0
         missile.velocity = 0
-
         missile.explode()
 
     @staticmethod
@@ -70,8 +68,6 @@ class ExploringState:
             if main_state.collide(soldier, missile):
                 if soldier.hp_amount > 0:
                     soldier.hp_amount -= missile.damage_amount
-
-        pass
 
     @staticmethod
     def draw(missile):

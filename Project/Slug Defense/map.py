@@ -23,7 +23,5 @@ class Map:
         return self.window_left - 1600, self.window_bottom + 200, self.window_left + 1600, self.window_bottom + 215
 
     def draw(self):
-        #self.image.draw_to_origin(self.x - 2, self.y, 1600 * 1.367, 220 * 1.367)  # 맵 높이 300으로 늘리기 위해 배율을 1.367로 하였음.
         self.image.clip_draw_to_origin(self.window_left, self.window_bottom,
                                       self.canvas_width, self.canvas_height - 300, -2, 200)
-        #draw_rectangle(*self.get_bb())

@@ -32,7 +32,6 @@ def enter():
 
 def exit():
     game_world.remove_object(pause_menu)
-    pass
 
 
 def update():
