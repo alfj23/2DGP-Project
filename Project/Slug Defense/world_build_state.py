@@ -39,8 +39,8 @@ def enter():
 
 
 def exit():
-    global font, background
-    del font, background
+    global font, background, bgm
+    del font, background, bgm
 
 
 def build_stage1():

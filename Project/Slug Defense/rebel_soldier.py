@@ -29,7 +29,6 @@ class Soldier:
         self.frame = random.randint(0, 11)
         self.hp_amount = hp_amount
         self.atk_cool_time = 100
-        self.font = load_font('./resource/font/ENCR10B.TTF', 16)
         self.chk_stabbing = False
         self.chk_ready_to_atk = False
         self.chk_dying = False
@@ -157,8 +156,6 @@ class Soldier:
             self.image.clip_draw(int(self.frame) * 33, 0, 33, 44, cx, self.y)
         if self.hp_amount <= 0:
             self.image.clip_draw(int(self.frame) * 52, 150, 48, 80, cx, self.y + 16)
-
-        self.font.draw(self.x - self.bg.window_left - 60, self.y + 50, '(HP : %i)' % self.hp_amount, (255, 0, 0))
 
     def get_bb(self):
         return self.x - self.bg.window_left - 15, self.y - 18, self.x - self.bg.window_left + 12, self.y + 22

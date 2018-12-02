@@ -100,7 +100,6 @@ class Barricade:
     def __init__(self):
         self.x, self.y = 200, 35 + 200
         self.image = load_image('./resource/barricade/barricade.png')
-        self.font = load_font('./resource/font/ENCR10B.TTF', 16)
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
@@ -136,5 +135,3 @@ class Barricade:
 
     def draw(self):
         self.cur_state.draw(self)
-        self.font.draw(self.x - self.bg.window_left - 60, self.y + 50,
-                       '(HP : %i)' % self.hp_amount, (255, 0, 0))

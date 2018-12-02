@@ -40,7 +40,6 @@ def enter():
     top_ui = Top_UI()
     game_world.add_object(top_ui, 2)
 
-
     global player, prisoner, barricade, map, left_wave_amount
     map = world_build_state.get_map()
     player = world_build_state.get_player()
@@ -85,8 +84,8 @@ def handle_events():
             bgm.stop()
             game_framework.change_state(world_build_state)
         if prisoner.hp_amount <= 0:
-            bgm.stop()
             game_framework.change_state(gameover_state)
+            bgm.stop()
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:

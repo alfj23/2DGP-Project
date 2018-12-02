@@ -33,7 +33,6 @@ class Droptank:
         self.frame = 0
         self.hp_amount = hp_amount
         self.atk_range = 400
-        self.font = load_font('./resource/font/ENCR10B.TTF', 16)
         self.chk_marking = False
         self.chk_firing = False
         self.chk_dying = False
@@ -159,8 +158,6 @@ class Droptank:
             self.image.clip_draw(int(self.frame) * 100, 160, 100, 80, cx, self.y)
         if self.chk_dying:
             self.image.clip_draw(int(self.frame) * 100, 0, 100, 80, cx, self.y)
-        self.font.draw(self.x - self.bg.window_left - 60, self.y + 50,
-                       '(HP : %i)' % self.hp_amount, (255, 0, 0))
 
     def get_bb(self):
         return self.x - self.bg.window_left - 33, self.y - 25, self.x - self.bg.window_left + 32, self.y + 20

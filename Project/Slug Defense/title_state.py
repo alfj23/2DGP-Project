@@ -15,8 +15,8 @@ def enter():
     bgm.set_volume(64)
     bgm.repeat_play()
 def exit():
-    global image
-    del(image)
+    global image, bgm
+    del image, bgm
 
 
 def handle_events():

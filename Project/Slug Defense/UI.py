@@ -32,11 +32,14 @@ class Bottom_UI:
         self.contents_font.draw(710, self.y - 87, '5:%i'%main_state.store.cost_slug_SK, (255, 0, 0))
         self.contents_font.draw(275, self.y - 130, 'z:%i'%main_state.store.cost_carpet_bombing, (255, 0, 0))
 
-        self.contents_font.draw(30, self.y - 50, 'HP:%i'%main_state.player.hp_amount, (255, 0, 0))
-        self.contents_font.draw(30, self.y - 100, 'DMG:%i' %main_state.player.damage_amount_of_cannon, (0, 0, 0))
-        self.contents_font.draw(30, self.y - 150, 'SKILL-DMG:%i'%main_state.player.damage_amount_of_skill,  (0 ,0, 0))
+        self.category_font.draw(30, self.y - 30, 'SLUG-STATUS', (0, 0, 0,))
+        self.contents_font.draw(30, self.y - 60, 'HP:%i'%main_state.player.hp_amount, (255, 0, 0))
+        self.contents_font.draw(30, self.y - 80, 'DMG:%i' %main_state.player.damage_amount_of_cannon, (0, 0, 0))
+        self.contents_font.draw(30, self.y - 100, 'SKILL-DMG:%i'%main_state.player.damage_amount_of_skill,  (0, 0, 0))
 
-        pass
+        self.category_font.draw(5, self.y - 130, 'BARRICADE-STATUS', (0, 0, 0))
+        self.contents_font.draw(30, self.y - 150, 'HP:%i' % main_state.barricade.hp_amount, (255, 0, 0))
+
 
 class Top_UI:
     def __init__(self):
