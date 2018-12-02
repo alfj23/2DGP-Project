@@ -66,7 +66,7 @@ def build_stage1():
         droptank_list = json.load(f)  # droptank_list에 역직렬화 해서 넣음.
 
     for data in droptank_list:
-        droptanks.append(Droptank(data['x'], data['hp_amount'], data['damage_amount']))
+        droptanks.append(Droptank(data['x'], data['hp_amount'], data['damage_amount'], data['gold']))
     game_world.add_objects(droptanks, 1)
     for droptank in droptanks:
         droptank.set_background(map)
@@ -100,7 +100,7 @@ def build_stage2():
         droptank_list = json.load(f)  # droptank_list에 역직렬화 해서 넣음.
 
     for data in droptank_list:
-        droptanks.append(Droptank(data['x'], data['hp_amount'], data['damage_amount']))
+        droptanks.append(Droptank(data['x'], data['hp_amount'], data['damage_amount'], data['gold']))
     game_world.add_objects(droptanks, 1)
     for droptank in droptanks:
         droptank.set_background(map)
@@ -134,7 +134,7 @@ def build_stage3():
         droptank_list = json.load(f)  # droptank_list에 역직렬화 해서 넣음.
 
     for data in droptank_list:
-        droptanks.append(Droptank(data['x'], data['hp_amount'], data['damage_amount']))
+        droptanks.append(Droptank(data['x'], data['hp_amount'], data['damage_amount'], data['gold']))
     game_world.add_objects(droptanks, 1)
     for droptank in droptanks:
         droptank.set_background(map)
@@ -168,7 +168,7 @@ def build_stage4():
         droptank_list = json.load(f)  # droptank_list에 역직렬화 해서 넣음.
 
     for data in droptank_list:
-        droptanks.append(Droptank(data['x'], data['hp_amount'], data['damage_amount']))
+        droptanks.append(Droptank(data['x'], data['hp_amount'], data['damage_amount'], data['gold']))
     game_world.add_objects(droptanks, 1)
     for droptank in droptanks:
         droptank.set_background(map)
@@ -206,7 +206,7 @@ def build_stage5():
         droptank_list = json.load(f)  # droptank_list에 역직렬화 해서 넣음.
 
     for data in droptank_list:
-        droptanks.append(Droptank(data['x'], data['hp_amount'], data['damage_amount']))
+        droptanks.append(Droptank(data['x'], data['hp_amount'], data['damage_amount'], data['gold']))
     game_world.add_objects(droptanks, 1)
     for droptank in droptanks:
         droptank.set_background(map)
