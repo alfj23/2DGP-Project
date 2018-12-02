@@ -130,7 +130,7 @@ def build_stage3():
     game_world.add_object(prisoner, 1)
     prisoner.set_background(map)
 
-    with open('stage1_droptank.json', 'r') as f:
+    with open('stage3_droptank.json', 'r') as f:
         droptank_list = json.load(f)  # droptank_list에 역직렬화 해서 넣음.
 
     for data in droptank_list:
@@ -139,7 +139,7 @@ def build_stage3():
     for droptank in droptanks:
         droptank.set_background(map)
 
-    with open('stage1_soldier.json', 'r') as f:
+    with open('stage3_soldier.json', 'r') as f:
         soldier_list = json.load(f)
 
     for data in soldier_list:
@@ -244,11 +244,11 @@ def handle_events():
             game_framework.quit()
         else:
             if (event.type, event.key) == (SDL_KEYDOWN, SDLK_n):  # 다음 스테이지로 이동해야함.
-                if(main_state.cleared_stage_count == 1):
+                if main_state.cleared_stage_count == 1:
                     build_stage2()
-                elif (main_state.cleared_stage_count == 2):
+                elif main_state.cleared_stage_count == 2:
                     build_stage3()
-                elif (main_state.cleared_stage_count == 3):
+                elif main_state.cleared_stage_count == 3:
                     build_stage4()
                 elif main_state.cleared_stage_count == 4:
                     build_stage5()
