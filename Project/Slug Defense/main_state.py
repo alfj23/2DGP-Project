@@ -8,6 +8,7 @@ import game_world
 import pause_state
 import world_build_state
 import title_state
+import gameover_state
 from player import Player
 from map import Map
 from pow import Pow
@@ -83,8 +84,7 @@ def handle_events():
             cleared_stage_count += 1
             game_framework.change_state(world_build_state)
         if prisoner.hp_amount < 0:
-            print("state fail!")
-            #game_framework.change_state(gameover_state)
+            game_framework.change_state(gameover_state)
             pass
 
         if event.type == SDL_QUIT:
