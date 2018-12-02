@@ -25,7 +25,7 @@ FRAMES_PER_ACTION = 8
 
 class Droptank:
     image = None
-    def __init__(self, x=0, hp_amount=0,damage_amount=0):
+    def __init__(self, x=0, hp_amount=0,damage_amount=0, gold=0):
         self.x, self.y = x * PIXEL_PER_METER, 40 + 200
         if Droptank.image == None:
             Droptank.image = load_image('./resource/droptank/droptank.png')
@@ -37,14 +37,14 @@ class Droptank:
         self.chk_marking = False
         self.chk_firing = False
         self.chk_dying = False
-        self.gold = 200
+        self.gold = gold
         self.timer = 800
         self.build_behavior_tree()
         self.num_of_frame = 0
         self.damage_amount = damage_amount
 
     def __getstate__(self):
-        state = {'x': self.x, 'hp_amount': self.hp_amount, 'damage_amount': self.damage_amount}
+        state = {'x': self.x, 'hp_amount': self.hp_amount, 'damage_amount': self.damage_amount, 'gold': self.gold}
         return state
 
     def __setstate__(self, state):
