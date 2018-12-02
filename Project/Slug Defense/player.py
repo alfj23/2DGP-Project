@@ -49,7 +49,7 @@ class IdleState:
         elif event == LEFT_UP:
             player.velocity += RUN_SPEED_PPS
         if event == REPAIR:
-            player.hp_amount = 200
+            player.hp_amount = player.max_hp
 
     @staticmethod
     def exit(player, event):
