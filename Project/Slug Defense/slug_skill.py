@@ -49,6 +49,7 @@ class ExploringState:
     def enter(missile, event):
         missile.frame = 0
         missile.velocity = 0
+        missile.explode()
 
     @staticmethod
     def exit(missile, event):
@@ -85,10 +86,14 @@ next_state_table = {
 
 class Missile:
     image = None
+    bgm = None
 
     def __init__(self, x=0, y=0):
         if Missile.image == None:
             Missile.image = load_image('./resource/skill/skill.png')
+        if Missile.bgm == None:
+            Missile.bgm = load_music('./resource/sounds/explode.wav')
+            Missile.bgm.set_volume(32)
         self.x, self.y = x * PIXEL_PER_METER, y * PIXEL_PER_METER
         self.velocity = 0
         self.frame = 0
@@ -102,6 +107,9 @@ class Missile:
 
     def set_background(self, bg):
         self.bg = bg
+
+    def explode(self):
+        self.bgm.play(1)
 
     def update(self):
         self.cur_state.do(self)

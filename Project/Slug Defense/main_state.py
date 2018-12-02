@@ -30,7 +30,7 @@ def enter():
     store = Store()
 
     global gold
-    gold = 0
+    gold = 3000
 
     global bottom_ui
     bottom_ui = Bottom_UI()
