@@ -96,7 +96,7 @@ def build_stage2():
     game_world.add_object(prisoner, 1)
     prisoner.set_background(map)
 
-    with open('stage1_droptank.json', 'r') as f:
+    with open('stage2_droptank.json', 'r') as f:
         droptank_list = json.load(f)  # droptank_list에 역직렬화 해서 넣음.
 
     for data in droptank_list:
@@ -105,7 +105,7 @@ def build_stage2():
     for droptank in droptanks:
         droptank.set_background(map)
 
-    with open('stage1_soldier.json', 'r') as f:
+    with open('stage2_soldier.json', 'r') as f:
         soldier_list = json.load(f)
 
     for data in soldier_list:

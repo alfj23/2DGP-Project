@@ -1,0 +1,12 @@
+[
+  {"x": 48, "hp_amount": 300, "damage_amount": 50},
+  {"x": 58, "hp_amount": 300, "damage_amount": 50},
+  {"x": 60, "hp_amount": 300, "damage_amount": 50},
+  {"x": 125, "hp_amount": 300, "damage_amount": 50},
+  {"x": 127, "hp_amount": 300, "damage_amount": 50},
+  {"x": 75, "hp_amount": 300, "damage_amount": 50},
+  {"x": 78, "hp_amount": 300, "damage_amount": 50},
+  {"x": 80, "hp_amount": 300, "damage_amount": 50},
+  {"x": 83, "hp_amount": 300, "damage_amount": 50},
+  {"x": 130, "hp_amount": 300, "damage_amount": 50}
+]
