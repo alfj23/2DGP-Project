@@ -75,7 +75,7 @@ def build_stage1():
         soldier_list = json.load(f)
 
     for data in soldier_list:
-        soldiers.append(Soldier(data['x'], data['hp_amount'], data['damage_amount']))
+        soldiers.append(Soldier(data['x'], data['hp_amount'], data['damage_amount'], data['gold']))
     game_world.add_objects(soldiers, 1)
     for soldier in soldiers:
         soldier.set_background(map)
@@ -109,7 +109,7 @@ def build_stage2():
         soldier_list = json.load(f)
 
     for data in soldier_list:
-        soldiers.append(Soldier(data['x'], data['hp_amount'], data['damage_amount']))
+        soldiers.append(Soldier(data['x'], data['hp_amount'], data['damage_amount'], data['gold']))
     game_world.add_objects(soldiers, 1)
     for soldier in soldiers:
         soldier.set_background(map)
@@ -143,7 +143,7 @@ def build_stage3():
         soldier_list = json.load(f)
 
     for data in soldier_list:
-        soldiers.append(Soldier(data['x'], data['hp_amount'], data['damage_amount']))
+        soldiers.append(Soldier(data['x'], data['hp_amount'], data['damage_amount'], data['gold']))
     game_world.add_objects(soldiers, 1)
     for soldier in soldiers:
         soldier.set_background(map)
@@ -177,7 +177,7 @@ def build_stage4():
         soldier_list = json.load(f)
 
     for data in soldier_list:
-        soldiers.append(Soldier(data['x'], data['hp_amount'], data['damage_amount']))
+        soldiers.append(Soldier(data['x'], data['hp_amount'], data['damage_amount'], data['gold']))
     game_world.add_objects(soldiers, 1)
     for soldier in soldiers:
         soldier.set_background(map)
@@ -215,7 +215,7 @@ def build_stage5():
         soldier_list = json.load(f)
 
     for data in soldier_list:
-        soldiers.append(Soldier(data['x'], data['hp_amount'], data['damage_amount']))
+        soldiers.append(Soldier(data['x'], data['hp_amount'], data['damage_amount'], data['gold']))
     game_world.add_objects(soldiers, 1)
     for soldier in soldiers:
         soldier.set_background(map)
