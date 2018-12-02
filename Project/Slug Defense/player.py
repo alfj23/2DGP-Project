@@ -180,7 +180,7 @@ class Player:
         self.cur_state.enter(self, None)
         self.check_fired = False
         self.timer = 0.0
-        self.damage_amount_of_cannon = 200
+        self.damage_amount_of_cannon = 50
         self.damage_amount_of_skill = 300
         self.max_hp = 150
         self.hp_amount = self.max_hp
