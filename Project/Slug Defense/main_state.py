@@ -48,10 +48,13 @@ def enter():
     barricade = world_build_state.get_barricade()
     left_wave_amount = len(world_build_state.droptanks) + len(world_build_state.soldiers)
 
-    global bgm
+    global bgm, voice
     bgm = load_music('./resource/sounds/maingame.mp3')
     bgm.set_volume(64)
     bgm.repeat_play()
+    voice = load_wav('./resource/sounds/intro.wav')
+    voice.set_volume(64)
+    voice.play(1)
 
 def exit():
     world_build_state.droptanks.clear()

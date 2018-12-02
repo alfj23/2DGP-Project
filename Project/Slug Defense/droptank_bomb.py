@@ -110,6 +110,7 @@ class ExplodedState:
     def enter(bomb, event):
         bomb.frame = 0
         bomb.velocity = 0
+        bomb.explose()
         pass
 
     @staticmethod
@@ -138,17 +139,23 @@ next_state_table = {
 
 class Bomb:
     image = None
-
+    explosion = None
     def __init__(self, x=400, y=300, damage_amount=50, velocity=1):
         self.x, self.y, self.damage_amount, self.velocity = x, y, damage_amount, velocity
         self.frame = 0
         if Bomb.image == None:
             self.image = load_image('./resource/droptank/droptank_bomb.png')
+        if Bomb.explosion == None:
+            Bomb.explosion = load_wav('./resource/sounds/explode.wav')
+            Bomb.explosion.set_volume(20)
         self.event_que = []
         self.cur_state = FiredState
         self.cur_state.enter(self, None)
         self.ctr_point0 = (self.x, self.y)
         self.ctr_point1, self.ctr_point2 = (self.x - 200, self.y - 5), (self.x - 250, self.y - 10)
+
+    def explose(self):
+        Bomb.explosion.play()
 
     def add_event(self, event):
         self.event_que.insert(0, event)
