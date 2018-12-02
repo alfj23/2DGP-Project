@@ -28,14 +28,12 @@ font = None
 
 def enter():
     global menu, font
-    global stage1_cleared, stage2_cleared, stage3_cleared, stage4_cleared, stage5_cleared
 
     menu = load_image('./resource/UI/pause_menu.png')
     font = load_font('./resource/font/ENCR10B.TTF', 18)
     draw()
     hide_cursor()
     hide_lattice()
-    pass
 
 
 def exit():
@@ -202,7 +200,7 @@ def build_stage5():
     game_world.add_object(prisoner, 1)
     prisoner.set_background(map)
 
-    with open('stage1_droptank.json', 'r') as f:
+    with open('stage5_droptank.json', 'r') as f:
         droptank_list = json.load(f)  # droptank_list에 역직렬화 해서 넣음.
 
     for data in droptank_list:
@@ -211,7 +209,7 @@ def build_stage5():
     for droptank in droptanks:
         droptank.set_background(map)
 
-    with open('stage1_soldier.json', 'r') as f:
+    with open('stage5_soldier.json', 'r') as f:
         soldier_list = json.load(f)
 
     for data in soldier_list:
@@ -261,8 +259,6 @@ def handle_events():
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):  # 타이틀로 이동.
                 game_framework.change_state(title_state)
 
-    pass
-
 
 def update():
     pass
@@ -276,4 +272,3 @@ def draw():
     font.draw(315, 295, 'R REPLAY STAGE', (255, 255, 255))
     font.draw(310, 255, 'ESC BACK TO TITLE', (255, 255, 255))
     update_canvas()
-    pass

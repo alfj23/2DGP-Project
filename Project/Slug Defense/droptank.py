@@ -38,7 +38,7 @@ class Droptank:
         self.chk_firing = False
         self.chk_dying = False
         self.gold = gold
-        self.timer = 800
+        self.timer = 300
         self.build_behavior_tree()
         self.num_of_frame = 0
         self.damage_amount = damage_amount
@@ -105,7 +105,7 @@ class Droptank:
             bomb = Bomb(self.x, self.y, self.damage_amount)
             bomb.set_background(main_state.map)
             game_world.add_object(bomb, 1)
-            self.timer = 200
+            self.timer = 300
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.RUNNING

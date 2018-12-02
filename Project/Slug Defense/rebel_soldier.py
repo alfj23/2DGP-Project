@@ -9,7 +9,7 @@ __name__ = "rebel_soldier"
 # soldier Speed
 
 PIXEL_PER_METER = (10.0 / 0.3)
-RUN_SPEED_KMPH = 12
+RUN_SPEED_KMPH = 15
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -28,7 +28,7 @@ class Soldier:
         self.velocity = 0
         self.frame = random.randint(0, 11)
         self.hp_amount = hp_amount
-        self.atk_cool_time = 300
+        self.atk_cool_time = 100
         self.font = load_font('./resource/font/ENCR10B.TTF', 16)
         self.chk_stabbing = False
         self.chk_ready_to_atk = False
@@ -133,10 +133,10 @@ class Soldier:
             self.velocity = 0
             self.num_of_frame = 22
             if int(self.frame) % 22 == 21:
-                game_world.remove_object(self)
-                self.x = -100
                 main_state.left_wave_amount -= 1
                 main_state.gold += self.gold
+                game_world.remove_object(self)
+                self.x = -100
 
         self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time)\
                      % self.num_of_frame
