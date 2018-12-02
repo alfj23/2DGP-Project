@@ -72,10 +72,8 @@ def resume():
 
 def handle_events():
     global left_wave_amount
-    global prisoner_dying
     global chk_stage_cleared, cleared_stage_count, bgm
     chk_stage_cleared = False
-    prisoner_dying = False
     events = get_events()
     for event in events:
         if left_wave_amount == 0:
@@ -83,10 +81,9 @@ def handle_events():
             cleared_stage_count += 1
             bgm.stop()
             game_framework.change_state(world_build_state)
-        if prisoner_dying:
+        if prisoner.hp_amount <= 0:
+            bgm.stop()
             game_framework.change_state(gameover_state)
-            pass
-
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:

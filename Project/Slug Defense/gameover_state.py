@@ -6,16 +6,18 @@ from pico2d import *
 
 
 def enter():
-    global font, background
-
+    global font, background, bgm
     background = load_image('./resource/result/game_over.png')
     font = load_font('./resource/font/ENCR10B.TTF', 18)
+    bgm = load_music('./resource/sounds/gameover.mp3')
+    bgm.set_volume(64)
+    bgm.play(1)
     draw()
 
 
 def exit():
     global font, background
-    del  font, background
+    del font, background
     pass
 
 

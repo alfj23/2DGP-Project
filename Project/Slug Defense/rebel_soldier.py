@@ -38,6 +38,8 @@ class Soldier:
         self.atk_range = 35
         self.build_behavior_tree()
         self.num_of_frame = 0
+        self.die_sound = load_wav('./resource/sounds/death.wav')
+        self.die_sound.set_volume(32)
 
     def __getstate__(self):
         state = {'x': self.x, 'hp_amount': self.hp_amount, 'damage_amount':self.damage_amount, 'gold':self.gold}
@@ -129,9 +131,11 @@ class Soldier:
         if self.hp_amount <= 0:
             if not self.chk_dying:
                 self.frame = 0
+                self.die_sound.play()
                 self.chk_dying = True
             self.velocity = 0
             self.num_of_frame = 22
+
             if int(self.frame) % 22 == 21:
                 main_state.left_wave_amount -= 1
                 main_state.gold += self.gold
