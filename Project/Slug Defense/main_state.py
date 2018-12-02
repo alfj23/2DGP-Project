@@ -9,13 +9,7 @@ import pause_state
 import world_build_state
 import title_state
 import gameover_state
-from player import Player
-from map import Map
-from pow import Pow
-from droptank import Droptank
-from barricade import Barricade
 from UI import Bottom_UI, Top_UI
-from rebel_soldier import Soldier
 from store import Store
 
 __name__ = "MainState"
@@ -36,7 +30,7 @@ def enter():
     store = Store()
 
     global gold
-    gold = 3000
+    gold = 0
 
     global bottom_ui
     bottom_ui = Bottom_UI()
@@ -74,16 +68,17 @@ def resume():
 
 def handle_events():
     global left_wave_amount
-    global prisoner
+    global prisoner_dying
     global chk_stage_cleared, cleared_stage_count
     chk_stage_cleared = False
+    prisoner_dying = False
     events = get_events()
     for event in events:
         if left_wave_amount == 0:
             chk_stage_cleared = True
             cleared_stage_count += 1
             game_framework.change_state(world_build_state)
-        if prisoner.hp_amount < 0:
+        if prisoner_dying:
             game_framework.change_state(gameover_state)
             pass
 

@@ -1,6 +1,6 @@
 import game_framework
 from pico2d import *
-
+import main_state
 import game_world
 
 __name__ = "pow"
@@ -43,6 +43,8 @@ class IdleState:
             if prisoner.x <= 20 + 1:
                 prisoner.velocity = 1
                 prisoner.dir = 1
+        if prisoner.hp_amount <= 0:
+            main_state.prisoner_dying = True
         prisoner.frame = (prisoner.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 13
 
         prisoner.x += prisoner.velocity * game_framework.frame_time

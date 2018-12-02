@@ -9,9 +9,8 @@ image = None
 
 
 def enter():
-    global image
+    global image, bgm
     image = load_image('./resource/title/title.png')
-
 
 def exit():
     global image

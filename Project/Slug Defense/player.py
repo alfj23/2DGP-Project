@@ -4,7 +4,6 @@ from cannon import Cannon
 from slug_skill import Missile
 import game_world
 import main_state
-import time
 
 __name__ = "player"
 # Player Slug Drive Speed

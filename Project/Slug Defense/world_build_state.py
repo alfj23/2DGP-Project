@@ -11,7 +11,6 @@ from pow import Pow
 from droptank import Droptank
 from barricade import Barricade
 from rebel_soldier import Soldier
-from store import Store
 
 __name__ = "world_build_state"
 
@@ -279,7 +278,7 @@ def draw():
     print(main_state.cleared_stage_count)
     clear_canvas()
     background.draw(get_canvas_width() // 2, get_canvas_height() // 2)
-    if main_state.cleared_stage_count == 6:
+    if main_state.cleared_stage_count == 5:
         font.draw(135, 385, 'ALL STAGE CLEAR!', (255, 255, 255))
         font.draw(115, 295, 'R REPLAY STAGE', (255, 255, 255))
         font.draw(115, 255, 'ESC BACK TO TITLE', (255, 255, 255))
