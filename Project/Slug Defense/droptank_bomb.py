@@ -51,15 +51,16 @@ class FiredState:
 
         if main_state.collide(bomb, main_state.map):
             bomb.add_event(LANDING)
-        if main_state.collide(bomb, main_state.barricade):
+
+        elif main_state.collide(bomb, main_state.barricade):
             main_state.barricade.hp_amount -= bomb.damage_amount
             bomb.add_event(EXPLOSION)
 
-        if main_state.collide(bomb, main_state.player):
+        elif main_state.collide(bomb, main_state.player):
             main_state.player.hp_amount -= bomb.damage_amount
             bomb.add_event(EXPLOSION)
 
-        if main_state.collide(bomb, main_state.prisoner):
+        elif main_state.collide(bomb, main_state.prisoner):
             main_state.prisoner.hp_amount -= bomb.damage_amount
             bomb.add_event(EXPLOSION)
 
@@ -87,11 +88,11 @@ class LandedState:
             main_state.barricade.hp_amount -= bomb.damage_amount
             bomb.add_event(EXPLOSION)
 
-        if main_state.collide(bomb, main_state.player):
+        elif main_state.collide(bomb, main_state.player):
             main_state.player.hp_amount -= bomb.damage_amount
             bomb.add_event(EXPLOSION)
 
-        if main_state.collide(bomb, main_state.prisoner):
+        elif main_state.collide(bomb, main_state.prisoner):
             main_state.prisoner.hp_amount -= bomb.damage_amount
             bomb.add_event(EXPLOSION)
 

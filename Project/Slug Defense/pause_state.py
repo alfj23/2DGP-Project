@@ -18,8 +18,9 @@ class Pause_menu:
     def draw(self):
         self.image.draw(800//2, 600//2)
         self.font.draw(380, 385, 'MENU', (0, 0, 0))
-        self.font.draw(330, 320, 'X: Exit Game', (255, 255, 255))
-        self.font.draw(310, 250, 'T: Back to title', (255, 255, 255))
+        self.font.draw(330, 320, 'X:Exit Game', (255, 255, 255))
+        self.font.draw(310, 285, 'R:Restart Stage',(255, 255, 255))
+        self.font.draw(310, 250, 'T:Back to title', (255, 255, 255))
 
 pause_menu = None
 
@@ -54,7 +55,24 @@ def handle_events():
             game_framework.pop_state()
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_x):
             game_framework.quit()
+
+        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_r):
+            game_world.clear()
+            world_build_state.droptanks.clear()
+            world_build_state.soldiers.clear()
+            if main_state.cleared_stage_count == 0:
+                world_build_state.build_stage1()
+            elif main_state.cleared_stage_count == 1:
+                world_build_state.build_stage2()
+            elif main_state.cleared_stage_count == 2:
+                world_build_state.build_stage3()
+            elif main_state.cleared_stage_count == 3:
+                world_build_state.build_stage4()
+            elif main_state.cleared_stage_count == 4:
+                world_build_state.build_stage5()
+            game_framework.change_state(main_state)
+
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_t):
             main_state.chk_back_to_title = True
-            print(game_world.objects)
+            main_state.cleared_stage_count = 0
             game_framework.pop_state()

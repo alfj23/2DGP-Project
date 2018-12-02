@@ -59,6 +59,8 @@ class IdleState:
             player.fire_cannon()
         elif event == FIRE_MISSILES:
             player.fire_missile()
+        elif event == DISABLED:
+            player.timer = 1000
 
     @staticmethod
     def do(player):
@@ -102,6 +104,8 @@ class DriveState:
             player.fire_cannon()
         elif event == FIRE_MISSILES:
             player.fire_missile()
+        elif event == DISABLED:
+            player.timer = 1000
 
     @staticmethod
     def do(player):
@@ -132,7 +136,6 @@ class DamagedState:
     def enter(player, event):
         if event == DISABLED:
             player.frame = 0
-            player.timer = 1000
 
     @staticmethod
     def exit(player, event):
@@ -144,25 +147,25 @@ class DamagedState:
         player.timer -= 1
         if player.timer == 0:
             player.add_event(REPAIR)
-        #player.frame = (player.frame + ACTION_PER_TIME * FRAMES_PER_ACTION * game_framework.frame_time) % 25
-        pass
+        player.frame = (player.frame + ACTION_PER_TIME * FRAMES_PER_ACTION * game_framework.frame_time) % 25
 
     @staticmethod
     def draw(player):
         cx = player.x - player.bg.window_left
-        #player.image.clip_draw(int(player.frame) * 120, 0, 120, 80, cx, player.y)
-        player.image.clip_draw(240, 240, 80, 80, cx, player.y)
-        pass
+        if int(player.frame) % 25 == 24:
+            player.image.clip_draw(240, 240, 80, 80, cx, player.y)
+        else:
+            player.image.clip_draw(int(player.frame) * 120, 0, 120, 80, cx, player.y)
 
 
 next_state_table = {
     IdleState: {RIGHT_UP: DriveState, LEFT_UP: DriveState, RIGHT_DOWN: DriveState, LEFT_DOWN: DriveState,
-                FIRE_CANNON: IdleState, FIRE_MISSILES: IdleState,DISABLED: DamagedState},
+                FIRE_CANNON: IdleState, FIRE_MISSILES: IdleState, DISABLED: DamagedState},
     DriveState: {RIGHT_UP: IdleState, LEFT_UP: IdleState,
                  LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState,
                  FIRE_CANNON: DriveState, FIRE_MISSILES: DriveState, DISABLED: DamagedState},
-    DamagedState: {REPAIR: IdleState, RIGHT_UP: IdleState, RIGHT_DOWN: IdleState, LEFT_UP: IdleState,
-                   LEFT_DOWN: IdleState, FIRE_CANNON: IdleState, FIRE_MISSILES: IdleState,}
+    DamagedState: {REPAIR: IdleState, RIGHT_UP: DamagedState, RIGHT_DOWN: DamagedState, LEFT_UP: DamagedState,
+                   LEFT_DOWN: DamagedState, FIRE_CANNON: DamagedState, FIRE_MISSILES: IdleState}
 }
 
 
@@ -178,7 +181,7 @@ class Player:
         self.check_fired = False
         self.timer = 0.0
         self.damage_amount_of_cannon = 200
-        self.damage_amount_of_skill = 500
+        self.damage_amount_of_skill = 300
         self.max_hp = 150
         self.hp_amount = self.max_hp
         self.hp_rate = self.hp_amount / self.max_hp

@@ -255,8 +255,21 @@ def handle_events():
                 game_framework.change_state(main_state)
                 pass
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_r):  # 현 스테이지 다시 시작.
+                if main_state.cleared_stage_count == 1:
+                    build_stage1()
+                elif main_state.cleared_stage_count == 2:
+                    build_stage2()
+                elif main_state.cleared_stage_count == 3:
+                    build_stage3()
+                elif main_state.cleared_stage_count == 4:
+                    build_stage4()
+                elif main_state.cleared_stage_count == 5:
+                    build_stage5()
+                game_framework.change_state(main_state)
+
                 pass
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):  # 타이틀로 이동.
+                main_state.cleared_stage_count = 0
                 game_framework.change_state(title_state)
 
 
