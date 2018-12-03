@@ -26,6 +26,9 @@ chk_back_to_title = False
 cleared_stage_count = 0
 
 def enter():
+    hide_cursor()
+    hide_lattice()
+
     global store
     store = Store()
 
@@ -66,7 +69,7 @@ def pause():
 
 
 def resume():
-    global chk_back_to_title
+    global chk_back_to_title, player
     if chk_back_to_title:
         chk_back_to_title = False
         game_framework.change_state(title_state)

@@ -15,8 +15,8 @@ def enter():
     bgm.set_volume(64)
     bgm.repeat_play()
 def exit():
-    global image, bgm
-    del image, bgm
+    global image
+    del image
 
 
 def handle_events():
@@ -27,6 +27,7 @@ def handle_events():
             game_framework.quit()
         else:
             if (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
+                bgm.stop()
                 game_framework.quit()
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
                 bgm.stop()

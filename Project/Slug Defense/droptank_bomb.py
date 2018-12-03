@@ -135,6 +135,7 @@ next_state_table = {
 class Bomb:
     image = None
     explosion = None
+
     def __init__(self, x=400, y=300, damage_amount=50, velocity=1):
         self.x, self.y, self.damage_amount, self.velocity = x, y, damage_amount, velocity
         self.frame = 0
@@ -142,7 +143,7 @@ class Bomb:
             self.image = load_image('./resource/droptank/droptank_bomb.png')
         if Bomb.explosion == None:
             Bomb.explosion = load_wav('./resource/sounds/explode.wav')
-            Bomb.explosion.set_volume(20)
+            Bomb.explosion.set_volume(32)
         self.event_que = []
         self.cur_state = FiredState
         self.cur_state.enter(self, None)

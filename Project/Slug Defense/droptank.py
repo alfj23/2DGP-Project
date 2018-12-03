@@ -25,6 +25,7 @@ FRAMES_PER_ACTION = 8
 
 class Droptank:
     image = None
+
     def __init__(self, x=0, hp_amount=0,damage_amount=0, gold=0):
         self.x, self.y = x * PIXEL_PER_METER, 40 + 200
         if Droptank.image == None:

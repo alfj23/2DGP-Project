@@ -134,6 +134,7 @@ class DamagedState:
     @staticmethod
     def enter(player, event):
         if event == DISABLED:
+            player.event_que.clear()
             player.frame = 0
 
     @staticmethod

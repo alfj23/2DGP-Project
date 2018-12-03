@@ -22,9 +22,12 @@ FRAMES_PER_ACTION = 8
 
 
 class Soldier:
+    image = None
+
     def __init__(self, x=0, hp_amount=0, damage_amount=0, gold=0):
         self.x, self.y = x * PIXEL_PER_METER, 32 + 200
-        self.image = load_image('./resource/rebel_soldier/soldier.png')
+        if Soldier.image == None:
+            Soldier.image = load_image('./resource/rebel_soldier/soldier.png')
         self.velocity = 0
         self.frame = random.randint(0, 11)
         self.hp_amount = hp_amount
@@ -38,7 +41,7 @@ class Soldier:
         self.build_behavior_tree()
         self.num_of_frame = 0
         self.die_sound = load_wav('./resource/sounds/death.wav')
-        self.die_sound.set_volume(32)
+        self.die_sound.set_volume(40)
 
     def __getstate__(self):
         state = {'x': self.x, 'hp_amount': self.hp_amount, 'damage_amount':self.damage_amount, 'gold':self.gold}
