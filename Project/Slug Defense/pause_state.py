@@ -22,6 +22,7 @@ class Pause_menu:
         self.font.draw(310, 285, 'R:Restart Stage',(255, 255, 255))
         self.font.draw(310, 250, 'T:Back to title', (255, 255, 255))
 
+
 pause_menu = None
 
 
